@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 __author__ = 'Ilya Fateev'
 
 from HTMLParser import HTMLParser
@@ -62,14 +64,14 @@ class TransportParser(HTMLParser):
         TransportParser.bus_dictionary = {}
         for bus_number in TransportParser.bus_number_list:
             if TransportParser.bus_descriptor_list[i] != "#":
-                TransportParser.bus_dictionary[bus_number] = TransportParser.bus_descriptor_list[i]
+                TransportParser.bus_dictionary[TransportParser.bus_descriptor_list[i]] = bus_number
             i += 1
 
         i = 0
         TransportParser.trolley_dictionary = {}
         for trolley_number in TransportParser.trolley_number_list:
             if TransportParser.trolley_descriptor_list[i] != "#":
-                TransportParser.trolley_dictionary[trolley_number] = TransportParser.trolley_descriptor_list[i]
+                TransportParser.trolley_dictionary[TransportParser.trolley_descriptor_list[i]] = trolley_number
             i += 1
 
     @staticmethod
@@ -87,28 +89,12 @@ if __name__ == "__main__":
     response = urllib2.urlopen(TransportParser.TRANSPORT_PAGE_URL)
     html = response.read().decode('windows-1251')
 
-    bus_dictionary = TransportParser.parse_corresponding_html(html)
+    TransportParser.parse_corresponding_html(html)
 
-    # for trolley in TransportParser.trolley_number_list:
-    #     print trolley,
-    # print ""
-    #
-    # for bus in TransportParser.bus_number_list:
-    #     print bus,
-    # print ""
-    #
-    # for bus_d in TransportParser.bus_descriptor_list:
-    #     print bus_d,
-    # print ""
-    #
-    # for trolley_d in TransportParser.trolley_descriptor_list:
-    #     print trolley_d,
-    # print ""
-
-    for k, v in TransportParser.bus_dictionary.iteritems():
-        print k, v
+    for bus_id, bus_name in TransportParser.bus_dictionary.iteritems():
+        print bus_id, bus_name
     print ""
 
-    for k, v in TransportParser.trolley_dictionary.iteritems():
-        print k, v
+    for trolley_id, trolley_name in TransportParser.trolley_dictionary.iteritems():
+        print trolley_id, trolley_name
 

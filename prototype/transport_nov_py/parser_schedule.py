@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 __author__ = 'Ilya Fateev'
 
 from HTMLParser import HTMLParser
@@ -43,3 +45,13 @@ class ScheduleParser(HTMLParser):
                 ScheduleParser._current_bus = []
         if ScheduleParser._station_name_started:
             ScheduleParser.stations_list.append(data)
+    
+    @staticmethod
+    def reset_parser():
+        ScheduleParser.stations_number = 0
+        ScheduleParser.schedule_table = []
+        ScheduleParser.stations_list = []
+        ScheduleParser._schedule_table_started = False
+        ScheduleParser._station_name_started = False
+        ScheduleParser._current_bus = []
+        ScheduleParser._current_bus_counter = 0
