@@ -1,3 +1,14 @@
+#################################
+
+# Python related
+.ropeproject
+.pyc
+
+# Vim related
+*.swp*
+
+
+#################################
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 /*.iml
@@ -42,7 +53,3 @@ atlassian-ide-plugin.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
-
-.ropeproject
-*.swp*
-
