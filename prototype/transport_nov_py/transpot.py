@@ -38,14 +38,20 @@ if __name__ == "__main__":
         # for bus in ScheduleParser.schedule_table:
         #     for time in bus:
         #         print time,
+
         stations_list = [x.encode('utf-8') for x in ScheduleParser.stations_list]
-        stations_list = [{}
-        bus_json_objects_list.append({'bus': True, 'stations': stations_list, 'schedule': ScheduleParser.schedule_table})
+        bus_json_objects_list.append(
+            {
+                'bus': True, 
+                'stations': stations_list, 
+                'schedule': ScheduleParser.schedule_table, 
+                'id': bus_id, 
+                'name': bus_name
+            }
+        )
         ScheduleParser.reset_parser()
-        if counter == 0:
-            break
     
-    json_text = json.dumps(bus_json_objects_list)        
+    json_text = json.dumps(bus_json_objects_list, sort_keys=True, indent=4, separators=(',', ': '))        
     print json_text
     json_file = open("out.json", 'w')
     json_file.write(json_text)
