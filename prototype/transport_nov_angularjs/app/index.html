@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="transportApp">
+<head>
+  <meta charset="utf-8">
+  <title>My HTML File</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body>
+    <div ng-controller="BusController as busController" class="container-fluid">
+        Enter bus  <input ng-model="query.$">         
+
+        <div ng-repeat="bus in busController.buses | filter:query">
+           
+            <div class="row">
+                <div class="col-xs-1"> 
+                    <strong>
+                        {{ bus.name }} 
+                    </strong>
+                </div>      
+            </div>
+            
+            <div class="row">
+                <div ng-repeat="station in bus.stations | filter:query">
+                    <div class="col-xs-6"> 
+                        {{ station }} 
+                    </div>      
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- <div ng-repeat="bus in busController.buses | filter:query">
+            
+            <div class="row">
+                <div class="col-xs-6"> 
+                    {{ bus.name }} 
+                </div>      
+                <div ng-repeat="station in bus.stations" class="col-xs-6">
+                    {{ station }} 
+                </div>
+            </div>
+        </div/> -->
+
+    </div> 
+</body>
+</html>
