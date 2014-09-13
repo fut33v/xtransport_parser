@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Местоположение транспорта в режиме реального времени. Город Великий Новгород.</title>
+<META NAME="Keywords" CONTENT="транспорт Великого Новгорода, транспорт, Великий Новгород, карта, маршрутка, тролле, пробки в Великом Новгороде, карта пробок">
+<META NAME="DESCRIPTION" CONTENT="Перемещение транспорта в режиме реального времени. Город Великий Новгород."> 
+<meta http-equiv="pragma" content="no-cache">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+	<link rel="stylesheet" href="styles.css" />
+	<script src="libs/jquery-1.11.1.min.js"></script>
+
+		<script src="jscode.js"></script>	<script src="config.js"></script>
+
+
+	<link rel="stylesheet" href="transportOnline/styles.css" />	
+		
+	
+
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+	}
+	html, body, #map {
+		height: 100%;
+		width: 100%;
+	}
+
+	</style>
+
+	<script>
+
+	testObject = null;
+
+	$( document ).ready(function() {
+
+		map.initialize({
+			'lat':54.626459,
+			'lng':39.736960,
+			'zoom': 15
+		},
+		function(){
+			objectsStorage = new ObjectsStorage();
+
+			serverDataSource = new ServerDataSource();
+
+			routesPanelWorks = new RoutesPanelWorks();
+			topMenuWorks = new TopMenuWorks();
+			vehicleMapWorks = new VehicleMapWorks();
+			vehicleForecastsMapWorks = new VehicleForecastsMapWorks();
+			stationForecastsMapWorks = new StationForecastsMapWorks();
+			stationsPanelWorks = new StationsPanelWorks();
+			favPanelWorks = new FavPanelWorks();
+		});
+
+
+	});
+
+	</script>
+
+</head>
+<body>
+
+
+
+	<table id="maintbl" style="width:100%;height:100%;" cellspacing="0" cellpadding="0" border="0">
+
+		<tbody>
+
+			<tr class="topRow">
+				<td class="topCell">
+					<div id="topPanelDiv" class="topPanel">
+						<div id="topPanelRoutesButton" class="routesButton"/></div>
+						<div class="buttonSplitter"/></div>
+						<div id="topPanelStationsButton" class="stationsButton"/></div>
+						<div class="buttonSplitter"/></div>
+						<div id="topPanelFavButton" class="favButton"/></div>
+						<div class="buttonSplitter"/></div>
+
+						<div id="topPanelTraffic" class="trafficButton"/></div>
+						<div class="buttonSplitter right"/></div>
+						
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="middleCell">
+					<div id="map"></div>
+				</td>
+			</tr>
+
+			<tr class="bottomRow">
+				<td class="bottomCell">
+					<div class="bottomPanel">
+						<a id="bottomDevelopText" style="" class="bottomGrayText bottomDevelopText">Разработка и техн. поддержка: ИП Кондрахин А.В.</a>
+						<a id="bottomSupportText" class="bottomGrayText bottomSupportText">Информационная поддержка: ООО "ЦДС города Рязани"</a>
+
+
+						<a class="bottomBlueText" href="https://play.google.com/store/apps/details?id=ru.bus62.SmartTransport" target="_blank">
+							<div class ="bottomAndroidApp"></div>
+							<div class="bottomAndroidText">Приложение для Android OS</div>
+						</a>			
+					</div>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+
+
+
+
+
+
+
+
+	<!-- routesPanelTemplate -->
+	<div id="routesPanelTemplate" class="routesPanel" style="display: none;">
+
+		<div id="routesPanelMenu" class="routesPanelMenu">         
+			<div id="routesPanelMenuListButton" class="routesPanelMenuButton isDown">Список маршрутов</div>
+			<div id="routesPanelMenuFilterButton" class="routesPanelMenuButton">
+				<div id="routesPanelMenuFilterButtonText" class="routesPanelMenuFilterButtonText">Фильтр </div>
+				<div id="routesPanelMenuFilterCountText" class="routesPanelMenuFilterCountText notActive">0</div>
+				<div id="routesPanelMenuFilterClearButton" class="routesPanelMenuFilterClearButton notActive"></div>
+			</div>            
+		</div>
+
+		<div id="routesPanelContainer" class="routesPanelContainer">
+		</div>
+
+	</div>
+
+
+	<!-- routesListTemplate -->
+	<div id="routesListTemplate" class="routesList">
+
+		<div class="routesListMenu">         
+			<div id="routesListMenuShortButton" class="routesListMenuViewButton isDown">Краткий</div>
+			<div id="routesListMenuFullButton" class="routesListMenuViewButton">Полный</div>             
+			<div id="routesListMenuSaveButton" class="routesListMenuActionButton" style="visibility:hidden;">Сохранить</div>              
+		</div>
+
+		<div id="routesListBlocksContainer" class="routesListBlocksContainer" style="height: 304px;">
+		</div>
+
+	</div>
+
+	<!-- routesListBlockTemplate -->
+	<div id="routesListBlockTemplate" class="routesListBlock" style="display: none;">
+
+		<div id="routesListBlockHeader" class="routesListBlockHeader">
+			<div id="routesListBlockHeaderIco" class="routesListBlockHeaderIco"></div>
+			<div id="routesListBlockHeaderName" class="routesListBlockHeaderName" >Автобусы</div>
+		</div>
+
+		<div id="routesListBlockItems" class="routesListBlockItems">
+		</div>
+
+	</div>
+
+	<!-- routesShortListBlockOneItemTemplate -->
+	<div id="routesShortListBlockOneItemTemplate" class="routesShortListBlockOneItem" style="display: none;">
+		<div id="routesShortListRouteCheck" class="routesShortListRouteCheck unchecked"></div>
+		<div id="routesShortListRouteNum" class="routesShortListRouteNum">1</div>
+	</div>
+
+	<!-- routesFullListBlockOneItemTemplate -->
+	<div id='routesFullListBlockOneItemTemplate' class="routesFullListBlockOneItem" style="display: none;"> 
+		<div id="routesFullListRouteTag" class="routesFullListRouteTag"></div>
+		<div class="routesFullListRouteContainer">                                
+			<div class="routesFullListRouteContent">
+				<div id="routesFullListRouteCheck" class="routesFullListRouteCheck"></div>
+				<div id="routesFullListRouteName" class="routesFullListRouteName">1</div>
+				<div class="routesFullListInfoContainer">
+					<div class="routesFullListFromLabel"> от:</div> 
+					<div id="routesFullListFromStation" class="routesFullListFromStation">Вокзал «Рязань-1»</div>                                            
+					<div class="routesFullListToLabel"> до:</div> 
+					<div id="routesFullListToStation" class="routesFullListToStation">Психбольница</div>                                                        
+				</div> 
+			</div>
+		</div>
+		<div class="routesFullListRouteEndTag"></div>
+	</div>
+
+
+
+
+	<!-- routesFilterTemplate -->
+	<div id="routesFilterTemplate" class="routesFilter">
+
+
+		<div class="routesFilterMenu">         
+			<div class="routesFilterInfoText" >Показать маршруты, которые следуют через:</div> <div class="routesFilterInfoText" style="visibility:hidden;border-bottom:1px dashed #333333;cursor:pointer;">1</div>                    
+		</div>
+
+		<div id="routesFilterBlocksContainer" class="routesFilterBlocksContainer" style="height: 304px;">	    	                
+		</div>
+
+
+	</div>
+
+	<!-- routesFilterBlockTemplate -->
+	<div id="routesFilterBlockTemplate" class="routesFilterBlock" style="display: none;">
+
+		<div id="routesFilterBlockHeader" class="routesFilterBlockHeader">
+			<div id="routesFilterBlockHeaderName" class="routesFilterBlockHeaderName" >Площади</div>
+		</div>
+
+		<div id="routesFilterBlockItems" class="routesFilterBlockItems">
+
+		</div>
+
+	</div>
+
+	<!-- routesFilterBlockOneItem -->
+	<div id="routesFilterBlockOneItem" class="routesFilterBlockOneItem" style="display: none;">
+		<div id="routesFilterBlockOneItemCheck" class="routesFilterBlockOneItemCheck unchecked"></div>
+		<div id="routesFilterBlockOneItemName" class="routesFilterBlockOneItemName">Пл. Театральная</div>
+	</div>
+
+
+
+
+	<!-- mapMarker -->
+	<div id="mapMarkerTemplate" class="mapMarker" style="display:none;">
+		<span id="mapMarkerRouteNum" class="mapMarkerRouteNum">17</span>
+		<div id='mapMarkerIco' class="mapMarkerIco"></div>
+	</div>
+
+	<!-- forecastMapMarker -->
+	<div id="forecastMapMarkerTemplate" class="forecastMapMarker hidden"  style="display:none;">
+		<span id='forecastMapMarkerArrTime' class="forecastMapMarkerArrTime">
+		</span>
+		<span id='forecastMapMarkerMinutes' class="forecastMapMarkerMinutes">мин
+		</span>
+		<div class="forecastMapMarkerIco">
+		</div>
+	</div>
+
+
+
+	<!-- stationForecastWindowTemplate -->
+	<div id="stationForecastWindowTemplate" class="stationForecastWindowTemplate" style="display:none;width: 454px; height: 310px;" >
+
+		<div class="stationForecastContainer">
+			<div class="stationForecastHeader">
+				<div class="stationForecastHeaderName" id="stationForecastHeaderName">Название остановки</div>
+
+				<div id="stationForecastHeaderClose" class="stationForecastHeaderClose"></div>
+			</div>
+
+
+			<div class="stationForecastColumnsHeaders">
+				<div class="stationForecastColumnHeaderRouteName">Маршрут</div>
+				<div class="stationForecastColumnHeaderArrTime1">Ближайший</div>
+				<div class="stationForecastColumnHeaderArrTime2">Следующий</div>
+				<div class="stationForecastColumnHeaderWhereGo">Куда направляется</div>
+			</div>
+
+			<div class="stationForecastLines" id="forecastLines">
+
+			</div>
+		</div>		
+
+	</div>
+
+
+
+	<!-- stationForecastLineTemplate -->
+	<div id="stationForecastLineTemplate" class="stationForecastLine" style="display:none;">
+		<div class="stationForecastLineColomnRouteName">
+			<div style="margin-top:4px;overflow:hidden;height:19px;"> 
+				<span id="stationForecastRouteNameSpan" class="stationForecastRouteNameSpan"> 
+					А-55
+				</span>
+			</div>
+		</div>
+		<div id="arrTime1" class="stationForecastLineColomnArrTime1">1 мин.</div>
+		<div id="arrTime2" class="stationForecastLineColomnArrTime2">2 мин.</div>
+		<div id="whereGo" class="stationForecastLineColomnWhereGo">Конечная</div>
+	</div>
+
+
+
+
+
+
+
+	<!-- stationsPanelTemplate -->
+	<div id="stationsPanelTemplate" class="stationsPanel" style="display: none;">
+
+		<div class="stationsPanelSearch">
+			<div class="stationsPanelSearchCaption">
+				Введите поисковую фразу:
+			</div>
+			<div>
+				<div class="stationsPanelSearchFieldHolder">
+					<input id="stationsSearchPanelInput" class="stationsPanelSearchField" type="text" maxlength="16" name="field"  value="">
+				</div>
+
+				<div id="stationsSearchPanelButton" class="stationsPanelSearchPanelButton">
+				</div>
+			</div>
+
+		</div>
+
+		<div id="stationsListBlocksContainer" class="stationsListBlocksContainer"></div>
+	</div>
+
+
+	<!-- stationsBlockTemplate -->
+	<div id="stationsBlockTemplate" class="stationsListBlock" style="display: none;">
+
+		<div id="stationsListBlockHeader" class="stationsListBlockHeader">
+			<div id="stationsListBlockHeaderIco" class="stationsListBlockHeaderIco"></div>
+			<div id="stationsListBlockHeaderName" class="stationsListBlockHeaderName" >Площади</div>
+		</div>
+
+		<div id="stationsListBlockItems" class="stationsListBlockItems">
+
+		</div>
+
+	</div>
+
+
+	<!-- stationsListBlockOneItemTemplate -->
+	<div id="stationsListBlockOneItemTemplate"  class="stationsListBlockOneItem" style="display: none;">
+		
+		<div id="stationsListRouteTag" class="stationsListRouteTag"></div>
+
+		<div class="stationsListRouteContainer">
+			<div id="stationsListRouteContent" class="stationsListRouteContent" >		
+
+				<div class="stationsListInfoContainer">
+					<div id="stationsListStationName" class="stationsListStationName">Пл Ленина</div>				
+					<div id="stationsListStationDescription" class="stationsListStationDescription">в сторону пл. Театральной</div> 				
+				</div> 
+				
+				<div id="stationsListFavButton" class="stationsListFavButton" style="display: none;"></div>
+				<div id="stationsListForecastButton" class="stationsListForecastButton"></div>
+				
+			</div>
+		</div>
+
+		<div id="stationsListRouteEndTag" class="stationsListRouteEndTag"></div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<!-- favPanelTemplate -->
+	<div id="favPanelTemplate" class="favPanel" style="display: none;">
+		<span style="margin-top:10px;margin-left:10px;float:left;color: #333333;font-family: trebuchet MS;font-size: 16px;"> Функция временно недоступна</span>
+		<!-- <div id="favListBlocksContainer" class="favListBlocksContainer"></div> -->
+	</div>
+
+	<!-- favBlockTemplate -->
+	<div id="favBlockTemplate" class="favListBlock" style="display: none;">
+
+		<div id="favListBlockHeader" class="favListBlockHeader">
+			<div id="favListBlockHeaderIco" class="favListBlockHeaderIco"></div>
+			<div id="favListBlockHeaderName" class="favListBlockHeaderName" >Площади</div>
+		</div>
+
+		<div id="favListBlockItems" class="favListBlockItems">
+
+		</div>
+
+	</div>
+
+
+	<!-- favRoutesListBlockOneItemTemplate -->
+	<div id='favRoutesListBlockOneItemTemplate' class="favRoutesListBlockOneItem" style="display: none;"> 
+		<div id="favRoutesListTag" class="favRoutesListTag"></div>
+		<div class="favRoutesListContainer">                                
+			<div class="favRoutesListContent">
+				<div id="favRoutesListCheck" class="favRoutesListCheck"></div>
+				<div id="favRoutesListName" class="favRoutesListName">1</div>
+
+				<div id="favRoutesListRemove" class="favRoutesListRemove"></div>
+			</div>
+		</div>
+		<div class="favRoutesListEndTag"></div>
+	</div>
+
+</body>
+</html>
+
