@@ -68,10 +68,12 @@ if __name__ == "__main__":
     json_text = json_pretty_dumps(bus_json_objects_list)
     print json_text
 
+    # JSON writing buses objs
     json_file = open("buses.json", 'w')
     json_file.write(json_text)
     json_file.close()
 
+    # JSON dumping stations list 
     stations_file = open("stations.json", 'w')
     stations_list = list(stations_set)
     stations_json_array = [
@@ -88,8 +90,20 @@ if __name__ == "__main__":
         separators=(',', ': ')
     )
     stations_file.write(stations_json_text)
-
     stations_file.close()
+    
+    for bus_js_object in bus_json_objects_list:
+        json_text = json_pretty_dumps(
+                {
+                    'id': bus_js_object['id'], 
+                    'schedule': bus_js_object['schedule'],
+                    'stationsNumber': (len(bus_js_object['stations']))
+                }
+        )
+        json_file = open(bus_js_object['id'].encode('utf-8') + ".json", 'w')
+        json_file.write(json_text)
+        json_file.close()
+
 
     # for trolley_id, trolley_name in TransportParser.
     # trolley_dictionary.iteritems():
