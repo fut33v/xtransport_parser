@@ -10,27 +10,41 @@
 </head>
 <body>
     <div ng-controller="BusController as busController" class="container-fluid">
-        Enter bus  <input ng-model="query.$">         
+       
+        <div class="text-center" id="main-input">
+        Enter bus/or bus stop: <input ng-model="query.$">
+        </div>         
 
-        <div ng-repeat="bus in busController.buses | filter:query">
-           
-            <div class="row">
-                <div class="col-xs-1"> 
-                    <strong>
-                        {{ bus.name }} 
-                    </strong>
-                </div>      
-            </div>
-            
-            <div class="row">
-                <div ng-repeat="station in bus.stations | filter:query">
-                    <div class="col-xs-6"> 
-                        {{ station }} 
-                    </div>      
-                </div>
-            </div>
-        </div>
+        <div class="row">
+            <div class="col-xs-3"> 
+                <table class="table">
+                    <tr>
+                        <th><img height="50px" src="img/bus.png"/></th> 
+                    </tr>
+                        <tr ng-show="query" ng-repeat="bus in busController.buses | filter:query">
+                                <td>
+                                    <strong>
+                                        {{ bus.name }} 
+                                    </strong>
+                                </td>
+                        </tr>      
+                </table>
+            </div>      
         
+            <div class="col-xs-6"> 
+                <table class="table">
+                    <tr>
+                        <th><img height="50px" src="img/bus_stop.png"/></th> 
+                    </tr>
+                    <tr ng-show="query" ng-repeat="station in busController.stations | filter:query">
+                        <td>
+                            {{ station.name }} 
+                        </td>
+                    </tr> 
+                </table>
+            </div>
+
+        </div>
         
         <!-- <div ng-repeat="bus in busController.buses | filter:query">
             

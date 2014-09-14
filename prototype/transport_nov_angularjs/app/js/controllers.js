@@ -10,4 +10,9 @@ transportApp.controller('BusController', function($http) {
         success(function(data) {
             busController.buses = data;
         });    
+    
+    $http({method: 'GET', url: 'transport/stations.json'}).
+        success(function(data) {
+            busController.stations = data;
+        });    
 });
