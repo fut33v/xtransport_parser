@@ -9,6 +9,7 @@ class ScheduleParser(HTMLParser):
 
     stations_number = 0
     schedule_table = []
+    schedule_table_by_station = []
     stations_list = []
 
     _schedule_table_started = False

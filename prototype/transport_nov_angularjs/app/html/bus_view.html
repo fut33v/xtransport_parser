@@ -13,7 +13,9 @@
             </th>
         </tr>
         <tr ng-repeat="bus in busSchedule.schedule"> 
-            <td ng-repeat="time in bus track by $index">            
+            <td 
+                ng-attr-class="{{busController.isTimeSearched()"
+                ng-repeat="time in bus track by $index">            
                 {{time}}
             </td>
         </tr>

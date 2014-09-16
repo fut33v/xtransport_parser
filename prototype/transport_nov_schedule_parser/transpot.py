@@ -40,6 +40,32 @@ if __name__ == "__main__":
         html = response.read().decode('windows-1251')
         schedule_parser.feed(html)
 
+        schedule_by_station = []
+        for bus_row in ScheduleParser.schedule_table:
+            for station_column in bus_row:
+                schedule_by_station.append([])
+
+        for station_column in schedule_by_station:
+            for bus_row in ScheduleParser.schedule_table:
+                station_column.append("-")
+
+        i = 0 
+        for column in schedule_by_station:
+            j = 0
+            for time in column:
+                try: 
+                    print ScheduleParser.schedule_table[i][j]
+                    schedule_by_station[i][j] = ScheduleParser.schedule_table[j][i]
+                    print column
+                except Exception as inst:
+                    print inst.args
+                    print i, j
+                    raise inst
+                j += 1
+            i += 1
+
+        print schedule_by_station
+
         # print "\nStations names:"
         # for station_name in ScheduleParser.stations_list:
         #     print station_name

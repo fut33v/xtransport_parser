@@ -15,3 +15,13 @@ body {
 .station {
     color: black;
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.main-text {
+    line-height: 16;
+}
