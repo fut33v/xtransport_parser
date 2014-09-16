@@ -8,3 +8,10 @@ body {
     margin-bottom: 40px;
 }
 
+.right-station {
+    color: red;
+}
+
+.station {
+    color: black;
+}
