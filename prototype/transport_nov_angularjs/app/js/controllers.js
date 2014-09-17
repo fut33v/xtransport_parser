@@ -17,33 +17,36 @@ transportControllers.controller('MainViewController', ['$scope', '$http',
         });    
 }]);
 
-transportControllers.controller('BusScheduleController', ['$scope', '$http', '$routeParams', '$filter',
-    function($scope, $http, $routeParams, $filter) {
-        $scope.busId = $routeParams.busId;
-        $http.get('transport/schedules/' + $scope.busId + ".json").
-            success(function(data) {
-             // console.log(data); 
-             $scope.busSchedule = data; 
-        });
+transportControllers.controller('BusesController', ['$scope', '$http', 
+    function($scope, $http) { 
         $http.get('transport/buses.json').
             success(function(data) {
-                // console.log(data); 
             $scope.buses = data; 
-            $scope.stationsSchedule = []; 
-            for (var i=0; i < data.length; i++) { 
-                if (data[i].id === $scope.busId) {
-                    $scope.currentBus = data[i];
-                }
-                // loop through the current bus schedule  
-                for (var j=0; j < data[i].schedule.length; j++) {
-                    // loop through the bus instance
-                    for(var x=0; x < data[i].schedule[j].length; x++) {
-                        $scope.stationsSchedule[x][j] = data[i].schedule[j][x]; 
-                    }     
+        });
+    }
+]);
+
+transportControllers.controller('BusScheduleController', ['$scope', '$http', '$routeParams', '$filter',
+    function($scope, $http, $routeParams, $filter) {
+        
+        $scope.busId = $routeParams.busId;
+        
+        $http.get('transport/schedules/' + $scope.busId + ".json").
+            success(function(data) {
+             $scope.busSchedule = data; 
+        });
+        
+        $http.get('transport/buses.json').
+            success(function(data) {
+            $scope.buses = data; 
+            for (var i=0; i < $scope.buses.length; i++) {
+                if ($scope.busId === $scope.buses[i].id) { 
+                    $scope.currentBus = $scope.buses[i];
                 }
             }
-            console.log($scope.stationsSchedule);
         });
+        
+
         this.isStationSearched = function(station) {
             var fitsQuery = [];
             fitsQuery = $filter('filter')($scope.currentBus.stations, $scope.query);
@@ -58,6 +61,5 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                 }
             }
             return false;
-             //return $filter('filter')($scope.currentBus.stations, $scope.query).length;
         }
 }]);

@@ -12,6 +12,10 @@ transportApp.config(['$routeProvider',
             templateUrl: 'html/main_view.html',
             controller: 'MainViewController'
         }).
+        when('/buses/', {
+            templateUrl: 'html/buses_view.html',
+            controller: 'BusesController'
+        }).
         when('/buses/:busId', {
             templateUrl: 'html/bus_view.html',
             controller: 'BusScheduleController'

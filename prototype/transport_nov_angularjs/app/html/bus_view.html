@@ -1,14 +1,14 @@
 <div ng-controller="BusScheduleController as busController">
 
     <div class="text-center" id="main-input">
-    Enter bus/or bus stop: <input ng-model="query">
+        <input ng-model="query">
     </div>         
 
     <table class="table">
         <tr>
+            <!--ng-attr-class="{{busController.isStationSearched(station) && 'right-station' || 'station'}}">-->
             <th 
-            ng-attr-class="{{busController.isStationSearched(station) && 'right-station' || 'station'}}" 
-            ng-repeat="station in currentBus.stations" > 
+                ng-repeat="station in currentBus.stations track by $index">
                 {{station}} 
             </th>
         </tr>

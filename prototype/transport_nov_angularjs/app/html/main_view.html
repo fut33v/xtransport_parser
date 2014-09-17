@@ -1,22 +1,36 @@
 <div ng-controller="MainViewController as mainViewController" class="container-fluid">
-   
-    <div class="text-center" id="main-input">
-    Enter bus/or bus stop: <input ng-model="query.$">
-    </div>         
 
     <div class="row">
-        <div class="col-xs-3"> 
-            <img height="256px" src="img/bus.png"/>
-        </div>      
-        <div class="col-xs-3"> 
-            <p class="vcenter main-text">You can see the schedule for particular bus</p>  
-        </div>      
+        <div> 
+            <div class="col-md-5 "> 
+                <a href="#/buses/">
+                    <img class="main-img-left" height="256px" src="img/bus.png"/>
+                </a>
+            </div>
+            <div class="col-md-2" > 
+                <div class="vertical-line" width="1px"></div>
+            </div>
+            <div class="col-md-5"> 
+                <a href="#/stops/">
+                    <img class="main-img-right " height="256px" src="img/bus_stop.png"/>
+                </a>
+            </div>
+        </div> 
+    </div>
+    <div class="row middle-stripe">
+        <div class="col-md-5 "> 
+            <p class="main-txt-left stripe-text"> 
+                You can look at particular bus schedule..    
+            </p> 
+        </div> 
         
-        <div class="col-xs-6"> 
-            <img height="256px" src="img/bus_stop.png"/>
-            <p class="vcenter main-text">
-                Either for a one of the bus stops
-            </p>
-        </div>
+        <div class="col-md-2" > 
+        </div> 
+    
+        <div class="col-md-5 "> 
+            <p class="stripe-text"> 
+                Either at one of the bus stop's schedule. 
+            </p> 
+        </div> 
     </div>
 </div>
