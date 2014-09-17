@@ -20,7 +20,6 @@
 
     "prestart": "npm install",
     "start": "http-server -c-1 -a 0.0.0.0 -p 8000",
-
     "pretest": "npm install",
     "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
     "test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js  --single-run",
