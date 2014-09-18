@@ -1,0 +1,78 @@
+/* app css stylesheet */
+
+body {
+    font-family: Bender-Black;
+}
+
+#main-input {
+    margin-bottom: 40px;
+}
+
+#main-header {
+    color: white;
+    text-align: center;
+}
+
+.right-station {
+    color: red;
+}
+
+.station {
+    color: black;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.main-text {
+    line-height: 256px;
+}
+
+.main-img-left {
+    display: block;
+    margin-left: auto;
+    padding: 20px;
+}
+
+.main-img-right {
+    display: block;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.main-txt-left {
+    text-align: right;
+}
+
+.vertical-line {
+    border-left: thick solid #000000;
+    height: 256px;
+    width: 1px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-main {
+    height: 100px; 
+    width: 100%;
+    background-color: #3071a9;
+    border-color: #285e8e;
+    margin-bottom: 20px;
+}
+
+.middle-stripe {
+    background-color: #3071a9;
+    border-color: #285e8e;
+    margin-top: 20px;
+    color: white;
+    height: 100px;
+}
+
+.stripe-text {
+    line-height: 100px;
+    font-size: large;
+}
