@@ -1,12 +1,13 @@
 /* app css stylesheet */
 
-#main-input {
-    margin-bottom: 40px;
+body {
+    /* font-family: Bender-Black; */
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: 700;
 }
 
-#main-header {
-    color: white;
-    text-align: center;
+#main-input {
+    margin-bottom: 40px;
 }
 
 .right-station {
@@ -30,13 +31,15 @@
 .main-img-left {
     display: block;
     margin-left: auto;
-    padding: 20px;
+    padding: 0;
+    padding-right: 10px;
 }
 
 .main-img-right {
     display: block;
     margin-right: auto;
-    padding: 20px;
+    padding: 0;
+    padding-left: 35px;
 }
 
 .main-txt-left {
@@ -53,12 +56,27 @@
 }
 
 .header-main {
-    height: 100px; 
+    height: 150px; 
     width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px #d7d7d7 solid;
+}
+
+#logo-img {
+    height: 150px; 
+}
+
+#footer-main {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
     background-color: #3071a9;
     border-color: #285e8e;
-    margin-bottom: 20px;
+    color: white;
 }
+
 
 .middle-stripe {
     background-color: #3071a9;
@@ -69,5 +87,20 @@
 }
 
 .stripe-text {
-    line-height: 100px;
+    font-size: large;
+}
+
+.button-container {
+    /* width: 520px;*/
+    overflow-y: auto;
+}
+
+.button-container > a {
+    float: left;
+    margin: 15px;
+    color: #333333;
+}
+
+#bus-button {
+    width: 70px;
 }

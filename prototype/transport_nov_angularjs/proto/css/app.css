@@ -31,13 +31,15 @@ body {
 .main-img-left {
     display: block;
     margin-left: auto;
-    padding: 20px;
+    padding: 0;
+    padding-right: 10px;
 }
 
 .main-img-right {
     display: block;
     margin-right: auto;
-    padding: 20px;
+    padding: 0;
+    padding-left: 35px;
 }
 
 .main-txt-left {
@@ -56,19 +58,25 @@ body {
 .header-main {
     height: 200px; 
     width: 100%;
-    /* background-color: #3071a9;
-    border-color: #285e8e; */
     margin-bottom: 20px;
-    border-bottom: 1px #d7d7d7 solid;
-}
-
-#header-border {
     border-bottom: 1px #d7d7d7 solid;
 }
 
 #logo-img {
     height: 200px; 
 }
+
+#footer-main {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+    background-color: #3071a9;
+    border-color: #285e8e;
+    color: white;
+}
+
 
 .middle-stripe {
     background-color: #3071a9;
@@ -79,6 +87,16 @@ body {
 }
 
 .stripe-text {
-    line-height: 100px;
     font-size: large;
+}
+
+.button-container {
+    /* width: 520px;*/
+    overflow-y: auto;
+}
+
+.button-container > button {
+    float: left;
+    margin: 15px;
+    width: 70px;
 }

@@ -6,7 +6,8 @@
 
 # Vim related
 *.swp*
-
+*.swo
+*.swn
 
 #################################
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
