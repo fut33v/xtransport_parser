@@ -40,45 +40,19 @@ if __name__ == "__main__":
         html = response.read().decode('windows-1251')
         schedule_parser.feed(html)
 
-        # schedule_by_station = []
-        # for bus_row in ScheduleParser.schedule_table:
-        #     for station_column in bus_row:
-        #         schedule_by_station.append([])
-
-        # for station_column in schedule_by_station:
-        #     for bus_row in ScheduleParser.schedule_table:
-        #         station_column.append("-")
-
-        # i = 0 
-        # for column in schedule_by_station:
-        #     j = 0
-        #     for time in column:
-        #         try: 
-        #             print ScheduleParser.schedule_table[i][j]
-        #             schedule_by_station[i][j] = ScheduleParser.schedule_table[j][i]
-        #             print column
-        #         except Exception as inst:
-        #             print inst.args
-        #             print i, j
-        #             raise inst
-        #         j += 1
-        #     i += 1
-
-        # print schedule_by_station
-
-        # print "\nStations names:"
-        # for station_name in ScheduleParser.stations_list:
-        #     print station_name
-
-        # for bus in ScheduleParser.schedule_table:
-        #     for time in bus:
-        #         print time,
         for station in ScheduleParser.stations_list:
             print station
             stations_set.add(station.encode('utf-8'))
 
         stations_list = [
             x.encode('utf-8') for x in ScheduleParser.stations_list
+        ]
+        stations_list = [
+            {
+                "name": x,
+                "id": hashlib.md5(x).hexdigest()[16:]
+            }
+            for x in stations_list
         ]
         bus_json_objects_list.append(
             {
@@ -99,7 +73,7 @@ if __name__ == "__main__":
     json_file.write(json_text)
     json_file.close()
 
-    # JSON dumping stations list 
+    # JSON dumping stations list
     stations_file = open("stations.json", 'w')
     stations_list = list(stations_set)
     stations_json_array = [
@@ -117,19 +91,18 @@ if __name__ == "__main__":
     )
     stations_file.write(stations_json_text)
     stations_file.close()
-    
+
     for bus_js_object in bus_json_objects_list:
         json_text = json_pretty_dumps(
-                {
-                    'id': bus_js_object['id'], 
-                    'schedule': bus_js_object['schedule'],
-                    'stationsNumber': (len(bus_js_object['stations']))
-                }
+            {
+                'id': bus_js_object['id'],
+                'schedule': bus_js_object['schedule'],
+                'stationsNumber': (len(bus_js_object['stations']))
+            }
         )
         json_file = open(bus_js_object['id'].encode('utf-8') + ".json", 'w')
         json_file.write(json_text)
         json_file.close()
-
 
     # for trolley_id, trolley_name in TransportParser.
     # trolley_dictionary.iteritems():

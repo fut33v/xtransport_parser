@@ -30,7 +30,6 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
     function($scope, $http, $routeParams, $filter) {
         
         $scope.busId = $routeParams.busId;
-        
         $http.get('transport/schedules/' + $scope.busId + ".json").
             success(function(data) {
              $scope.busSchedule = data; 
@@ -44,11 +43,18 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                     $scope.currentBus = $scope.buses[i];
                 }
             }
+            $scope.checkedStations = [];
+            $scope.checkedStationsInit = [0];
+            console.log("Хуёк!");
+            for (var i=0; i < $scope.currentBus.stations.length; i++) {
+                $scope.checkedStations.push($scope.currentBus.stations[i].id);
+            }
+            console.log($scope.checkedStations);
         });
         
-
-        this.isStationSearched = function(station) {
-            var fitsQuery = [];
+        
+        this.isStationChecked = function(station) {
+            /* var fitsQuery = [];
             fitsQuery = $filter('filter')($scope.currentBus.stations, $scope.query);
             if (fitsQuery.length) {             
                 for (var i=0; i < fitsQuery.length; i++){
@@ -60,6 +66,42 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                     }
                 }
             }
+            return false; */
+            for (var i=0; i < $scope.checkedStations.length; i++) {
+                if (station.id === $scope.checkedStations[i]) {
+                    return true;
+                }
+                console.log(station.id);
+            }
             return false;
         }
-}]);
+}])
+    .directive("checkboxGroup", function() {
+    return {
+        restrict: "A",
+        link: function (scope, elem, attrs) {
+            // Update array on click
+            elem.bind('click', function () {
+                if (scope.checkedStationsInit.length) { 
+                    console.log("1", scope.checkedStationsInit);
+                    while(scope.checkedStations.length > 0) {
+                        scope.checkedStations.pop(); 
+                    }
+                    while(scope.checkedStationsInit.length > 0) {
+                        scope.checkedStationsInit.pop(); 
+                    }
+                }
+                // Add if checked
+                if (elem[0].checked) {
+                    scope.checkedStations.push(scope.station.id);
+                }
+                // Remove if unchecked
+                else {
+                    var index = scope.checkedStations.indexOf(scope.station.id);
+                    scope.checkedStations.splice(index, 1);
+                }
+                console.log(scope.checkedStations);
+            });
+        }
+    }
+});

@@ -1,20 +1,54 @@
 <div ng-controller="BusScheduleController as busController">
-
-    <table class="table">
-        <tr>
-            <!--ng-attr-class="{{busController.isStationSearched(station) && 'right-station' || 'station'}}">-->
-            <th 
-                ng-repeat="station in currentBus.stations track by $index">
-                {{station}} 
-            </th>
-        </tr>
-        <tr ng-repeat="bus in busSchedule.schedule"> 
-            <td 
-                ng-attr-class="{{busController.isTimeSearched()"
-                ng-repeat="time in bus track by $index">            
-                {{time}}
-            </td>
-        </tr>
-    </table>
-
+  <div class="row">
+    <div class="col-md-6 checkbox-container">
+      <p>Вы можете выбрать остановки, которые Вас интересуют:</p>
+      <label ng-repeat="station in currentBus.stations track by $index">
+        <input type="checkbox" checkbox-group id="station-checkbox" name="checkbox">{{station.name}}
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-4">
+          <p>А также время:</p> 
+          <select>
+            <option value="0">0</option>
+            <option value="0">0</option>
+            <option value="0">0</option>
+            <option value="0">0</option>
+          </select> 
+          <select>
+            <option value="0">0</option>
+            <option value="0">0</option>
+            <option value="0">0</option>
+            <option value="0">0</option>
+          </select> 
+          <label><input type="checkbox">Учитывать текущее время</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <button class="button dno">Скрыть данное меню</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+        <!--ng-attr-class="{{busController.isStationSearched(station) && 'right-station' || 'station'}}">-->
+      <th 
+        ng-REPEat="station in currentBus.stations track by $index"
+        ng-show="busController.isStationChecked(station)" 
+        >
+        {{station.name  }}  
+        {{busController.isStationChecked(station)}}
+      </th>
+    </tr>
+    <tr ng-repeat="bus in busSchedule.schedule"> 
+      <td 
+        ng-attr-class="{{busController.isTimeSearched()"
+        ng-repeat="time in bus track by $index">            
+        {{time}}
+      </td>
+    </tr>
+  </table>
 </div>

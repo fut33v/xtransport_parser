@@ -4,6 +4,7 @@ body {
     /* font-family: Bender-Black; */
     font-family: 'PT Sans Narrow', sans-serif;
     font-weight: 700;
+    color: #333333;
 }
 
 #main-input {
@@ -91,7 +92,6 @@ body {
 }
 
 .button-container {
-    /* width: 520px;*/
     overflow-y: auto;
 }
 
@@ -101,6 +101,26 @@ body {
     color: #333333;
 }
 
+.checkbox-container {
+    overflow-y: auto;
+}
+
+.checkbox-container > label {
+    float: left;
+    margin: 15px;
+    color: #333333;
+    width: 250px;
+}
+
+#station-checkbox {
+    margin-right: 5px;
+}
+
 #bus-button {
     width: 70px;
+}
+
+.dno {
+    /* position: absolute; */
+    /* bottom: 0; */
 }
