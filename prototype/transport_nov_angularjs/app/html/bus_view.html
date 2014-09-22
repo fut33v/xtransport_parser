@@ -3,7 +3,7 @@
     <div class="col-md-6 checkbox-container">
       <p>Вы можете выбрать остановки, которые Вас интересуют:</p>
       <label ng-repeat="station in currentBus.stations track by $index">
-        <input type="checkbox" checkbox-group id="station-checkbox" name="checkbox">{{station.name}}
+        <input type="checkbox" ng-model="query" checkbox-group id="station-checkbox" name="checkbox">{{station.name}}
       </label>
     </div>
     <div class="col-md-4">
@@ -33,19 +33,20 @@
     </div>
   </div>
   <table class="table">
+    {{ currentBus.stations }}
+    {{ query }}
     <tr>
         <!--ng-attr-class="{{busController.isStationSearched(station) && 'right-station' || 'station'}}">-->
       <th 
-        ng-REPEat="station in currentBus.stations track by $index"
-        ng-show="busController.isStationChecked(station)" 
+        ng-repeat="station in currentBus.stations track by $index"
+        ng-show="currentBus.stations[$index].selected"
         >
-        {{station.name  }}  
-        {{busController.isStationChecked(station)}}
+        {{station.name}}  
       </th>
     </tr>
     <tr ng-repeat="bus in busSchedule.schedule"> 
       <td 
-        ng-attr-class="{{busController.isTimeSearched()"
+        ng-show="currentBus.stations[$index].selected"
         ng-repeat="time in bus track by $index">            
         {{time}}
       </td>
