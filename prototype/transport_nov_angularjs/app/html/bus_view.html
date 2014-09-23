@@ -26,6 +26,10 @@
             ng-options="i for i in minutes"> 
           </select> 
           <button ng-click="busController.setCurrentTime()">Использовать текущее время</button>
+          <button ng-click="busController.setNullTime()">Сбросить</button>
+          <label> 
+            <input type="checkbox" ng-model="highlightOn">Подсвечивать красным ПОТРАЧЕННЫЕ</input>
+          </label> 
         </div>
       </div>
       <div class="row">
@@ -35,6 +39,10 @@
       </div>
     </div>
   </div>
+
+  <script lang="js">
+    console.log(1234);
+  </script>
 
   <div class="schedule-table">
     <table class="table table-striped" oci.fixed-header>
@@ -49,7 +57,8 @@
       <tbody>
         <tr ng-repeat="bus in busSchedule.schedule | filtertime:selectedHour:selectedMinute"> 
           <td ng-show="checkedStations[$index].selected"
-              ng-repeat="time in bus  track by $index ">
+              ng-repeat="time in bus  track by $index "
+              ng-class="{'text-danger': busController.isTimeExpired(time) && highlightOn}">
             {{time}}
           </td>
         </tr>

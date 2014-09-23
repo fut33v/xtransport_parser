@@ -59,8 +59,6 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         }
 
         this.setCurrentTime = function() {
-            var minutes = 1000 * 60;
-            var hours = minutes * 60;
             var d = new Date();
             var h = d.getHours();
             var m = d.getMinutes();
@@ -69,11 +67,38 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             $scope.selectedMinute = m;
         }
         
+        this.setNullTime = function(time) {
+            $scope.selectedHour = 0;
+            $scope.selectedMinute = 0;
+        }
+       
+        this.isTimeExpired = function(time) {
+            var d = new Date();
+            var currentHour = d.getHours();
+            var currentMinute = d.getMinutes();
+            var timeSplited = time.split(':');
+            var hour = timeSplited[0];
+            var minute = timeSplited[1];
+            // @comment: night hours of the next day 
+            if (hour == 0 || hour == 1) {
+                return false;
+            }  
+            if (currentHour > hour) {
+                return true;
+            } else {
+                if (currentHour == hour && currentMinute > minute) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         $scope.hideMenu = false;
         $scope.hours = [];
         $scope.minutes = [];
         $scope.selectedHour = 0;
         $scope.selectedMinute = 0;
+        $scope.highlightOn = true;
         for (var i=0; i < 24; i++) {
             $scope.hours.push(i);
         }

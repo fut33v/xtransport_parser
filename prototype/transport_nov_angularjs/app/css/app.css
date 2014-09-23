@@ -120,7 +120,7 @@ body {
     width: 70px;
 }
 
-
+/*
 thead, tbody, tr, td, th { display: block; }
 
 tr:after {
@@ -146,25 +146,25 @@ tbody td, thead th {
     width: 10%; 
     float: left;
 } 
-
+*/
 /* the maximum height of the table: */
-/*div.schedule-table div.fixed-table-container-inner {
+div.schedule-table div.fixed-table-container-inner {
     max-height: 500px;
 
     border: 1px solid #aaaaaa;
     width: 100%;
 }
-*/
+
 /* the height of the header row */
-/*div.schedule-table div.th-inner {
+div.schedule-table div.th-inner {
     line-height: 30px;
 }
-*/
+
 /* the height of the header row - this needs to match line-height above */
-/*div.schedule-table div.fixed-table-container {
+div.schedule-table div.fixed-table-container {
    padding-top: 30px;
 }
 
 div.schedule-table tr.hidden-header .th-inner {
   padding-right: 5px;
-} */
+} 

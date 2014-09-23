@@ -12,10 +12,8 @@ transportFilters.filter('filtertime', function() {
         for (var i=0; i < input.length; i++) {
             for (var j=0; j < input[i].length; j++) {            
                 var time = input[i][j].split(":");
-                // console.log(time); 
                 var scheduleHour = parseInt(time[0]); 
                 var scheduleMinute = parseInt(time[1]); 
-                // console.log(scheduleHour, ":", scheduleMinute, "--", hour, ":", minute); 
                 if (scheduleHour > hour) {
                     output.push(input[i]);         
                     break;
@@ -25,10 +23,8 @@ transportFilters.filter('filtertime', function() {
                         break;
                     }
                 }
-                // console.log(input[i][j]);
             }
         } 
-        console.log(output);
         return output;
     }
 });
