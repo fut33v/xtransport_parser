@@ -50,6 +50,16 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             $scope.checkedStationsInit = [0];
             console.log($scope.buses);
         });
+
+        $scope.hideMenu = false;
+
+        this.hideButton = function() {
+            if($scope.hideMenu) {
+                $scope.hideMenu = false;
+            } else {
+                $scope.hideMenu = true;
+            }    
+        }
 }])
     .directive("checkboxGroup", function() {
     return {

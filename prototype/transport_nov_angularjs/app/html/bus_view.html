@@ -1,5 +1,10 @@
 <div ng-controller="BusScheduleController as busController">
-  <div class="row">
+  <div class="row" ng-show="hideMenu">
+        <div class="col-md-4">
+          <button ng-click="busController.hideButton()" class="button">Показать меню</button>
+        </div>
+  </div>
+  <div class="row" ng-hide="hideMenu">
     <div class="col-md-6 checkbox-container">
       <p>Вы можете выбрать остановки, которые Вас интересуют:</p>
     
@@ -29,21 +34,24 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <button class="button dno">Скрыть данное меню</button>
+          <button ng-click="busController.hideButton()" class="button">Скрыть данное меню</button>
         </div>
       </div>
     </div>
   </div>
-  <table class="table">
-    <tr>
-      <th ng-repeat="station in currentBus.stations track by $index"
-          ng-show="checkedStations[$index].selected">
-        {{station.name}}  
-      </th>
-    </tr>
+  <table class="table table-striped">
+    <thead> 
+      <tr>
+        <th ng-repeat="station in currentBus.stations track by $index"
+            ng-show="checkedStations[$index].selected">
+          {{station.name}}  
+        </th>
+      </tr>
+    </thead>
     <tr ng-repeat="bus in busSchedule.schedule"> 
       <td ng-show="checkedStations[$index].selected"
-          ng-repeat="time in bus track by $index">            
+          ng-repeat="time in bus track by $index"
+          class="filterable-cell">            
         {{time}}
       </td>
     </tr>
