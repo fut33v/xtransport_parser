@@ -52,6 +52,17 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         });
 
         $scope.hideMenu = false;
+        
+        $scope.hours = [];
+        $scope.minutes = [];
+
+        for (var i=0; i < 24; i++) {
+            $scope.hours.push(i);
+        }
+        
+        for (var i=0; i < 60; i++) {
+            $scope.minutes.push(i);
+        }
 
         this.hideButton = function() {
             if($scope.hideMenu) {

@@ -17,17 +17,22 @@
       <div class="row">
         <div class="col-md-4">
           <p>А также время:</p> 
+            <!-- 
           <select>
-            <option value="0">0</option>
-            <option value="0">0</option>
-            <option value="0">0</option>
-            <option value="0">0</option>
-          </select> 
+            <option
+              ng-repeat="i in hours track by $index" value="{{i}}" 
+              ng-model="query[$index]">
+              {{i}}
+            </option>-->
+         
+
+            <select 
+              ng-model="selectedHour"
+              ng-options="i for i in hours"> 
+            </select> 
+          
           <select>
-            <option value="0">0</option>
-            <option value="0">0</option>
-            <option value="0">0</option>
-            <option value="0">0</option>
+            <option ng-repeat="i in minutes" value="{{i}}">{{i}}</option>
           </select> 
           <label><input type="checkbox">Учитывать текущее время</label>
         </div>
@@ -39,21 +44,28 @@
       </div>
     </div>
   </div>
-  <table class="table table-striped">
-    <thead> 
-      <tr>
-        <th ng-repeat="station in currentBus.stations track by $index"
-            ng-show="checkedStations[$index].selected">
-          {{station.name}}  
-        </th>
-      </tr>
-    </thead>
-    <tr ng-repeat="bus in busSchedule.schedule"> 
-      <td ng-show="checkedStations[$index].selected"
-          ng-repeat="time in bus track by $index"
-          class="filterable-cell">            
-        {{time}}
-      </td>
-    </tr>
-  </table>
+
+  {{selectedHour}}
+
+
+  <div class="schedule-table">
+    <table class="table table-striped" oci.fixed-header>
+      <thead> 
+        <tr>
+          <th ng-repeat="station in currentBus.stations track by $index"
+              ng-show="checkedStations[$index].selected">
+            {{station.name}}   
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="bus in busSchedule.schedule"> 
+          <td ng-show="checkedStations[$index].selected"
+              ng-repeat="time in bus | filter:selectedHour track by $index ">
+            {{time}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
