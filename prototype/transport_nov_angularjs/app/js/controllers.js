@@ -93,6 +93,17 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             return false;
         }
 
+        this.stationClicked = function() {
+            console.log('kydax');
+            if ($scope.initialCheckedStations) {
+                for (var x=0; x < $scope.checkedStations.length; x++) {
+                    $scope.checkedStations[x].selected = false;
+                }
+                $scope.initialCheckedStations = false;
+            }
+        }
+        
+        $scope.initialCheckedStations = true; 
         $scope.hideMenu = false;
         $scope.hours = [];
         $scope.minutes = [];

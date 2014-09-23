@@ -1,48 +1,77 @@
 <div ng-controller="BusScheduleController as busController">
   <div class="row" ng-show="hideMenu">
         <div class="col-md-4">
-          <button ng-click="busController.hideButton()" class="button">Показать меню</button>
+          <button 
+            ng-click="busController.hideButton()" 
+            class="btn btn-default">
+              Показать меню
+          </button>
         </div>
   </div>
   <div class="row" ng-hide="hideMenu">
     <div class="col-md-6 checkbox-container">
       <p>Вы можете выбрать остановки, которые Вас интересуют:</p>
     
-      <label ng-repeat="i in currentBus.stations track by $index"> 
-        <input type="checkbox" ng-model="currentBus.stations[$index].selected"> {{currentBus.stations[$index].name}} </input>
+      <label 
+        ng-repeat="i in currentBus.stations track by $index"
+        ng-click="busController.stationClicked()">
+        <input 
+          type="checkbox" 
+          ng-model="currentBus.stations[$index].selected"> 
+            {{currentBus.stations[$index].name}} 
+        </input>
       </label> 
     
     </div>
     <div class="col-md-4">
+
       <div class="row">
+       
         <div class="col-md-4">
           <p>А также время:</p> 
+          
           <select 
             ng-model="selectedHour"
             ng-options="i for i in hours"> 
           </select> 
+          
           <select 
             ng-model="selectedMinute"
             ng-options="i for i in minutes"> 
           </select> 
-          <button ng-click="busController.setCurrentTime()">Использовать текущее время</button>
-          <button ng-click="busController.setNullTime()">Сбросить</button>
+         
+          <button 
+            ng-click="busController.setCurrentTime()" 
+            class="btn btn-default">
+              Использовать текущее время
+          </button>
+        
+          <button 
+            ng-click="busController.setNullTime()"
+            class="btn btn-default">
+            Сбросить фильтрацию по времени
+          </button>
+       
           <label> 
             <input type="checkbox" ng-model="highlightOn">Подсвечивать красным ПОТРАЧЕННЫЕ</input>
           </label> 
+      
         </div>
+
       </div>
+
       <div class="row">
         <div class="col-md-4">
-          <button ng-click="busController.hideButton()" class="button">Скрыть данное меню</button>
+          <button 
+            ng-click="busController.hideButton()" 
+            class="btn btn-default">
+              Скрыть данное меню
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <script lang="js">
-    console.log(1234);
-  </script>
 
   <div class="schedule-table">
     <table class="table table-striped" oci.fixed-header>
