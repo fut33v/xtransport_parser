@@ -39,15 +39,13 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             success(function(data) {
             $scope.buses = data; 
             for (var i=0; i < $scope.buses.length; i++) {
-                for (var j=0; j <  $scope.buses[i].stations.length; j++) {
-                    $scope.buses[i].stations[j].selected = false; 
-                }
                 if ($scope.busId === $scope.buses[i].id) { 
                     $scope.currentBus = $scope.buses[i];
                 }
             }
-            for (var x=0; x < $scope.currentBus.stations.length; x++) {
-                $scope.currentBus.stations[x].selected = true;
+            $scope.checkedStations = $scope.currentBus.stations;
+            for (var x=0; x < $scope.checkedStations.length; x++) {
+                $scope.checkedStations[x].selected = true;
             } 
             $scope.checkedStationsInit = [0];
             console.log($scope.buses);
@@ -63,27 +61,27 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                     while(scope.checkedStationsInit.length > 0) {
                         scope.checkedStationsInit.pop(); 
                     }
-                    for (var x=0; x < scope.currentBus.stations.length; x++) {
-                        scope.currentBus.stations[x].selected = false;
+                    for (var x=0; x < scope.checkedStations.length; x++) {
+                        scope.checkedStations[x].selected = false;
                         console.log("Хуёк");
                     } 
                 }
                 // Add if checked
                 if (elem[0].checked) {
-                    for (var x=0; x < scope.currentBus.stations.length; x++) {
-                        if (scope.currentBus.stations[x].id === scope.station.id) { 
-                            scope.currentBus.stations[x].selected = true;
-                            console.log(scope.currentBus.stations)
+                    for (var x=0; x < scope.checkedStations.length; x++) {
+                        if (scope.checkedStations[x].id === scope.station.id) { 
+                            scope.checkedStations[x].selected = true;
+                            console.log(scope.checkedStations)
                         }
                     } 
                     // scope.checkedStations.push(scope.station.id);
                 }
                 // Remove if unchecked
                 else {
-                    for (var x=0; x < scope.currentBus.stations.length; x++) {
-                        if (scope.currentBus.stations[x].id === scope.station.id) { 
-                            scope.currentBus.stations[x].selected = false;
-                            console.log(scope.currentBus.stations)
+                    for (var x=0; x < scope.checkedStations.length; x++) {
+                        if (scope.checkedStations[x].id === scope.station.id) { 
+                            scope.checkedStations[x].selected = false;
+                            console.log(scope.checkedStations)
                         }
                     } 
                     // var index = scope.checkedStations.indexOf(scope.station.id);
