@@ -48,13 +48,14 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                 $scope.checkedStations[x].selected = true;
             } 
             $scope.checkedStationsInit = [0];
-            console.log($scope.buses);
         });
 
         $scope.hideMenu = false;
         
         $scope.hours = [];
         $scope.minutes = [];
+        $scope.selectedHour = 0;
+        $scope.selectedMinute = 0;
 
         for (var i=0; i < 24; i++) {
             $scope.hours.push(i);
@@ -84,7 +85,6 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                     }
                     for (var x=0; x < scope.checkedStations.length; x++) {
                         scope.checkedStations[x].selected = false;
-                        console.log("Хуёк");
                     } 
                 }
                 // Add if checked
@@ -92,7 +92,6 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                     for (var x=0; x < scope.checkedStations.length; x++) {
                         if (scope.checkedStations[x].id === scope.station.id) { 
                             scope.checkedStations[x].selected = true;
-                            console.log(scope.checkedStations)
                         }
                     } 
                     // scope.checkedStations.push(scope.station.id);
@@ -102,13 +101,11 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                     for (var x=0; x < scope.checkedStations.length; x++) {
                         if (scope.checkedStations[x].id === scope.station.id) { 
                             scope.checkedStations[x].selected = false;
-                            console.log(scope.checkedStations)
                         }
                     } 
                     // var index = scope.checkedStations.indexOf(scope.station.id);
                     // scope.checkedStations.splice(index, 1);
                 }
-                // console.log(scope.checkedStations);
             });
         }
     }

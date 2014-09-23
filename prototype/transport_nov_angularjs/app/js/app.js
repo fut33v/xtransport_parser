@@ -4,7 +4,7 @@
 var transportApp = angular.module('transportApp', [
     'ngRoute',
     'transportControllers',
-    'oci.fixedHeader'
+    'transportFilters',
 ]);
 
 transportApp.config(['$routeProvider',
