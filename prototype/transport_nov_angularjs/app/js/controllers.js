@@ -49,22 +49,7 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             } 
             $scope.checkedStationsInit = [0];
         });
-
-        $scope.hideMenu = false;
         
-        $scope.hours = [];
-        $scope.minutes = [];
-        $scope.selectedHour = 0;
-        $scope.selectedMinute = 0;
-
-        for (var i=0; i < 24; i++) {
-            $scope.hours.push(i);
-        }
-        
-        for (var i=0; i < 60; i++) {
-            $scope.minutes.push(i);
-        }
-
         this.hideButton = function() {
             if($scope.hideMenu) {
                 $scope.hideMenu = false;
@@ -72,6 +57,30 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                 $scope.hideMenu = true;
             }    
         }
+
+        this.setCurrentTime = function() {
+            var minutes = 1000 * 60;
+            var hours = minutes * 60;
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            console.log(h, m);
+            $scope.selectedHour = h;
+            $scope.selectedMinute = m;
+        }
+        
+        $scope.hideMenu = false;
+        $scope.hours = [];
+        $scope.minutes = [];
+        $scope.selectedHour = 0;
+        $scope.selectedMinute = 0;
+        for (var i=0; i < 24; i++) {
+            $scope.hours.push(i);
+        }
+        for (var i=0; i < 60; i++) {
+            $scope.minutes.push(i);
+        }
+
 }])
     .directive("checkboxGroup", function() {
     return {

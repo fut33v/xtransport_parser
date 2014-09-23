@@ -17,18 +17,15 @@
       <div class="row">
         <div class="col-md-4">
           <p>А также время:</p> 
-
-            <select 
-              ng-model="selectedHour"
-              ng-options="i for i in hours"> 
-            </select> 
-            
-            <select 
-              ng-model="selectedMinute"
-              ng-options="i for i in minutes"> 
-            </select> 
-          
-          <label><input type="checkbox">Учитывать текущее время</label>
+          <select 
+            ng-model="selectedHour"
+            ng-options="i for i in hours"> 
+          </select> 
+          <select 
+            ng-model="selectedMinute"
+            ng-options="i for i in minutes"> 
+          </select> 
+          <button ng-click="busController.setCurrentTime()">Использовать текущее время</button>
         </div>
       </div>
       <div class="row">
@@ -38,9 +35,6 @@
       </div>
     </div>
   </div>
-
-  {{selectedHour}}
-
 
   <div class="schedule-table">
     <table class="table table-striped" oci.fixed-header>
