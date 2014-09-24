@@ -158,12 +158,12 @@ div.schedule-table div.fixed-table-container-inner {
 
 /* the height of the header row */
 div.schedule-table div.th-inner {
-    line-height: 30px;
+    line-height: 50px;
 }
 
 /* the height of the header row - this needs to match line-height above */
 div.schedule-table div.fixed-table-container {
-   padding-top: 30px;
+   padding-top: 50px;
 }
 
 div.schedule-table tr.hidden-header .th-inner {
@@ -193,4 +193,9 @@ div.schedule-table tr.hidden-header .th-inner {
 .schedule-menu-group {
     padding-left: 40px;
     padding-right: 40px;
+}
+
+.nav-bar-schedule {
+    margin-bottom: 20px;
+    padding-left: 20px;
 }
