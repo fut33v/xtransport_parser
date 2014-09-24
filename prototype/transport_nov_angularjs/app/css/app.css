@@ -148,6 +148,7 @@ tbody td, thead th {
 } 
 */
 /* the maximum height of the table: */
+
 div.schedule-table div.fixed-table-container-inner {
     max-height: 500px;
 
@@ -167,4 +168,9 @@ div.schedule-table div.fixed-table-container {
 
 div.schedule-table tr.hidden-header .th-inner {
   padding-right: 5px;
-} 
+}
+
+.schedule-table-ui {
+    width: 500px;
+    height: 500px;
+}
