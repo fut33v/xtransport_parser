@@ -1,5 +1,5 @@
 <div ng-controller="BusScheduleController as busController">
-  <div class="row" ng-show="hideMenu">
+  <div class="row well well-lg" ng-show="hideMenu">
     <button 
       ng-click="busController.hideButton()" 
       class="btn btn-success centerized">
@@ -10,7 +10,7 @@
   
   <!-- @Menu @start --> 
   <div class="row" ng-hide="hideMenu">
-    <div class="col-md-6 checkbox-container schedule-menu-stations-group">
+    <div class="col-md-6 checkbox-container schedule-menu-group well well-lg">
       <p>Остановки:</p>
     
       <label 
@@ -32,7 +32,7 @@
     
     </div>
     
-    <div class="col-md-6">
+    <div class="col-md-6 schedule-menu-group well well-lg">
       <div class="row">
         <p>Время:</p> 
         <select 
@@ -90,10 +90,11 @@
 </div>
 -->
 
-  <div class="row">
+  <div 
+    ng-hide="hideMenu" 
+    class="row well well-lg">
       <button 
         ng-click="busController.hideButton()" 
-        ng-hide="hideMenu" 
         class="btn btn-primary centerized">
         <span class="glyphicon glyphicon-chevron-up"></span>
           Скрыть меню

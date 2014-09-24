@@ -190,6 +190,7 @@ div.schedule-table tr.hidden-header .th-inner {
     margin-bottom: 10px;
 }
 
-.schedule-menu-stations-group {
+.schedule-menu-group {
     padding-left: 40px;
+    padding-right: 40px;
 }
