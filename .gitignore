@@ -8,6 +8,9 @@
 *.swp*
 *.swo
 *.swn
+*.swk
+*.swl
+*.swm
 
 #################################
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
