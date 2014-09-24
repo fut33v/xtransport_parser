@@ -93,8 +93,14 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             return false;
         }
 
+        this.setAllStationsChecked = function() {
+            for (var x=0; x < $scope.checkedStations.length; x++) {
+                $scope.checkedStations[x].selected = true;
+            } 
+            $scope.initialCheckedStations = true;
+        }
+
         this.stationClicked = function() {
-            console.log('kydax');
             if ($scope.initialCheckedStations) {
                 for (var x=0; x < $scope.checkedStations.length; x++) {
                     $scope.checkedStations[x].selected = false;
@@ -109,49 +115,11 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         $scope.minutes = [];
         $scope.selectedHour = 0;
         $scope.selectedMinute = 0;
-        $scope.highlightOn = true;
+        this.highlightOn = true;
         for (var i=0; i < 24; i++) {
             $scope.hours.push(i);
         }
         for (var i=0; i < 60; i++) {
             $scope.minutes.push(i);
         }
-
-}])
-    .directive("checkboxGroup", function() {
-    return {
-        restrict: "A",
-        link: function (scope, elem, attrs) {
-            // Update array on click
-            elem.bind('click', function () {
-                if (scope.checkedStationsInit.length) { 
-                    while(scope.checkedStationsInit.length > 0) {
-                        scope.checkedStationsInit.pop(); 
-                    }
-                    for (var x=0; x < scope.checkedStations.length; x++) {
-                        scope.checkedStations[x].selected = false;
-                    } 
-                }
-                // Add if checked
-                if (elem[0].checked) {
-                    for (var x=0; x < scope.checkedStations.length; x++) {
-                        if (scope.checkedStations[x].id === scope.station.id) { 
-                            scope.checkedStations[x].selected = true;
-                        }
-                    } 
-                    // scope.checkedStations.push(scope.station.id);
-                }
-                // Remove if unchecked
-                else {
-                    for (var x=0; x < scope.checkedStations.length; x++) {
-                        if (scope.checkedStations[x].id === scope.station.id) { 
-                            scope.checkedStations[x].selected = false;
-                        }
-                    } 
-                    // var index = scope.checkedStations.indexOf(scope.station.id);
-                    // scope.checkedStations.splice(index, 1);
-                }
-            });
-        }
-    }
-});
+}]);

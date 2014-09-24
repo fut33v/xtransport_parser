@@ -174,3 +174,22 @@ div.schedule-table tr.hidden-header .th-inner {
     width: 500px;
     height: 500px;
 }
+
+.centerized {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.schedule-menu-button {
+    width: 150px;
+}
+
+.schedule-menu-button-row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.schedule-menu-stations-group {
+    padding-left: 40px;
+}
