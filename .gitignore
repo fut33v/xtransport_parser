@@ -12,6 +12,8 @@
 *.swl
 *.swm
 
+*.fuse_hidden*
+
 #################################
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
