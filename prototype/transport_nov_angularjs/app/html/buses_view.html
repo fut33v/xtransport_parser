@@ -14,7 +14,8 @@
       
     <div class="row"> 
       <div class="col-md-6 button-container"> 
-        <a href="#/buses/{{bus.id}}" ng-repeat="bus in buses | orderBy:'id'">
+        <!--<a href="#/buses/{{bus.id}}" ng-repeat="bus in buses | orderBy:nameInInt(bus.name)">-->
+        <a href="#/buses/{{bus.id}}" ng-repeat="bus in buses | orderbuses">
             <button style="button" id="bus-button">
               {{bus.name}}
             </button>

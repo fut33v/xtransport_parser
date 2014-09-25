@@ -1,16 +1,25 @@
 <div ng-controller="BusScheduleController as busController">
-  <div class="row" ng-show="hideMenu">
-        <div class="col-md-4">
-          <button 
-            ng-click="busController.hideButton()" 
-            class="btn btn-default">
-              Показать меню
-          </button>
-        </div>
+  <div class="row nav-bar-schedule">
+    <a href="/app/#/buses/"><button 
+      class="btn btn-primary">
+        <span class="glyphicon glyphicon-list"></span>
+        Вернуться к списку автобусов 
+    </button></a>
   </div>
+
+  <div class="row well well-lg" ng-show="hideMenu">
+    <button 
+      ng-click="busController.hideButton()" 
+      class="btn btn-success centerized">
+        <span class="glyphicon glyphicon-list"></span>
+        Показать меню
+    </button>
+  </div>
+  
+  <!-- @Menu @start --> 
   <div class="row" ng-hide="hideMenu">
-    <div class="col-md-6 checkbox-container">
-      <p>Вы можете выбрать остановки, которые Вас интересуют:</p>
+    <div class="col-md-6 checkbox-container schedule-menu-group well well-lg">
+      <p>Остановки:</p>
     
       <label 
         ng-repeat="i in currentBus.stations track by $index"
@@ -21,64 +30,92 @@
             {{currentBus.stations[$index].name}} 
         </input>
       </label> 
+      
+      <button 
+        ng-click="busController.setAllStationsChecked()"
+        class="btn btn-success centerized">
+        <span class="glyphicon glyphicon-ok"></span>
+       Выбрать все 
+      </button>
     
     </div>
-    <div class="col-md-4">
-
+    
+    <div class="col-md-6 schedule-menu-group well well-lg">
       <div class="row">
-       
-        <div class="col-md-4">
-          <p>А также время:</p> 
-          
-          <select 
-            ng-model="selectedHour"
-            ng-options="i for i in hours"> 
-          </select> 
-          
-          <select 
-            ng-model="selectedMinute"
-            ng-options="i for i in minutes"> 
-          </select> 
-         
-          <button 
-            ng-click="busController.setCurrentTime()" 
-            class="btn btn-default">
-              Использовать текущее время
-          </button>
-        
-          <button 
-            ng-click="busController.setNullTime()"
-            class="btn btn-default">
-            Сбросить фильтрацию по времени
-          </button>
-       
-          <label> 
-            <input type="checkbox" ng-model="highlightOn">Подсвечивать красным ПОТРАЧЕННЫЕ</input>
-          </label> 
+        <p>Время:</p> 
+        <select 
+          ng-model="selectedHour"
+          ng-options="i for i in hours"> 
+        </select> 
+        <select 
+          ng-model="selectedMinute"
+          ng-options="i for i in minutes"> 
+        </select> 
+      </div> 
       
-        </div>
-
+      <div class="row schedule-menu-button-row">
+        <button 
+          ng-click="busController.setCurrentTime()" 
+          class="btn schedule-menu-button">
+            Текущее время
+        </button>
+        <button 
+          ng-click="busController.setNullTime()"
+          class="btn btn-danger schedule-menu-button">
+          <span class="glyphicon glyphicon-remove"></span>
+          Сбросить 
+        </button>
       </div>
 
       <div class="row">
-        <div class="col-md-4">
-          <button 
-            ng-click="busController.hideButton()" 
-            class="btn btn-default">
-              Скрыть данное меню
-          </button>
-        </div>
+        <label> 
+          <input type="checkbox" ng-model="busController.highlightOn">Подсвечивать красным ПОТРАЧЕННЫЕ</input>
+        </label> 
       </div>
+
     </div>
   </div>
+  <!-- @Menu @end --> 
+   
 
+  <!--<div class="col-md-2">
+      <h2> Автобус №{{currentBus.name}} </h2> 
+    </div>-->
+  
+<!--
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+  </ul>
+</div>
+-->
+
+  <div 
+    ng-hide="hideMenu" 
+    class="row well well-lg">
+      <button 
+        ng-click="busController.hideButton()" 
+        class="btn btn-primary centerized">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+          Скрыть меню
+      </button>
+  </div>
 
   <div class="schedule-table">
     <table class="table table-striped" oci.fixed-header>
       <thead> 
         <tr>
           <th ng-repeat="station in currentBus.stations track by $index"
-              ng-show="checkedStations[$index].selected">
+              ng-show="checkedStations[$index].selected"
+              class="schedule-header">
             {{station.name}}   
           </th>
         </tr>
@@ -87,7 +124,7 @@
         <tr ng-repeat="bus in busSchedule.schedule | filtertime:selectedHour:selectedMinute"> 
           <td ng-show="checkedStations[$index].selected"
               ng-repeat="time in bus  track by $index "
-              ng-class="{'text-danger': busController.isTimeExpired(time) && highlightOn}">
+              ng-class="{'text-danger': busController.isTimeExpired(time) && busController.highlightOn}">
             {{time}}
           </td>
         </tr>
