@@ -1,0 +1,22 @@
+body {
+    color: white;
+}
+.centerized-text {
+    text-align: center;
+}
+
+#not-spaced {
+    width: 400px;
+    color: black;
+}
+
+#spaced {
+
+}
+
+#spacer {
+    /* float:none;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:-4px; */
+}
