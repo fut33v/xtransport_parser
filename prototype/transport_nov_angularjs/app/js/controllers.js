@@ -23,6 +23,9 @@ transportControllers.controller('BusesController', ['$scope', '$http',
             success(function(data) {
             $scope.buses = data; 
         });
+        $scope.nameInInt = function(name) {
+            return parseInt(name);
+        }
     }
 ]);
 
@@ -108,7 +111,9 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
                 $scope.initialCheckedStations = false;
             }
         }
+
         
+
         $scope.initialCheckedStations = true; 
         $scope.hideMenu = false;
         $scope.hours = [];

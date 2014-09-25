@@ -11,6 +11,8 @@
 *.swk
 *.swl
 *.swm
+*.swi
+*.swj
 
 *.fuse_hidden*
 
