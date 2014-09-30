@@ -1,2 +1,2 @@
 #!/bin/bash
-vim -p index.html js/*.js html/*.html css/*.css
+vim -p index.html js/controllers.js html/*.html css/*.css
