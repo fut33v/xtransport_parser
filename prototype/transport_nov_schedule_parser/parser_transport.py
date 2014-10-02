@@ -4,6 +4,7 @@ __author__ = 'Ilya Fateev'
 
 from HTMLParser import HTMLParser
 import urllib2
+import string
 
 
 class TransportParser(HTMLParser):
@@ -57,6 +58,7 @@ class TransportParser(HTMLParser):
 
     @staticmethod
     def parse_corresponding_html(html_page):
+        TransportParser.reset_parser()
         parser = TransportParser()
         parser.feed(html_page)
 
@@ -64,14 +66,25 @@ class TransportParser(HTMLParser):
         TransportParser.bus_dictionary = {}
         for bus_number in TransportParser.bus_number_list:
             if TransportParser.bus_descriptor_list[i] != "#":
-                TransportParser.bus_dictionary[TransportParser.bus_descriptor_list[i]] = bus_number
+                bus_id = string.split(
+                    TransportParser.bus_descriptor_list[i], '_'
+                )
+                weekend_flag = False
+                if len(bus_id) > 1:
+                    if bus_id[1] == u'v':
+                        weekend_flag = True
+                TransportParser.bus_dictionary[
+                    TransportParser.bus_descriptor_list[i]
+                ] = (bus_number, weekend_flag)
             i += 1
 
         i = 0
         TransportParser.trolley_dictionary = {}
         for trolley_number in TransportParser.trolley_number_list:
             if TransportParser.trolley_descriptor_list[i] != "#":
-                TransportParser.trolley_dictionary[TransportParser.trolley_descriptor_list[i]] = trolley_number
+                TransportParser.trolley_dictionary[
+                    TransportParser.trolley_descriptor_list[i]
+                ] = trolley_number
             i += 1
 
     @staticmethod

@@ -2,9 +2,10 @@
 
 __author__ = 'Ilya Fateev'
 
-import urllib2
+# import urllib2
 import hashlib
 import os
+import logging
 
 from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
@@ -13,50 +14,53 @@ import parser_utils
 
 if __name__ == "__main__":
 
+    logging.basicConfig(
+        filename='example.log',
+        level=logging.DEBUG,
+        format='%(levelname)s:%(asctime)s:%(message)s',
+        datefmt='%d-%m-%Y %H:%M:%S'
+    )
+
     """
     Getting list of buses and trolleys, which stores in
     TransportParser.bus_dictionary
     """
+
+    logging.info("Parsing transport id's started.")
+
     transport_parser = TransportParser()
-    # response = urllib2.urlopen(TransportParser.TRANSPORT_PAGE_URL)
-    # html = response.read().decode('windows-1251')
     html = parser_utils.download_page_with_retry_and_encode(
         TransportParser.TRANSPORT_PAGE_URL
     )
     transport_parser.parse_corresponding_html(html)
 
-    schedule_parser = ScheduleParser()
-    EXAMPLE_OF_HTML_POST_REQUEST = """select+value=&avt=19_r&trol=%23"""
+    logging.info("Parsing transport id's finished.")
 
     """
-    Forming json_buses_list structure, that after will be
+    Downloading schedule tables,
+    forming json_buses_list structure, that after will be
     dumped in JSON text file.
     """
+    logging.info("Parsing transport schedules started.")
+    EXAMPLE_OF_HTML_POST_REQUEST = """select+value=&avt=19_r&trol=%23"""
+
     json_buses_list = []
     stations_set = set()
+
     for bus_id, bus_name in TransportParser.bus_dictionary.iteritems():
+
+        logging.info("Parsing schedule for bus with id: %s", bus_id)
         print "Current bus_id is:", bus_id
 
-        """
-        Getting html text of schedule table, decoding it.
-        """
-        data = schedule_parser.get_post_data_for_schedule_for_given_id(bus_id)
+        data = ScheduleParser.get_post_data_for_schedule_for_given_id(bus_id)
         html = parser_utils.download_page_with_retry_and_encode(
             ScheduleParser.COMMON_TRANSPORT_SCHEDULE_URL,
             data
         )
-        schedule_parser.feed(html)
-
-        # request = urllib2.Request(
-        #     ScheduleParser.COMMON_TRANSPORT_SCHEDULE_URL,
-        #     data
-        # )
-        # response = urllib2.urlopen(request)
-        # html = response.read().decode('windows-1251')
-
+        ScheduleParser.parse_corresponding_html(html)
 
         """
-        Forming structures for stations
+        Filling structures for stations
         """
         for station in ScheduleParser.stations_list:
             stations_set.add(station.encode('utf-8'))
@@ -70,15 +74,29 @@ if __name__ == "__main__":
             }
             for x in stations_list
         ]
+
+        """
+        Filling particular bus structure
+        """
         json_bus_object = {
             'bus': True,
             'stations': stations_list,
             'schedule': ScheduleParser.schedule_table,
             'weekend': ScheduleParser._with_weekends,
             'id': bus_id,
-            'name': bus_name
+            'name': bus_name[0],
+            'weekendOnly': bus_name[1]
         }
         if ScheduleParser._with_weekends:
+            WORKDAY_URL = 0
+            WEEKEND_URL = 1
+            weekend_schedule_url = ScheduleParser.workdays_weekends_links[
+                WEEKEND_URL
+            ]
+            html = parser_utils.download_page_with_retry_and_encode(
+                weekend_schedule_url
+            )
+            ScheduleParser.parse_corresponding_html(html)
             json_bus_object['scheduleWeekend'] = ScheduleParser.schedule_table
         # print json_bus_object
         json_buses_list.append(json_bus_object)
@@ -123,7 +141,7 @@ if __name__ == "__main__":
         }
         print bus_js_object['weekend']
         if bus_js_object['weekend']:
-            temp['scheduleWeekend'] = bus_js_object['schedule']
+            temp['scheduleWeekend'] = bus_js_object['scheduleWeekend']
             print "With weekend"
         json_text = parser_utils.json_pretty_dumps(temp)
 

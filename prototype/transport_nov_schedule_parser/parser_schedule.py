@@ -22,7 +22,7 @@ class ScheduleParser(HTMLParser):
     _current_bus_counter = 0
 
     _with_weekends = False
-    _workdays_weekends_links = []
+    workdays_weekends_links = []
     _weekends_schedule_link = ""
 
     @staticmethod
@@ -43,12 +43,15 @@ class ScheduleParser(HTMLParser):
                 if attr[0] == 'href':
                     # print attr[1]
                     if string.find(attr[1], "?mar=") == 0:
-                        ScheduleParser._workdays_weekends_links.append(attr[1])
+                        ScheduleParser.workdays_weekends_links.append(
+                            ScheduleParser.COMMON_TRANSPORT_SCHEDULE_URL +
+                            attr[1]
+                        )
                         ScheduleParser._with_weekends = True
-                        if len(ScheduleParser._workdays_weekends_links) == 2:
+                        if len(ScheduleParser.workdays_weekends_links) == 2:
                             ScheduleParser._weekends_schedule_link = (
                                 ScheduleParser.COMMON_TRANSPORT_SCHEDULE_URL +
-                                ScheduleParser._workdays_weekends_links[1]
+                                ScheduleParser.workdays_weekends_links[1]
                             )
 
     def handle_endtag(self, tag):
@@ -77,6 +80,12 @@ class ScheduleParser(HTMLParser):
             ScheduleParser.stations_list.append(data)
 
     @staticmethod
+    def parse_corresponding_html(html_page):
+        ScheduleParser.reset_parser()
+        parser = ScheduleParser()
+        parser.feed(html_page)
+
+    @staticmethod
     def reset_parser():
         ScheduleParser.stations_number = 0
         ScheduleParser.schedule_table = []
@@ -87,5 +96,5 @@ class ScheduleParser(HTMLParser):
         ScheduleParser._current_bus_counter = 0
         ScheduleParser.weekend_list = []
         ScheduleParser._with_weekends = False
-        ScheduleParser._workdays_weekends_links = []
+        ScheduleParser.workdays_weekends_links = []
         ScheduleParser._weekends_schedule_link = ""
