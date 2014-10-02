@@ -82,5 +82,6 @@
             "-"
         ]
     ],
-    "stationsNumber": 8
+    "stationsNumber": 8,
+    "weekend": false
 }

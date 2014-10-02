@@ -3,19 +3,31 @@
 __author__ = 'Ilya Fateev'
 
 from HTMLParser import HTMLParser
+import string
 
 
 class ScheduleParser(HTMLParser):
+
+    COMMON_TRANSPORT_SCHEDULE_URL = "http://transport.nov.ru/urban_trans/1"
+    EXAMPLE_OF_HTML_POST_REQUEST_FOR_19 = """select+value=&avt=19_r&trol=%23"""
 
     stations_number = 0
     schedule_table = []
     schedule_table_by_station = []
     stations_list = []
 
-    _schedule_table_started = False
     _station_name_started = False
+    _schedule_table_started = False
     _current_bus = []
     _current_bus_counter = 0
+
+    _with_weekends = False
+    _workdays_weekends_links = []
+    _weekends_schedule_link = ""
+
+    @staticmethod
+    def get_post_data_for_schedule_for_given_id(bus_id):
+        return "select+value=&" + "avt=" + bus_id + "&trol=%23"
 
     def handle_starttag(self, tag, attrs):
         if "table" == tag:
@@ -26,6 +38,18 @@ class ScheduleParser(HTMLParser):
             if attr == ('class', 'zagl'):
                 ScheduleParser.stations_number += 1
                 ScheduleParser._station_name_started = True
+        if "a" == tag:
+            for attr in attrs:
+                if attr[0] == 'href':
+                    # print attr[1]
+                    if string.find(attr[1], "?mar=") == 0:
+                        ScheduleParser._workdays_weekends_links.append(attr[1])
+                        ScheduleParser._with_weekends = True
+                        if len(ScheduleParser._workdays_weekends_links) == 2:
+                            ScheduleParser._weekends_schedule_link = (
+                                ScheduleParser.COMMON_TRANSPORT_SCHEDULE_URL +
+                                ScheduleParser._workdays_weekends_links[1]
+                            )
 
     def handle_endtag(self, tag):
         if "table" == tag:
@@ -36,17 +60,22 @@ class ScheduleParser(HTMLParser):
                 ScheduleParser._station_name_started = False
 
     def handle_data(self, data):
-        if ScheduleParser._schedule_table_started and not ScheduleParser._station_name_started:
-            if ScheduleParser._current_bus_counter < ScheduleParser.stations_number:
+        if (ScheduleParser._schedule_table_started and
+                not ScheduleParser._station_name_started):
+            if (ScheduleParser._current_bus_counter <
+                    ScheduleParser.stations_number):
                 ScheduleParser._current_bus.append(data)
                 ScheduleParser._current_bus_counter += 1
-            if ScheduleParser._current_bus_counter == ScheduleParser.stations_number:
-                ScheduleParser.schedule_table.append(ScheduleParser._current_bus)
+            if (ScheduleParser._current_bus_counter ==
+                    ScheduleParser.stations_number):
+                ScheduleParser.schedule_table.append(
+                    ScheduleParser._current_bus
+                )
                 ScheduleParser._current_bus_counter = 0
                 ScheduleParser._current_bus = []
         if ScheduleParser._station_name_started:
             ScheduleParser.stations_list.append(data)
-    
+
     @staticmethod
     def reset_parser():
         ScheduleParser.stations_number = 0
@@ -56,3 +85,7 @@ class ScheduleParser(HTMLParser):
         ScheduleParser._station_name_started = False
         ScheduleParser._current_bus = []
         ScheduleParser._current_bus_counter = 0
+        ScheduleParser.weekend_list = []
+        ScheduleParser._with_weekends = False
+        ScheduleParser._workdays_weekends_links = []
+        ScheduleParser._weekends_schedule_link = ""

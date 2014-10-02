@@ -842,5 +842,6 @@
             "00:25"
         ]
     ],
-    "stationsNumber": 13
+    "stationsNumber": 13,
+    "weekend": false
 }

@@ -218,5 +218,6 @@
             "-"
         ]
     ],
-    "stationsNumber": 10
+    "stationsNumber": 10,
+    "weekend": false
 }

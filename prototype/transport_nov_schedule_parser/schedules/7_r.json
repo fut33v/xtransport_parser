@@ -92,5 +92,6 @@
             "20:03"
         ]
     ],
-    "stationsNumber": 4
+    "stationsNumber": 4,
+    "weekend": false
 }
