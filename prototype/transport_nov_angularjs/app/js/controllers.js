@@ -33,11 +33,39 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
     function($scope, $http, $routeParams, $filter) {
         
         $scope.busId = $routeParams.busId;
+
         $http.get('transport/schedules/' + $scope.busId + ".json").
             success(function(data) {
             $scope.busSchedule = data; 
-            $scope.currentSchedule = $scope.busSchedule.schedule;
-            // console.log($scope.busSchedule);
+            
+            $scope.daysOfWeek = [
+                "воскресенье", 
+                "понедельник",
+                "вторник",
+                "среда",
+                "четверг",
+                "пятница",
+                "суббота"
+            ]; 
+            var currentDate = new Date();
+            $scope.currentDay = currentDate.getDay();
+            $scope.currentDay = 6;
+            console.log($scope.currentDay);
+
+            if ($scope.currentDay == 0 || $scope.currentDay == 6) {
+                $scope.isCurrentDayWeekend = true;
+                $scope.dayEndString = "выходной";
+            } else {
+                $scope.dayEndString = "рабочий";
+                $scope.isCurrentDayWeekend = false;
+            }
+
+            $scope.isSelectedWorkdays = !$scope.isCurrentDayWeekend;
+            if ($scope.isSelectedWorkdays) { 
+                $scope.currentSchedule = $scope.busSchedule.schedule;
+            } else {
+                $scope.currentSchedule = $scope.busSchedule.scheduleWeekend;
+            }
         });
         
         $http.get('transport/buses.json').
@@ -125,17 +153,15 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         }
 
         this.setCurrentWorkdays = function() {
-            $scope.isCurrentWorkdays = true; 
+            $scope.isSelectedWorkdays = true; 
             $scope.currentSchedule = $scope.busSchedule.schedule;
         }
 
         this.setCurrentWeekend = function() {
-            $scope.isCurrentWorkdays = false; 
+            $scope.isSelectedWorkdays = false; 
             $scope.currentSchedule = $scope.busSchedule.scheduleWeekend;
         }
-        
-
-        $scope.isCurrentWorkdays = true;
+      
         $scope.initialCheckedStations = true; 
         $scope.hideMenu = false;
         $scope.hours = [];
