@@ -35,7 +35,9 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         $scope.busId = $routeParams.busId;
         $http.get('transport/schedules/' + $scope.busId + ".json").
             success(function(data) {
-             $scope.busSchedule = data; 
+            $scope.busSchedule = data; 
+            $scope.currentSchedule = $scope.busSchedule.schedule;
+            console.log($scope.busSchedule);
         });
         
         $http.get('transport/buses.json').
@@ -52,7 +54,8 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             } 
             $scope.checkedStationsInit = [0];
         });
-        
+       
+
         this.hideButton = function() {
             if($scope.hideMenu) {
                 $scope.hideMenu = false;
@@ -112,8 +115,18 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             }
         }
 
+        this.setCurrentWorkdays = function() {
+            $scope.isCurrentWorkdays = true; 
+            $scope.currentSchedule = $scope.busSchedule.schedule;
+        }
+
+        this.setCurrentWeekend = function() {
+            $scope.isCurrentWorkdays = false; 
+            $scope.currentSchedule = $scope.busSchedule.scheduleWeekend;
+        }
         
 
+        $scope.isCurrentWorkdays = true;
         $scope.initialCheckedStations = true; 
         $scope.hideMenu = false;
         $scope.hours = [];

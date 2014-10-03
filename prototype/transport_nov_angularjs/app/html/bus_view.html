@@ -37,10 +37,47 @@
         <span class="glyphicon glyphicon-ok"></span>
        Выбрать все 
       </button>
-    
     </div>
-    
+   
+
     <div class="col-md-6 schedule-menu-group well well-lg">
+      <div class="row btn-group" data-toggle="buttons">
+        <label 
+          class="btn btn-default schedule-menu-button "
+          ng-class="{active: isCurrentWorkdays}"
+          ng-click="busController.setCurrentWorkdays()">
+            <input 
+            type="radio" 
+            name="options" 
+            id="option1" 
+            checked>
+              Рабочий день
+        </label>
+        <label class="btn btn-default schedule-menu-button"
+          ng-class="{active: !isCurrentWorkdays}"
+          ng-click="busController.setCurrentWeekend()">
+            <input 
+            type="radio" 
+            name="options" 
+            id="option2"> 
+              Выходной
+        </label>
+      </div>
+
+<!--
+      <div class="row schedule-menu-button-row btn-group">
+        <button 
+          ng-click="busController.setCurrentWorkdays()" 
+          class="btn btn-default schedule-menu-button">
+            Рабочий день
+        </button>
+        <button 
+          ng-click="busController.setCurrentWeekend()" 
+          class="btn btn-default schedule-menu-button">
+            Выходной
+        </button>
+      </div> 
+
       <div class="row">
         <p>Время:</p> 
         <select 
@@ -52,12 +89,13 @@
           ng-options="i for i in minutes"> 
         </select> 
       </div> 
-      
+   -->   
       <div class="row schedule-menu-button-row">
         <button 
           ng-click="busController.setCurrentTime()" 
           class="btn schedule-menu-button">
             Текущее время
+            (<span current-time></span>)
         </button>
         <button 
           ng-click="busController.setNullTime()"
@@ -97,7 +135,6 @@
   </ul>
 </div>
 -->
-
   <div 
     ng-hide="hideMenu" 
     class="row well well-lg">
@@ -121,7 +158,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="bus in busSchedule.schedule | filtertime:selectedHour:selectedMinute"> 
+        <tr ng-repeat="bus in currentSchedule | filtertime:selectedHour:selectedMinute"> 
           <td ng-show="checkedStations[$index].selected"
               ng-repeat="time in bus  track by $index "
               ng-class="{'text-danger': busController.isTimeExpired(time) && busController.highlightOn}">
