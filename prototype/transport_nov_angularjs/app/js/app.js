@@ -5,6 +5,7 @@ var transportApp = angular.module('transportApp', [
     'ngRoute',
     'transportControllers',
     'transportFilters',
+    'transportDirectives',
     'oci.fixedHeader',
     'ui.grid'
 ]);
