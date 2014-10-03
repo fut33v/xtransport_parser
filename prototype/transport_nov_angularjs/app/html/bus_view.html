@@ -23,7 +23,7 @@
     
       <label 
         ng-repeat="i in currentBus.stations track by $index"
-        ng-click="busController.stationClicked()">
+        ng-click="busController.stationClicked(i)">
         <input 
           type="checkbox" 
           ng-model="currentBus.stations[$index].selected"> 
