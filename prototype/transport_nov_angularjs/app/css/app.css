@@ -57,14 +57,14 @@ body {
 }
 
 .header-main {
-    height: 150px; 
+    height: 50px; 
     width: 100%;
     margin-bottom: 20px;
     border-bottom: 1px #d7d7d7 solid;
 }
 
 #logo-img {
-    height: 150px; 
+    height: 50px; 
 }
 
 #footer-main {
@@ -222,4 +222,12 @@ div.schedule-table tr.hidden-header .th-inner {
 #bus-number {
     font-size: 100px;
     text-align: center;
+}
+
+.schedule-menu-well {
+    background: white;
+}
+
+#show-menu-button {
+    margin-bottom: 20px;
 }

@@ -7,19 +7,23 @@
     </button></a>
   </div>
 
-  <div class="well well-lg">
-  <div class="row well well-lg" ng-show="hideMenu">
-    <button 
-      ng-click="busController.hideButton()" 
-      class="btn btn-success centerized">
-        <span class="glyphicon glyphicon-list"></span>
-        Показать меню
-    </button>
-  </div>
+  <div class="well well-lg square-borders">
+    <div class="row" ng-show="hideMenu">
+      <button 
+        ng-click="busController.hideButton()" 
+        class="btn btn-success centerized"
+        id="show-menu-button">
+          <span class="glyphicon glyphicon-list"></span>
+          Показать меню
+      </button>
+      <div class="row schedule-menu-well well">
+        <div id="bus-number">{{currentBus.name}}</div>
+      </div>
+    </div>
   
   <!-- @Menu @start --> 
   <div class="row" ng-hide="hideMenu">
-    <div class="col-md-6 well well-lg" id="stations-choosing-container">
+    <div class="col-md-6 well well-lg schedule-menu-well" id="stations-choosing-container">
       <div class="checkbox-container schedule-menu-group" data-toggle="buttons">
         <p>Остановки:</p>
       
@@ -48,9 +52,9 @@
     </div>
    
 
-    <div class="col-md-4 schedule-menu-group well well-lg">
+    <div class="col-md-4 schedule-menu-group schedule-menu-well well well-lg">
       <div class="row" data-toggle="buttons">
-        <div>Сегодня {{daysOfWeek[currentDay]}}, {{dayEndString}} день.</div>
+        <div class="schedule-menu-button-row">Сегодня {{daysOfWeek[currentDay]}}, {{dayEndString}} день.</div>
         <label 
           class="btn btn-default schedule-menu-button "
           ng-class="{active: isSelectedWorkdays}"
@@ -73,21 +77,18 @@
         </label>
       </div>
 
-<!--
-      <div class="row">
-        <p>Время:</p> 
-        <select 
-          ng-model="selectedHour"
-          ng-options="i for i in hours"> 
-        </select> 
-        <select 
-          ng-model="selectedMinute"
-          ng-options="i for i in minutes"> 
-        </select> 
-      </div> 
-   -->   
       <div class="row schedule-menu-button-row">
         <div>Фильтрация по времени:</div>
+        <div class="schedule-menu-button-row">
+          <select 
+            ng-model="selectedHour"
+            ng-options="i for i in hours"> 
+          </select> 
+          <select 
+            ng-model="selectedMinute"
+            ng-options="i for i in minutes"> 
+          </select> 
+        </div>
         <button 
           ng-click="busController.setCurrentTime()" 
           class="btn schedule-menu-button">
@@ -110,9 +111,8 @@
 
     </div>
     
-    <div class="col-md-2 schedule-menu-group well well-lg">
+    <div class="col-md-2 schedule-menu-group schedule-menu-well well well-lg">
       <div id="bus-number">{{currentBus.name}}</div>
-
     </div>
   </div>
   <!-- @Menu @end --> 
