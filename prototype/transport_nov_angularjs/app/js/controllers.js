@@ -49,7 +49,6 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             ]; 
             var currentDate = new Date();
             $scope.currentDay = currentDate.getDay();
-            $scope.currentDay = 6;
             console.log($scope.currentDay);
 
             if ($scope.currentDay == 0 || $scope.currentDay == 6) {
