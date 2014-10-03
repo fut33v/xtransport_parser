@@ -7,6 +7,7 @@
     </button></a>
   </div>
 
+  <div class="well well-lg">
   <div class="row well well-lg" ng-show="hideMenu">
     <button 
       ng-click="busController.hideButton()" 
@@ -18,29 +19,36 @@
   
   <!-- @Menu @start --> 
   <div class="row" ng-hide="hideMenu">
-    <div class="col-md-6 checkbox-container schedule-menu-group well well-lg">
-      <p>Остановки:</p>
-    
-      <label 
-        ng-repeat="i in currentBus.stations track by $index"
-        ng-click="busController.stationClicked(i)">
-        <input 
-          type="checkbox" 
-          ng-model="currentBus.stations[$index].selected"> 
-            {{currentBus.stations[$index].name}} 
-        </input>
-      </label> 
+    <div class="col-md-6 well well-lg" id="stations-choosing-container">
+      <div class="checkbox-container schedule-menu-group" data-toggle="buttons">
+        <p>Остановки:</p>
       
-      <button 
-        ng-click="busController.setAllStationsChecked()"
-        class="btn btn-success centerized">
-        <span class="glyphicon glyphicon-ok"></span>
-       Выбрать все 
-      </button>
+        <label 
+          ng-repeat="i in currentBus.stations track by $index"
+          ng-click="busController.stationClicked(i)"
+          ng-class="{active: currentBus.stations[$index].selected}"
+          class="btn btn-default square-borders">
+          <input
+            type="checkbox" 
+            ng-model="currentBus.stations[$index].selected"
+            checked> 
+              {{currentBus.stations[$index].name}} 
+          </input>
+        </label> 
+      </div>
+      <div class="row" id="choose-all-row"> 
+        <button 
+          ng-click="busController.setAllStationsChecked()"
+          class="btn btn-success centerized"
+          id="choose-all-button">
+          <span class="glyphicon glyphicon-ok"></span>
+         Выбрать все 
+        </button>
+      </div>
     </div>
    
 
-    <div class="col-md-6 schedule-menu-group well well-lg">
+    <div class="col-md-4 schedule-menu-group well well-lg">
       <div class="row btn-group" data-toggle="buttons">
         <label 
           class="btn btn-default schedule-menu-button "
@@ -65,19 +73,6 @@
       </div>
 
 <!--
-      <div class="row schedule-menu-button-row btn-group">
-        <button 
-          ng-click="busController.setCurrentWorkdays()" 
-          class="btn btn-default schedule-menu-button">
-            Рабочий день
-        </button>
-        <button 
-          ng-click="busController.setCurrentWeekend()" 
-          class="btn btn-default schedule-menu-button">
-            Выходной
-        </button>
-      </div> 
-
       <div class="row">
         <p>Время:</p> 
         <select 
@@ -107,10 +102,14 @@
 
       <div class="row">
         <label> 
-          <input type="checkbox" ng-model="busController.highlightOn">Подсвечивать красным ПОТРАЧЕННЫЕ</input>
+          <input type="checkbox" ng-model="busController.highlightOn">Подсвечивать уехавшие автобусы</input>
         </label> 
       </div>
 
+    </div>
+    
+    <div class="col-md-2 schedule-menu-group well well-lg">
+      <div id="bus-number">{{currentBus.name}}</div>
     </div>
   </div>
   <!-- @Menu @end --> 
@@ -135,15 +134,16 @@
   </ul>
 </div>
 -->
-  <div 
-    ng-hide="hideMenu" 
-    class="row well well-lg">
-      <button 
-        ng-click="busController.hideButton()" 
-        class="btn btn-primary centerized">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-          Скрыть меню
-      </button>
+    <div 
+      ng-hide="hideMenu" 
+      class="row">
+        <button 
+          ng-click="busController.hideButton()" 
+          class="btn btn-primary centerized">
+          <span class="glyphicon glyphicon-chevron-up"></span>
+            Скрыть меню
+        </button>
+    </div>
   </div>
 
   <div class="schedule-table">

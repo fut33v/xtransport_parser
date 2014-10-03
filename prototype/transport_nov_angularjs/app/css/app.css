@@ -107,9 +107,9 @@ body {
 
 .checkbox-container > label {
     float: left;
-    margin: 15px;
+    margin: 5px;
     color: #333333;
-    width: 250px;
+    width: 235px;
 }
 
 #station-checkbox {
@@ -198,4 +198,28 @@ div.schedule-table tr.hidden-header .th-inner {
 .nav-bar-schedule {
     margin-bottom: 20px;
     padding-left: 20px;
+}
+
+.square-borders {
+    border-radius: 0;
+}
+
+#choose-all-button {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+#choose-all-row {
+    border-top: 1px #d7d7d7 solid;
+    margin-top: 5px;
+}
+
+#stations-choosing-container {
+    padding-bottom: 10px;
+}
+
+#bus-number {
+    font-size: 100px;
+    text-align: center;
 }

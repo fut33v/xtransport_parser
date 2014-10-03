@@ -37,7 +37,7 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             success(function(data) {
             $scope.busSchedule = data; 
             $scope.currentSchedule = $scope.busSchedule.schedule;
-            console.log($scope.busSchedule);
+            // console.log($scope.busSchedule);
         });
         
         $http.get('transport/buses.json').
@@ -68,7 +68,7 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
             var d = new Date();
             var h = d.getHours();
             var m = d.getMinutes();
-            console.log(h, m);
+            // console.log(h, m);
             $scope.selectedHour = h;
             $scope.selectedMinute = m;
         }
@@ -107,15 +107,17 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         }
 
         this.stationClicked = function(selectedStation) {
-            console.log(selectedStation);
+            // console.log(selectedStation);
             // selectedStation.selected = true;
             if ($scope.initialCheckedStations) {
                 for (var x=0; x < $scope.checkedStations.length; x++) {
-                    console.log($scope.checkedStations[x]);
+                    // console.log($scope.checkedStations[x]);
                     if ($scope.checkedStations[x].id != selectedStation.id) {
-                        $scope.checkedStations[x].selected = false;
+                        // $scope.checkedStations[x].selected = false;
                     } else {
-                        $scope.checkedStations[x].selected = true;
+                        console.log($scope.checkedStations[x]);
+                        $scope.currentBus.stations[x].selected = true;
+                        console.log($scope.checkedStations[x]);
                     }
                 }
                 $scope.initialCheckedStations = false;
