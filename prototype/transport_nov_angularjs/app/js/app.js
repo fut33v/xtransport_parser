@@ -6,8 +6,7 @@ var transportApp = angular.module('transportApp', [
     'transportControllers',
     'transportFilters',
     'transportDirectives',
-    'oci.fixedHeader',
-    'ui.grid'
+    'oci.fixedHeader'
 ]);
 
 transportApp.config(['$routeProvider',
