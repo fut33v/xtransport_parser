@@ -148,10 +148,12 @@
     <table class="table table-striped" oci.fixed-header>
       <thead> 
         <tr>
-          <th ng-repeat="station in currentBus.stations track by $index"
-              ng-show="currentBus.stations[$index].selected"
-              class="schedule-header">
-            {{station.name}}   
+          <th 
+            ng-repeat="station in currentBus.stations track by $index"
+            ng-show="currentBus.stations[$index].selected">
+              <div class="schedule-header">
+                {{station.name}}   
+              </div>
           </th>
         </tr>
       </thead>
