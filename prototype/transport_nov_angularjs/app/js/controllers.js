@@ -134,18 +134,9 @@ transportControllers.controller('BusScheduleController', ['$scope', '$http', '$r
         }
 
         this.stationClicked = function(selectedStation) {
-            // console.log(selectedStation);
-            // selectedStation.selected = true;
             if ($scope.initialCheckedStations) {
                 for (var x=0; x < $scope.checkedStations.length; x++) {
-                    // console.log($scope.checkedStations[x]);
-                    if ($scope.checkedStations[x].id != selectedStation.id) {
-                        $scope.currentBus.stations[x].selected = false;
-                    } else {
-                        console.log($scope.checkedStations[x]);
-                        $scope.currentBus.stations[x].selected = false;
-                        console.log($scope.checkedStations[x]);
-                    }
+                    $scope.currentBus.stations[x].selected = false;
                 }
                 $scope.initialCheckedStations = false;
             }
