@@ -6,6 +6,7 @@ __author__ = 'Ilya Fateev'
 import hashlib
 import os
 import logging
+import string
 
 from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
@@ -14,15 +15,26 @@ import parser_utils
 
 if __name__ == "__main__":
 
+    directories = {
+        "LOGS_DIR":  "logs/",
+        "SCHEDULES_DIR": "json/",
+        "JSON_DIR": "json/"
+    }
+
+    for dir_alias, dir_name in directories.iteritems():
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+            logging.info("Parsing transport id's started.")
+
     logging.basicConfig(
-        filename='example.log',
+        filename=directories["LOGS_DIR"] + 'example.log',
         level=logging.DEBUG,
         format='%(levelname)s:%(asctime)s:%(message)s',
         datefmt='%d-%m-%Y %H:%M:%S'
     )
 
     """
-    Getting list of buses and trolleys, which stores in
+    Downloading, parsing, getting list of buses and trolleys, which stores in
     TransportParser.bus_dictionary
     """
 
@@ -79,13 +91,13 @@ if __name__ == "__main__":
         Filling particular bus structure
         """
         json_bus_object = {
-            'bus': True,
+            'type': 'bus',
             'stations': stations_list,
             'schedule': ScheduleParser.schedule_table,
             'weekend': ScheduleParser._with_weekends,
+            'workdays': bus_name[1],
             'id': bus_id,
-            'name': bus_name[0],
-            'weekendOnly': bus_name[1]
+            'name': bus_name[0]
         }
         if ScheduleParser._with_weekends:
             WORKDAY_URL = 0
@@ -98,20 +110,18 @@ if __name__ == "__main__":
             )
             ScheduleParser.parse_corresponding_html(html)
             json_bus_object['scheduleWeekend'] = ScheduleParser.schedule_table
-        # print json_bus_object
         json_buses_list.append(json_bus_object)
         ScheduleParser.reset_parser()
 
     json_text = parser_utils.json_pretty_dumps(json_buses_list)
-    # print json_text
 
     # JSON writing buses objs
-    json_file = open("buses.json", 'w')
+    json_file = open(directories["JSON_DIR"] + "buses.json", 'w')
     json_file.write(json_text)
     json_file.close()
 
     # JSON dumping stations set
-    stations_file = open("stations.json", 'w')
+    stations_file = open(directories["JSON_DIR"] + "stations.json", 'w')
     stations_list = list(stations_set)
     stations_json_array = [
         {
@@ -129,9 +139,6 @@ if __name__ == "__main__":
     stations_file.write(stations_json_text)
     stations_file.close()
 
-    SCHEDULES_DIR = "schedules"
-    if not os.path.exists(SCHEDULES_DIR):
-        os.makedirs(SCHEDULES_DIR)
     for bus_js_object in json_buses_list:
         temp = {
             'id': bus_js_object['id'],
@@ -145,10 +152,14 @@ if __name__ == "__main__":
             print "With weekend"
         json_text = parser_utils.json_pretty_dumps(temp)
 
+        tmp = string.split(
+            bus_js_object['id'].encode('utf-8'),
+            '_'
+        )
+        print tmp, tmp[0]
         json_file = open(
-            SCHEDULES_DIR +
-            "/" +
-            bus_js_object['id'].encode('utf-8') +
+            directories["SCHEDULES_DIR"] +
+            tmp[0] +
             ".json", 'w'
         )
         json_file.write(json_text)
