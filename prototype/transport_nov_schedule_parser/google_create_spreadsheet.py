@@ -42,10 +42,13 @@ class SpreadsheetCreator:
             'Authorization',
             self._token_type + " " + self._access_token
         )
+        response = None
         try:
-            urllib2.urlopen(request)
+            response = urllib2.urlopen(request)
         except urllib2.URLError as e:
             print e.reason
+            # raise e
+        return response
 
     def _load_credentials(self, credentials_filename):
         json_f_credentials = open(credentials_filename, 'r')
@@ -55,4 +58,5 @@ class SpreadsheetCreator:
 
 
 spreadsheet_creator = SpreadsheetCreator('credentials.json')
-spreadsheet_creator.create_spreadsheet('bus_20')
+response = spreadsheet_creator.create_spreadsheet('bus_19')
+print response.read()
