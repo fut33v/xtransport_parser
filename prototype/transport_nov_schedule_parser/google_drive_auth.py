@@ -202,9 +202,8 @@ def get_credentials(authorization_code, state):
     raise NoRefreshTokenException(authorization_url)
 
 print get_authorization_url('brd.work.mail@gmail.com', '')
-AUTH_CODE = "4/sGqjNKm3xsmmyUhwnBGWFw.kgYed0Z9bAMUPvB8fYmgkJyxmbIPkgI"
-
-credentials = get_credentials(AUTH_CODE, '')
+auth_code = raw_input("Insert auth code: ")
+credentials = get_credentials(auth_code, '')
 json_txt_credentials = credentials.to_json()
 json_f_credentials = open('credentials.json', 'w')
 json_f_credentials.write(json_txt_credentials)
