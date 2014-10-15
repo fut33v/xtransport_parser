@@ -1,0 +1,9 @@
+{
+    "id": "bus_27a",
+    "name": "27a",
+    "schedule_workdays": [],
+    "stations": [],
+    "type": "bus",
+    "weekend": false,
+    "workdays": false
+}

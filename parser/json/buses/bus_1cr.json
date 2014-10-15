@@ -1,0 +1,9 @@
+{
+    "id": "bus_1cr",
+    "name": "\u043e\u0442 \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0440\u044b\u043d\u043a\u0430",
+    "schedule_workdays": [],
+    "stations": [],
+    "type": "bus",
+    "weekend": false,
+    "workdays": false
+}
