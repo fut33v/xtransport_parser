@@ -3,24 +3,46 @@
     
   <div class="container"> 
       
-    <div class="row"> 
-      <div class="col-md-6 button-container" id="buses-container"> 
-        <div class="stripe-text">Автобус:</div>
-        <!--<a href="#/buses/{{bus.id}}" ng-repeat="bus in buses | orderBy:nameInInt(bus.name)">-->
-        <a href="#/buses/{{bus.id}}" ng-repeat="bus in buses | orderbuses">
-            <button class="btn btn-danger bus-button">
+    <div class="row buses-row"> 
+      <div class="col-md-6 " id="buses-container"> 
+        <div class="button-container">
+          <div class="buses-txt-transport">Автобус:</div>
+          <a href="#/buses/{{bus.id}}" ng-repeat="bus in buses | orderbuses">
+            <button 
+              ng-mouseover="busesController.showFullName(bus)" 
+              ng-mouseleave="busesController.hideFullName()" 
+              class="btn btn-danger bus-button">
               {{bus.name}}
             </button>
-        </a>
+          </a>
+        </div>
+        <div 
+          ng-show="showFullName"
+          class="well buses-full-info">
+          Подробнее:
+          <div class="buses-full-info-right">
+            {{currentBus.name}}  
+          </div>
+        </div>
       </div>                   
       
-      <div class="col-md-6 button-container"> 
-        <div class="stripe-text">Троллейбус:</div>
-        <a href=""><button class="btn btn-primary bus-button"> 1 </button></a>
-        <a href=""><button class="btn btn-primary bus-button"> 2 </button></a>
-        <a href=""><button class="btn btn-primary bus-button"> 3 </button></a>
-        <a href=""><button class="btn btn-primary bus-button"> 4 </button></a>
-        <a href=""><button class="btn btn-primary bus-button"> 5 </button></a>
+      <div class="col-md-6 "> 
+        <div class="button-container">
+          <div class="buses-txt-transport">Троллейбус:</div>
+          <a href=""><button class="btn btn-primary bus-button"> 1 </button></a>
+          <a href=""><button class="btn btn-primary bus-button"> 2 </button></a>
+          <a href=""><button class="btn btn-primary bus-button"> 3 </button></a>
+          <a href=""><button class="btn btn-primary bus-button"> 4 </button></a>
+          <a href=""><button class="btn btn-primary bus-button"> 5 </button></a>
+        </div>
+        <div 
+          ng-show="showFullName"
+          class="well buses-full-info">
+          Подробнее:
+          <div class="buses-full-info-right">
+            {{currentBus.name}}  
+          </div>
+        </div>
       </div>
     </div>
 

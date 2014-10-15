@@ -58,6 +58,29 @@ body {
 
 
 /* Buses view */
+.buses-txt-transport {
+    font-size: 20px;
+}
+
+.buses-full-info {
+    padding: 10px;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.buses-full-info-right {
+    float: right;
+    display: inline-block;
+}
+
+.buses-full-info-left {
+    text-align: left;
+}
+
+.buses-row {
+    display: flex;
+}
+
 .button-container {
     overflow-y: auto;
 }

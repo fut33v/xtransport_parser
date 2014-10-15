@@ -26,6 +26,14 @@ transportControllers.controller('BusesController', ['$scope', '$http',
         $scope.nameInInt = function(name) {
             return parseInt(name);
         }
+        this.showFullName = function(bus) {
+            console.log ("testing", bus);
+            $scope.showFullName = true;
+            $scope.currentBus = bus;
+        }
+        this.hideFullName = function(bus) {
+            $scope.currentBus = "";
+        }
     }
 ]);
 
