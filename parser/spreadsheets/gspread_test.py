@@ -10,38 +10,36 @@ from os.path import isfile, join
 
 GMAIL_ADDRESS = 'brd.work.mail@gmail.com'
 GMAIL_PASSWORD = 'casAph7N'
-TEST_JSON_SCHEDULE = 'json/19.json'
 
-CLIENT_ID = (
-    '350893716146-0es56dkljga1b18hg5l9r1pserisnb8d.apps.googleusercontent.com'
-)
-CLIENT_SECRET = "SZKNTFrROcsEj6NeMg-JJTw7"
-"""Redirect URIS"""
-"""
-urn:ietf:wg:oauth:2.0:oob
-http://localhost
-"""
+
+def load_json_file(filename):
+    json_f = open(filename, 'r')
+    return json.loads(json_f.read())
 
 
 class SpreadsheetSerialization:
-    def __init__(self, gmail, password, credentials_filename):
-        self._gs = gspread.login(gmail, password)
-        self._spreadsheet_creator = SpreadsheetCreator(credentials_filename)
+    def __init__(self, credentials):
+        self._gs = gspread.authorize(credentials)
+        self._spreadsheet_creator = SpreadsheetCreator(credentials)
 
     def serialize_schedule_json(self, json_filename):
-        json_f_schedule = open(json_filename, 'r')
-        json_txt_schedule = json_f_schedule.read()
-        json_obj_schedule = json.loads(json_txt_schedule)
-        # stations_list = json_obj_schedule['stations']
-        schedule_table = json_obj_schedule['schedule']
+        schedule = load_json_file(json_filename)
+        schedule_table = schedule['schedule']
 
         spreadsheet_name = string.split(json_filename, '.')[:-1]
         print spreadsheet_name
         spreadsheet_name = string.split(spreadsheet_name[0], '/')[-1]
         print spreadsheet_name
         self._spreadsheet_creator.create_spreadsheet(spreadsheet_name)
-        worksheet = self._gs.open(spreadsheet_name).sheet1
-        self._fill_time(worksheet, schedule_table)
+        spreadsheet = self._gs.open(spreadsheet_name)
+        # PADDING = 2
+        worksheet = spreadsheet.add_worksheet('workdays', 1, 1)
+        # worksheet = spreadsheet.sheet1
+        for bus_entry in schedule_table:
+            print bus_entry
+            worksheet.append_row(bus_entry)
+
+        # self._fill_time(worksheet, schedule_table)
 
     def _fill_stations(self, stations_list):
         print "hello"
@@ -58,6 +56,19 @@ class SpreadsheetSerialization:
             row += 1
 
 
+class Credentials (object):
+    def __init__(self, credentials_filename):
+        credentials = load_json_file(credentials_filename)
+        token_response = credentials['token_response']
+        self.access_token = token_response['access_token']
+        self.token_type = token_response['token_type']
+
+    def refresh(self, http):
+        raise Exception("Not implemented")
+        # get new access_token
+        # this only gets called if access_token is None
+
+
 class SpreadsheetCreator:
     MIME_SPREADSHEET = "application/vnd.google-apps.spreadsheet"
     API_ENDPOINT = "https://www.googleapis.com/drive/v2/files"
@@ -70,11 +81,9 @@ class SpreadsheetCreator:
         """
     )
 
-    def __init__(self, credentials_filename):
-        self._credentials = self._load_credentials(credentials_filename)
-        self._token_response = self._credentials['token_response']
-        self._access_token = self._token_response['access_token']
-        self._token_type = self._token_response['token_type']
+    def __init__(self, credentials):
+        self._access_token = credentials.access_token
+        self._token_type = credentials.token_type
 
     def create_spreadsheet(self, spreadsheet_filename):
         title = spreadsheet_filename
@@ -104,19 +113,11 @@ class SpreadsheetCreator:
             # raise e
         return response
 
-    def _load_credentials(self, credentials_filename):
-        json_f_credentials = open(credentials_filename, 'r')
-        json_txt_credentials = json_f_credentials.read()
-        json_obj_credentials = json.loads(json_txt_credentials)
-        return json_obj_credentials
-
 
 if __name__ == "__main__":
-    spreadsheet_serialization = SpreadsheetSerialization(
-        GMAIL_ADDRESS,
-        GMAIL_PASSWORD,
-        'credentials.json'
-    )
+    credentials = Credentials('credentials.json')
+    print credentials.access_token
+    spreadsheet_serialization = SpreadsheetSerialization(credentials)
     JSON_DIR = 'json/'
     onlyfiles = [f for f in listdir(JSON_DIR) if isfile(join(JSON_DIR, f))]
     print onlyfiles
