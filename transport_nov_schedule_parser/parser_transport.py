@@ -34,11 +34,11 @@ class TransportParser(HTMLParser):
         if "option" == tag:
             if TransportParser._transport_bus_started:
                 for attr in attrs:
-                    if attr[0] == "value": #and attr[1] != "#":
+                    if attr[0] == "value":  # and attr[1] != "#":
                         TransportParser.bus_descriptor_list.append(attr[1])
             if TransportParser._transport_trolley_started:
                 for attr in attrs:
-                    if attr[0] == "value":# and attr[1] != "#":
+                    if attr[0] == "value":  # and attr[1] != "#":
                         TransportParser.trolley_descriptor_list.append(attr[1])
 
 
@@ -73,9 +73,9 @@ class TransportParser(HTMLParser):
                 if len(bus_id) > 1:
                     if bus_id[1] == u'v':
                         weekend_flag = True
-                TransportParser.bus_dictionary[
-                    TransportParser.bus_descriptor_list[i]
-                ] = (bus_number, weekend_flag)
+                TransportParser.bus_dictionary['bus_' +bus_id[0]] = (
+                    bus_number, weekend_flag
+                )
             i += 1
 
         i = 0
@@ -110,4 +110,3 @@ if __name__ == "__main__":
 
     for trolley_id, trolley_name in TransportParser.trolley_dictionary.iteritems():
         print trolley_id, trolley_name
-

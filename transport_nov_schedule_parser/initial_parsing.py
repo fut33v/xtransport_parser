@@ -16,14 +16,14 @@ if __name__ == "__main__":
 
     directories = {
         "LOGS_DIR":  "logs/",
-        "SCHEDULES_DIR": "json/",
-        "JSON_DIR": "json/"
+        "JSON_DIR": "json/",
+        "BUSES_DIR": "json/buses/",
+        "TROLLEYS_DIR": "json/trolleys/"
     }
 
     for dir_alias, dir_name in directories.iteritems():
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
-            logging.info("Parsing transport id's started.")
 
     logging.basicConfig(
         filename=directories["LOGS_DIR"] + 'example.log',
@@ -73,8 +73,6 @@ if __name__ == "__main__":
         """
         Filling structures for stations
         """
-        for station in ScheduleParser.stations_list:
-            stations_set.add(station.encode('utf-8'))
         stations_list = [
             x.encode('utf-8') for x in ScheduleParser.stations_list
         ]
@@ -92,7 +90,7 @@ if __name__ == "__main__":
         json_bus_object = {
             'type': 'bus',
             'stations': stations_list,
-            'schedule': ScheduleParser.schedule_table,
+            'schedule_workdays': ScheduleParser.schedule_table,
             'weekend': ScheduleParser._with_weekends,
             'workdays': bus_name[1],
             'id': bus_id,
@@ -108,9 +106,12 @@ if __name__ == "__main__":
                 weekend_schedule_url
             )
             ScheduleParser.parse_corresponding_html(html)
-            json_bus_object['scheduleWeekend'] = ScheduleParser.schedule_table
-        json_buses_list.append(json_bus_object)
-        ScheduleParser.reset_parser()
+            json_bus_object['schedule_weekend'] = ScheduleParser.schedule_table
+
+        json_text = parser_utils.json_pretty_dumps(json_bus_object)
+        json_file = open(directories["BUSES_DIR"] + bus_id + ".json", 'w')
+        json_file.write(json_text)
+        json_file.close()
 
     json_text = parser_utils.json_pretty_dumps(json_buses_list)
 
