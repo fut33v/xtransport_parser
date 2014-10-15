@@ -7,14 +7,15 @@ import urllib2
 from os import listdir
 from os.path import isfile, join
 
+from ..parser_utils import load_json_file
 
 GMAIL_ADDRESS = 'brd.work.mail@gmail.com'
 GMAIL_PASSWORD = 'casAph7N'
 
 
-def load_json_file(filename):
-    json_f = open(filename, 'r')
-    return json.loads(json_f.read())
+# def load_json_file(filename):
+#     json_f = open(filename, 'r')
+#     return json.loads(json_f.read())
 
 
 class SpreadsheetSerialization:

@@ -14,6 +14,7 @@ class TransportParser(HTMLParser):
     bus_descriptor_list = []
     trolley_descriptor_list = []
     bus_dictionary = {}
+    bus_list = []
     trolley_dictionary = {}
 
     _transport_bus_started = False
@@ -41,7 +42,6 @@ class TransportParser(HTMLParser):
                     if attr[0] == "value":  # and attr[1] != "#":
                         TransportParser.trolley_descriptor_list.append(attr[1])
 
-
     def handle_endtag(self, tag):
         if "select" == tag:
             if TransportParser._transport_bus_started:
@@ -64,6 +64,7 @@ class TransportParser(HTMLParser):
 
         i = 0
         TransportParser.bus_dictionary = {}
+        TransportParser.bus_list = []
         for bus_number in TransportParser.bus_number_list:
             if TransportParser.bus_descriptor_list[i] != "#":
                 bus_id = string.split(
@@ -73,8 +74,17 @@ class TransportParser(HTMLParser):
                 if len(bus_id) > 1:
                     if bus_id[1] == u'v':
                         weekend_flag = True
-                TransportParser.bus_dictionary['bus_' +bus_id[0]] = (
-                    bus_number, weekend_flag
+                TransportParser.bus_list.append(
+                    {
+                        "id": 'bus_' + bus_id[0],
+                        "name": bus_number,
+                        "post_data": (
+                            TransportParser._get_post_data(
+                                TransportParser.bus_descriptor_list[i]
+                            )
+                        ),
+                        "weekend": weekend_flag
+                    }
                 )
             i += 1
 
@@ -86,6 +96,10 @@ class TransportParser(HTMLParser):
                     TransportParser.trolley_descriptor_list[i]
                 ] = trolley_number
             i += 1
+
+    @staticmethod
+    def _get_post_data(bus_id):
+        return "select+value=&" + "avt=" + bus_id + "&trol=%23"
 
     @staticmethod
     def reset_parser():

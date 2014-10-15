@@ -8,7 +8,7 @@ import string
 
 class ScheduleParser(HTMLParser):
 
-    COMMON_TRANSPORT_SCHEDULE_URL = "http://transport.nov.ru/urban_trans/1"
+    COMMON_TRANSPORT_SCHEDULE_URL = "http://transport.nov.ru/urban_trans/1/"
     EXAMPLE_OF_HTML_POST_REQUEST_FOR_19 = """select+value=&avt=19_r&trol=%23"""
 
     stations_number = 0
@@ -25,9 +25,6 @@ class ScheduleParser(HTMLParser):
     workdays_weekends_links = []
     _weekends_schedule_link = ""
 
-    @staticmethod
-    def get_post_data_for_schedule_for_given_id(bus_id):
-        return "select+value=&" + "avt=" + bus_id + "&trol=%23"
 
     def handle_starttag(self, tag, attrs):
         if "table" == tag:

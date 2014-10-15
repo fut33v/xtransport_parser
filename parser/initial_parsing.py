@@ -40,7 +40,7 @@ if __name__ == "__main__":
     logging.info("Parsing transport id's started.")
 
     transport_parser = TransportParser()
-    html = parser_utils.download_page_with_retry_and_encode(
+    html = parser_utils.download_page(
         TransportParser.TRANSPORT_PAGE_URL
     )
     transport_parser.parse_corresponding_html(html)
@@ -58,15 +58,14 @@ if __name__ == "__main__":
     json_buses_list = []
     stations_set = set()
 
-    for bus_id, bus_name in TransportParser.bus_dictionary.iteritems():
+    for bus in TransportParser.bus_list:
 
-        logging.info("Parsing schedule for bus with id: %s", bus_id)
-        print "Current bus_id is:", bus_id
+        logging.info("Parsing schedule for bus with id: %s", bus["id"])
+        print "Current bus_id is:", bus["id"]
 
-        data = ScheduleParser.get_post_data_for_schedule_for_given_id(bus_id)
-        html = parser_utils.download_page_with_retry_and_encode(
-            ScheduleParser.COMMON_TRANSPORT_SCHEDULE_URL,
-            data
+        html = parser_utils.download_page(
+            TransportParser.TRANSPORT_PAGE_URL,
+            bus["post_data"]
         )
         ScheduleParser.parse_corresponding_html(html)
 
@@ -92,9 +91,9 @@ if __name__ == "__main__":
             'stations': stations_list,
             'schedule_workdays': ScheduleParser.schedule_table,
             'weekend': ScheduleParser._with_weekends,
-            'workdays': bus_name[1],
-            'id': bus_id,
-            'name': bus_name[0]
+            'workdays': True,
+            'id': bus["id"],
+            'name': bus["name"]
         }
         if ScheduleParser._with_weekends:
             WORKDAY_URL = 0
@@ -102,20 +101,14 @@ if __name__ == "__main__":
             weekend_schedule_url = ScheduleParser.workdays_weekends_links[
                 WEEKEND_URL
             ]
-            html = parser_utils.download_page_with_retry_and_encode(
+            html = parser_utils.download_page(
                 weekend_schedule_url
             )
             ScheduleParser.parse_corresponding_html(html)
             json_bus_object['schedule_weekend'] = ScheduleParser.schedule_table
 
         json_text = parser_utils.json_pretty_dumps(json_bus_object)
-        json_file = open(directories["BUSES_DIR"] + bus_id + ".json", 'w')
+        json_file = open(directories["BUSES_DIR"] + bus["id"] + ".json", 'w')
         json_file.write(json_text)
         json_file.close()
-
-    json_text = parser_utils.json_pretty_dumps(json_buses_list)
-
-    # JSON writing buses objs
-    json_file = open(directories["JSON_DIR"] + "buses.json", 'w')
-    json_file.write(json_text)
-    json_file.close()
+load_json_file

@@ -17,10 +17,17 @@ json_pretty_dumps = partial(
 )
 
 
+def load_json_file(filename):
+    json_f = open(filename, 'r')
+    json_obj = json.loads(json_f.read())
+    json_f.close()
+    return json_obj
+
+
 RETRY_SLEEP_TIME = 1
 
 
-def download_page_with_retry_and_encode(url_string, data=""):
+def download_page(url_string, data=""):
     """
     Function downloads html page by given url,
     if URLError raises, it will retry after
@@ -39,7 +46,7 @@ def download_page_with_retry_and_encode(url_string, data=""):
             data
         )
 
-    #response = urllib2.urlopen(request)
+    # response = urllib2.urlopen(request)
 
     while not success:
         try:

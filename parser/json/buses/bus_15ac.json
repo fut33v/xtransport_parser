@@ -5,5 +5,5 @@
     "stations": [],
     "type": "bus",
     "weekend": false,
-    "workdays": false
+    "workdays": true
 }
