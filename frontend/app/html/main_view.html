@@ -1,25 +1,25 @@
 <div ng-controller="MainViewController as mainViewController" class="container-fluid">
-    <div class="row">
-      <div class="col-md-5"> 
-        <a href="#/buses">
-          <img class="main-img-left" height="256px" src="img/bus.png"/>
-          <div class="main-txt-left stripe-text"> 
-            Узнать расписание автобуса/троллейбуса  
-          </div> 
-        </a>
+    <div class="row main-row">
+      <div class="col-md-6 main-right-border"> 
+        <div  id="main-text-about">
+          Удобное<br>
+          расписание<br>
+          автобусов в<br>
+          Великом Новгороде<br>
+        </div>
       </div>
       
-      <div class="col-md-2"> 
-        <div class="vertical-line" width="1px"></div>
-      </div>
-      
-      <div class="col-md-5"> 
-        <a href="html/choose_stop_view.html/">
-          <img class="main-img-right" height="256px" src="img/bus_stop.png"/>
-          <div class="stripe-text"> 
-            Узнать расписание остановки    
-          </div> 
-        </a>
+      <div class="col-md-6 main-features-container"> 
+        <div class="main-features">
+          <ul>
+            <li><a href="#/buses">
+              <span class="glyphicon glyphicon-calendar"></span>Расписание автобуса/троллейбуса
+            </a></li>
+            <li><a href="html/choose_stop_view.html/">
+              <span class="glyphicon glyphicon-calendar"></span>Расписание остановки
+            </a></li>
+          </ul>
+        </div>
       </div> 
     </div>
 </div>

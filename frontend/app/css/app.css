@@ -1,5 +1,3 @@
-/* app css stylesheet */
-
 body {
     /* font-family: Bender-Black; */
     font-family: 'PT Sans Narrow', sans-serif;
@@ -7,53 +5,31 @@ body {
     color: #333333;
 }
 
-#main-input {
-    margin-bottom: 40px;
-}
-
-.right-station {
-    color: red;
-}
-
-.station {
-    color: black;
-}
-
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+/* Main view */
+#main-text-about {
+    text-align: right;
+    font-size: 50px;
 }
 
 .main-text {
     line-height: 256px;
 }
 
-.main-img-left {
-    display: block;
-    margin-left: auto;
-    padding: 0;
-    padding-right: 10px;
+.main-right-border {
+    border-right: 1px #d7d7d7 solid;
 }
 
-.main-img-right {
-    display: block;
-    margin-right: auto;
-    padding: 0;
-    padding-left: 35px;
+.main-features-container {
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
-.main-txt-left {
-    text-align: right;
+.main-features-container ul > li {
+e   font-size: 20px;
 }
 
-.vertical-line {
-    border-left: thick solid #000000;
-    height: 256px;
-    width: 1px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.main-row {
+    display: flex;
 }
 
 .header-main {
@@ -78,19 +54,10 @@ body {
     color: white;
 }
 
+/* Main view */
 
-.middle-stripe {
-    background-color: #3071a9;
-    border-color: #285e8e;
-    margin-top: 20px;
-    color: white;
-    height: 100px;
-}
 
-.stripe-text {
-    font-size: large;
-}
-
+/* Buses view */
 .button-container {
     overflow-y: auto;
 }
@@ -100,6 +67,8 @@ body {
     margin: 15px;
     color: #333333;
 }
+/* Buses view */
+
 
 .checkbox-container {
     overflow-y: auto;
