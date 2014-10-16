@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 __author__ = 'Ilya Fateev'
 
 from functools import partial
@@ -24,14 +26,18 @@ def load_json_file(filename):
     return json_obj
 
 
-RETRY_SLEEP_TIME = 1
+def save_json_file(filename, data):
+    json_txt = json_pretty_dumps(data)
+    json_f = open(filename, 'w')
+    json_f.write(json_txt)
+    json_f.close()
 
 
-def download_page(url_string, data=""):
+def download_page(url_string, data="", retry_sleep_time=1):
     """
     Function downloads html page by given url,
     if URLError raises, it will retry after
-    RETRY_SLEEP_TIME
+    retry_sleep_time
     """
 
     request = None
@@ -46,8 +52,6 @@ def download_page(url_string, data=""):
             data
         )
 
-    # response = urllib2.urlopen(request)
-
     while not success:
         try:
             response = urllib2.urlopen(request)
@@ -55,15 +59,15 @@ def download_page(url_string, data=""):
             print e.reason
             print (
                 "Connection problem, will retry in " +
-                str(RETRY_SLEEP_TIME) +
+                str(retry_sleep_time) +
                 " seconds"
             )
             logging.info(
                 "Connection error %s, will retry in %d seconds",
                 str(e.reason),
-                RETRY_SLEEP_TIME
+                retry_sleep_time
             )
-            time.sleep(RETRY_SLEEP_TIME)
+            time.sleep(retry_sleep_time)
             success = False
         else:
             success = True
@@ -79,3 +83,6 @@ def download_page(url_string, data=""):
         )
 
     return html
+
+if __name__ == "__main__":
+    save_json_file("test.json", {"id": 1})

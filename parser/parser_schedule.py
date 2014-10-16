@@ -8,6 +8,27 @@ import string
 
 class ScheduleParser(HTMLParser):
 
+    @staticmethod
+    def parse_html(html_page):
+        ScheduleParser._reset_parser()
+        parser = ScheduleParser()
+        parser.feed(html_page)
+
+        schedule_dict = {
+            "schedule_table": parser.schedule_table,
+            "weekend": parser._with_weekends,
+            'everyday': False
+        }
+
+        # Case of '7a' bus which works every day
+        if len(parser.workdays_weekends_links) == 0:
+            schedule_dict["everyday"] = True
+
+        if len(parser.workdays_weekends_links) > 1:
+            schedule_dict["weekend_link"] = parser.workdays_weekends_links[1]
+
+        return schedule_dict
+
     COMMON_TRANSPORT_SCHEDULE_URL = "http://transport.nov.ru/urban_trans/1/"
     EXAMPLE_OF_HTML_POST_REQUEST_FOR_19 = """select+value=&avt=19_r&trol=%23"""
 
@@ -24,7 +45,6 @@ class ScheduleParser(HTMLParser):
     _with_weekends = False
     workdays_weekends_links = []
     _weekends_schedule_link = ""
-
 
     def handle_starttag(self, tag, attrs):
         if "table" == tag:
@@ -77,13 +97,7 @@ class ScheduleParser(HTMLParser):
             ScheduleParser.stations_list.append(data)
 
     @staticmethod
-    def parse_corresponding_html(html_page):
-        ScheduleParser.reset_parser()
-        parser = ScheduleParser()
-        parser.feed(html_page)
-
-    @staticmethod
-    def reset_parser():
+    def _reset_parser():
         ScheduleParser.stations_number = 0
         ScheduleParser.schedule_table = []
         ScheduleParser.stations_list = []
