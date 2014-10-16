@@ -1,9 +1,10 @@
 {
     "id": "bus_15ac",
     "name": "15a\u0446",
+    "schedule_weekend": [],
     "schedule_workdays": [],
-    "stations": [],
-    "type": "bus",
-    "weekend": false,
-    "workdays": true
+    "stations": [
+        {}
+    ],
+    "type": "bus"
 }

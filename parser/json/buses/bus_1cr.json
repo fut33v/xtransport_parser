@@ -557,19 +557,14 @@
     ],
     "stations": [
         {
-            "id": "1e8d225f9b4fc2a5",
-            "name": "\u2116 \u043c\u0430\u0440\u0448\u0440\u0443\u0442\u0430"
-        },
-        {
-            "id": "0a8e5ccbdf532f9f",
-            "name": "\u041c\u0430\u0440\u0448\u0440\u0443\u0442"
-        },
-        {
-            "id": "27f4ba93023c9867",
             "name": "\u0412\u0440\u0435\u043c\u044f   \u043e\u0442\u043f\u0440."
         }
     ],
     "type": "bus",
-    "weekend": true,
-    "workdays": true
+    "weekend": [
+        false
+    ],
+    "workdays": [
+        true
+    ]
 }

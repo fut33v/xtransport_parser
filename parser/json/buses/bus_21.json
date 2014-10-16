@@ -1,7 +1,7 @@
 {
     "id": "bus_21",
     "name": "21",
-    "schedule_workdays": [
+    "schedule_weekend": [
         [
             "-",
             "-",
@@ -85,39 +85,10 @@
     ],
     "stations": [
         {
-            "id": "bc4920b43765ff23",
-            "name": "\u0423\u043b. \u041b\u043e\u043c\u043e\u043d\u043e\u0441\u043e\u0432\u0430 \u043e\u0442\u043f\u0440."
-        },
-        {
-            "id": "75e32ef6ed070ed6",
-            "name": "\u041f\u0410\u0422\u041f-1 (\u0443\u043b.\u041d\u0435\u0445\u0438\u043d\u0441\u043a\u0430\u044f)"
-        },
-        {
-            "id": "bb7ce1a063835ce5",
-            "name": "\u0443\u043b. \u041a\u043e\u043b\u043b\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f (\u0443\u043b.\u041f\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f)"
-        },
-        {
-            "id": "e969191d87e48af0",
-            "name": "9 \u043a\u043c \u041f\u0441\u043a\u043e\u0432\u0441\u043a\u043e\u0433\u043e \u0448. \u043f\u0440\u0438\u0431."
-        },
-        {
-            "id": "8ba5809cb84fbd69",
-            "name": "9 \u043a\u043c \u041f\u0441\u043a\u043e\u0432\u0441\u043a\u043e\u0433\u043e \u0448.\u043e\u0442\u043f\u0440."
-        },
-        {
-            "id": "bb7ce1a063835ce5",
-            "name": "\u0443\u043b. \u041a\u043e\u043b\u043b\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f (\u0443\u043b.\u041f\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f)"
-        },
-        {
-            "id": "75e32ef6ed070ed6",
-            "name": "\u041f\u0410\u0422\u041f-1 (\u0443\u043b.\u041d\u0435\u0445\u0438\u043d\u0441\u043a\u0430\u044f)"
-        },
-        {
-            "id": "2cef8228a02d2be6",
             "name": "\u0423\u043b. \u041b\u043e\u043c\u043e\u043d\u043e\u0441\u043e\u0432\u0430 \u043f\u0440\u0438\u0431."
         }
     ],
     "type": "bus",
-    "weekend": false,
-    "workdays": true
+    "weekend": true,
+    "workdays": false
 }
