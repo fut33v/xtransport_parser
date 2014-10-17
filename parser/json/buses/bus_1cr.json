@@ -1,4 +1,5 @@
 {
+    "everyday": false,
     "id": "bus_1cr",
     "name": "\u043e\u0442 \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0440\u044b\u043d\u043a\u0430",
     "schedule_weekend": [
@@ -555,16 +556,17 @@
             "21:47"
         ]
     ],
-    "stations": [
+    "stations_weekend": [
+        "\u2116 \u043c\u0430\u0440\u0448\u0440\u0443\u0442\u0430",
+        "\u041c\u0430\u0440\u0448\u0440\u0443\u0442",
+        "\u0412\u0440\u0435\u043c\u044f   \u043e\u0442\u043f\u0440."
+    ],
+    "stations_workdays": [
         "\u2116 \u043c\u0430\u0440\u0448\u0440\u0443\u0442\u0430",
         "\u041c\u0430\u0440\u0448\u0440\u0443\u0442",
         "\u0412\u0440\u0435\u043c\u044f   \u043e\u0442\u043f\u0440."
     ],
     "type": "bus",
-    "weekend": [
-        false
-    ],
-    "workdays": [
-        true
-    ]
+    "weekend": true,
+    "workdays": true
 }
