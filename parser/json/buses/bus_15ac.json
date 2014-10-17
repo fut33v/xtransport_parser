@@ -3,8 +3,6 @@
     "name": "15a\u0446",
     "schedule_weekend": [],
     "schedule_workdays": [],
-    "stations": [
-        {}
-    ],
+    "stations": [],
     "type": "bus"
 }
