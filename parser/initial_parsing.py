@@ -5,6 +5,7 @@ __author__ = 'Ilya Fateev'
 # import urllib2
 import os
 import logging
+# import string
 
 from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
@@ -88,26 +89,46 @@ def parse_schedules_trolley(trolley_list):
 
         json_trolley_object = {
             'type': 'trolley',
-            'stations': schedule['stations_list'],
             'id': trolley["id"],
-            'name': trolley["name"]
+            'name': trolley["name"],
+            'workdays': False,
+            'weekend': False,
+            'everyday': False
         }
+
+        # in trolley case ['workdays'] always True
         if trolley['workdays'] is True:
-            json_trolley_object['schedule_workdays'] = (
-                schedule['schedule_table']
-            )
-            if schedule['weekend'] is True:
-                json_trolley_object['weekend'] = True
-                html = parser_utils.download_page(
-                    schedule['weekend_link']
+            # case, when trolley works only on workdays
+            if schedule['workdays'] is True:
+                print "Workdays only"
+                json_trolley_object['workdays'] = True
+                json_trolley_object['schedule_workdays'] = (
+                    schedule['schedule_table']
                 )
-                schedule_weekend = ScheduleParser.parse_html(html)
-                json_trolley_object['schedule_weekend'] = (
-                    schedule_weekend['schedule_table']
+                json_trolley_object['stations_workdays'] = (
+                    schedule['stations_list']
                 )
-                json_trolley_object['stations_weekend'] = (
-                    schedule_weekend['stations_list']
+            # regular case, when trolley works both on workdays and weekend
+            else:
+                json_trolley_object['workdays'] = True
+                json_trolley_object['schedule_workdays'] = (
+                    schedule['schedule_table']
                 )
+                json_trolley_object['stations_workdays'] = (
+                    schedule['stations_list']
+                )
+                if schedule['weekend'] is True:
+                    json_trolley_object['weekend'] = True
+                    html = parser_utils.download_page(
+                        schedule['weekend_link']
+                    )
+                    schedule_weekend = ScheduleParser.parse_html(html)
+                    json_trolley_object['schedule_weekend'] = (
+                        schedule_weekend['schedule_table']
+                    )
+                    json_trolley_object['stations_weekend'] = (
+                        schedule_weekend['stations_list']
+                    )
 
         parser_utils.save_json_file(
             directories["TROLLEYS_DIR"] + trolley["id"] + ".json",
@@ -147,5 +168,44 @@ if __name__ == "__main__":
     # logging.info("Parsing buses schedules started.")
     # parse_schedules_bus(transport["bus_list"])
 
-    logging.info("Parsing trolleys schedules started.")
-    parse_schedules_trolley(transport["trolley_list"])
+    # logging.info("Parsing trolleys schedules started.")
+    # parse_schedules_trolley(transport["trolley_list"])
+    transport_list = []
+    buses_trolleys = transport["trolley_list"] + transport["bus_list"]
+
+    trolleys = []
+    for trolley in transport["trolley_list"]:
+        trolleys.append(
+            {
+                'id': trolley['id'],
+                'name': trolley['name'],
+                'type': 'trolley'
+            }
+        )
+
+    buses = []
+    for trolley in transport["bus_list"]:
+        buses.append(
+            {
+                'id': trolley['id'],
+                'name': trolley['name'],
+                'type': 'bus'
+            }
+        )
+        transport_dict = {
+            'buses': buses,
+            'trolleys': trolleys
+        }
+    # for tr in buses_trolleys:
+    #     tr_id = string.split(tr['id'], '_')
+    #     transport_list.append(
+    #         {
+    #             'id': tr['id'],
+    #             'name': tr['name'],
+    #             'type': tr_id[0]
+    #         }
+    #     )
+    parser_utils.save_json_file(
+        directories["JSON_DIR"] + "transport.json",
+        transport_dict
+    )

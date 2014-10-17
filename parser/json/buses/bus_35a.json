@@ -1,8 +1,8 @@
 {
-    "everyday": true,
+    "everyday": false,
     "id": "bus_35a",
     "name": "35A",
-    "schedule_everyday": [
+    "schedule_workdays": [
         [
             "-",
             "-",
@@ -932,7 +932,7 @@
             "-"
         ]
     ],
-    "stations_everyday": [
+    "stations_workdays": [
         "\u043f.\u041f\u0430\u043d\u043a\u043e\u0432\u043a\u0430 \u043e\u0442\u043f\u0440.",
         "\u041a\u043e\u043b\u043b\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f \u0443\u043b.( \u041f\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u0443\u043b.) \u043e\u0442\u043f\u0440.",
         "\u0416/\u0414 \u0432\u043e\u043a\u0437\u0430\u043b    \u041f\u0440\u0438\u0432\u043e\u043a\u0437\u0430\u043b\u044c\u043d\u0430\u044f \u043f\u043b.",
@@ -949,6 +949,6 @@
         "\u043f.\u041f\u0430\u043d\u043a\u043e\u0432\u043a\u0430 \u043f\u0440\u0438\u0431."
     ],
     "type": "bus",
-    "weekend": true,
+    "weekend": false,
     "workdays": true
 }

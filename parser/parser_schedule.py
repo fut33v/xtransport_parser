@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 __author__ = 'Ilya Fateev'
 
 from HTMLParser import HTMLParser
 import string
+import re
 
 
 class ScheduleParser(HTMLParser):
@@ -16,22 +18,34 @@ class ScheduleParser(HTMLParser):
 
         schedule_dict = {
             'schedule_table': parser.schedule_table,
-            'weekend': parser._with_weekends,
+            'workdays': False,
+            'weekend': False,
             'everyday': False,
             'stations_list': parser.stations_list
         }
-
-        # Case of '7a' bus which works every day
         if len(parser.workdays_weekends_links) == 0:
-            schedule_dict["everyday"] = True
-
-        if len(parser.workdays_weekends_links) > 1:
-            schedule_dict["weekend_link"] = parser.workdays_weekends_links[1]
+            everyday = parser._regex_everyday.search(html_page)
+            workdays = parser._regex_workdays.search(html_page)
+            # print everyday, workdays
+            if everyday is not None:
+                print "everyday I'm hustling"
+                schedule_dict['everyday'] = True
+            elif workdays is not None:
+                print "workdays only"
+                schedule_dict['workdays'] = True
+        elif len(parser.workdays_weekends_links) > 1:
+            schedule_dict['weekend'] = parser._with_weekends
+            schedule_dict['weekend_link'] = parser.workdays_weekends_links[1]
 
         return schedule_dict
 
     COMMON_TRANSPORT_SCHEDULE_URL = "http://transport.nov.ru/urban_trans/1/"
     EXAMPLE_OF_HTML_POST_REQUEST_FOR_19 = """select+value=&avt=19_r&trol=%23"""
+
+    EVERYDAY_SUBSTRING = u"ежедневно"
+    WORKDAYS_SUBSTRING = u"рабочим дням"
+    _regex_everyday = re.compile(EVERYDAY_SUBSTRING)
+    _regex_workdays = re.compile(WORKDAYS_SUBSTRING)
 
     stations_number = 0
     schedule_table = []

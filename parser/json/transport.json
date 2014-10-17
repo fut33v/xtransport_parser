@@ -1,0 +1,226 @@
+{
+    "buses": [
+        {
+            "id": "bus_1",
+            "name": "1",
+            "type": "bus"
+        },
+        {
+            "id": "bus_1a",
+            "name": "1a",
+            "type": "bus"
+        },
+        {
+            "id": "bus_1cr",
+            "name": "\u043e\u0442 \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0440\u044b\u043d\u043a\u0430",
+            "type": "bus"
+        },
+        {
+            "id": "bus_2",
+            "name": "2",
+            "type": "bus"
+        },
+        {
+            "id": "bus_2k",
+            "name": "2k",
+            "type": "bus"
+        },
+        {
+            "id": "bus_4",
+            "name": "4",
+            "type": "bus"
+        },
+        {
+            "id": "bus_5",
+            "name": "5",
+            "type": "bus"
+        },
+        {
+            "id": "bus_6",
+            "name": "6",
+            "type": "bus"
+        },
+        {
+            "id": "bus_7",
+            "name": "7",
+            "type": "bus"
+        },
+        {
+            "id": "bus_7a",
+            "name": "7a",
+            "type": "bus"
+        },
+        {
+            "id": "bus_8a",
+            "name": "8a",
+            "type": "bus"
+        },
+        {
+            "id": "bus_8",
+            "name": "8",
+            "type": "bus"
+        },
+        {
+            "id": "bus_8en",
+            "name": "8 \u0434\u043e \u043f.\u042d\u043d\u0435\u0440\u0433\u0435\u0442\u0438\u043a\u043e\u0432",
+            "type": "bus"
+        },
+        {
+            "id": "bus_9",
+            "name": "9",
+            "type": "bus"
+        },
+        {
+            "id": "bus_9a",
+            "name": "9a",
+            "type": "bus"
+        },
+        {
+            "id": "bus_10",
+            "name": "10",
+            "type": "bus"
+        },
+        {
+            "id": "bus_11",
+            "name": "11",
+            "type": "bus"
+        },
+        {
+            "id": "bus_12",
+            "name": "12",
+            "type": "bus"
+        },
+        {
+            "id": "bus_13",
+            "name": "13",
+            "type": "bus"
+        },
+        {
+            "id": "bus_1418",
+            "name": "\u211614,18 \u043f\u043e \u041c\u0430\u0433\u0438\u0441\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439",
+            "type": "bus"
+        },
+        {
+            "id": "bus_14",
+            "name": "14",
+            "type": "bus"
+        },
+        {
+            "id": "bus_15ac",
+            "name": "15a\u0446",
+            "type": "bus"
+        },
+        {
+            "id": "bus_16",
+            "name": "16",
+            "type": "bus"
+        },
+        {
+            "id": "bus_17",
+            "name": "17",
+            "type": "bus"
+        },
+        {
+            "id": "bus_17a",
+            "name": "17a",
+            "type": "bus"
+        },
+        {
+            "id": "bus_18",
+            "name": "18",
+            "type": "bus"
+        },
+        {
+            "id": "bus_19",
+            "name": "19",
+            "type": "bus"
+        },
+        {
+            "id": "bus_20",
+            "name": "20",
+            "type": "bus"
+        },
+        {
+            "id": "bus_21",
+            "name": "21",
+            "type": "bus"
+        },
+        {
+            "id": "bus_22",
+            "name": "22",
+            "type": "bus"
+        },
+        {
+            "id": "bus_24",
+            "name": "24",
+            "type": "bus"
+        },
+        {
+            "id": "bus_26",
+            "name": "26",
+            "type": "bus"
+        },
+        {
+            "id": "bus_27",
+            "name": "27",
+            "type": "bus"
+        },
+        {
+            "id": "bus_27a",
+            "name": "27a",
+            "type": "bus"
+        },
+        {
+            "id": "bus_32",
+            "name": "32",
+            "type": "bus"
+        },
+        {
+            "id": "bus_33",
+            "name": "33",
+            "type": "bus"
+        },
+        {
+            "id": "bus_35",
+            "name": "35",
+            "type": "bus"
+        },
+        {
+            "id": "bus_35a",
+            "name": "35A",
+            "type": "bus"
+        },
+        {
+            "id": "bus_101",
+            "name": "101",
+            "type": "bus"
+        }
+    ],
+    "trolleys": [
+        {
+            "id": "trolley_1",
+            "name": "1",
+            "type": "trolley"
+        },
+        {
+            "id": "trolley_2",
+            "name": "2",
+            "type": "trolley"
+        },
+        {
+            "id": "trolley_3",
+            "name": "3",
+            "type": "trolley"
+        },
+        {
+            "id": "trolley_4",
+            "name": "4",
+            "type": "trolley"
+        },
+        {
+            "id": "trolley_5",
+            "name": "5",
+            "type": "trolley"
+        }
+    ]
+}

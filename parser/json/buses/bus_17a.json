@@ -1,8 +1,8 @@
 {
-    "everyday": true,
+    "everyday": false,
     "id": "bus_17a",
     "name": "17a",
-    "schedule_everyday": [
+    "schedule_workdays": [
         [
             "-",
             "-",
@@ -121,7 +121,7 @@
             "-"
         ]
     ],
-    "stations_everyday": [
+    "stations_workdays": [
         "\u0414\u0435\u0440\u0435\u0432\u044f\u043d\u0438\u0446\u044b \u21161 \u0443\u043b.\u041f\u0435\u0440\u0441\u043f\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f \u043e\u0442\u043f\u0440.",
         "\u0411.\u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u0422\u0426\"\u0410\u043d\u0442\u043e\u043d\u043e\u0432\u043e\"",
         "\u0411.\u0412\u043b\u0430\u0441\u044c\u0435\u0432\u0441\u043a\u0430\u044f \u0410\u0434\u043c\u0438\u043d. \u0433\u043e\u0440\u043e\u0434\u0430",
@@ -131,6 +131,6 @@
         "\u0414\u0435\u0440\u0435\u0432\u044f\u043d\u0438\u0446\u044b \u21161 \u0443\u043b.\u041f\u0435\u0440\u0441\u043f\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f \u043f\u0440\u0438\u0431."
     ],
     "type": "bus",
-    "weekend": true,
+    "weekend": false,
     "workdays": true
 }
