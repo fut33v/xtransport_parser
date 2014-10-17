@@ -1,0 +1,83 @@
+ a/c/controllers.coffee
+  1 transportControllers = angular.module 'transportControllers', []
+  2
+  3 class TestController
+  4   constructor: (@$scope, @TransportManager) ->
+  5     TransportManager.getBus('bus_20')
+  6     $scope.helloWorld = "Hello world"
+  7
+  8
+  9 transportControllers.controller 'TestController', [
+ 10   '$scope',
+ 11   'TransportManager',
+ 12   TestController
+ 13 ]
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+                                                                                            4,28          All

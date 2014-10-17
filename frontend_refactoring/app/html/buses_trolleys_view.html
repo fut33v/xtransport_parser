@@ -1,0 +1,42 @@
+<div class="container-fluid" ng-controller="BusesTrolleysController as ctrl">
+
+    
+  <div class="container"> 
+    <div class="row buses-row"> 
+      <div class="col-md-6 " id="buses-container"> 
+        <div class="button-container">
+          <div class="buses-txt-transport">Автобус:</div>
+          <a href="#/schedule/{{bus.id}}" ng-repeat="bus in busesList | ordertransport">
+            <button 
+              ng-mouseover="ctrl.showFullName(bus)" 
+              ng-mouseleave="ctrl.hideFullName()" 
+              class="btn btn-danger bus-button">
+              {{bus.name}}
+            </button>
+          </a>
+        </div>
+      </div>                   
+      
+      <div class="col-md-6 "> 
+        <div class="button-container">
+          <div class="buses-txt-transport">Троллейбус:</div>
+          <a href="#/schedule/{{trolley.id}}" ng-repeat="trolley in trolleysList | ordertransport">
+            <button 
+              ng-mouseover="ctrl.showFullName(trolley)" 
+              ng-mouseleave="ctrl.hideFullName()" 
+              class="btn btn-primary bus-button">
+              {{trolley.name}}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div 
+      ng-show="showFullName"
+      class="well buses-full-info">
+      Подробнее:
+      <div class="buses-full-info-right">
+        {{currentBus.name}}  
+      </div>
+    </div>
+</div>
