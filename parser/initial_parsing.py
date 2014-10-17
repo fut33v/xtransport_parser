@@ -10,6 +10,10 @@ from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
 import parser_utils
 
+# def encode_stations(stations):
+#     return [
+#         {"name": x.encode('utf-8')} for x in stations
+#     ]
 
 if __name__ == "__main__":
 
@@ -54,43 +58,40 @@ if __name__ == "__main__":
         )
         schedule = ScheduleParser.parse_html(html)
 
-        stations_list = [
-            {
-                "name": x.encode('utf-8') for x in ScheduleParser.stations_list
-            }
-        ]
-
         json_bus_object = {
             'type': 'bus',
-            'stations': stations_list,
+            # 'stations': schedule['stations_list'],
             'id': bus["id"],
-            'name': bus["name"]
+            'name': bus["name"],
+            'everyday': False
         }
 
         # Case when bus have only weekend schedule
         if bus['weekend'] is True:
-            json_bus_object['weekend'] = True
             json_bus_object['workdays'] = False
+            json_bus_object['weekend'] = True
             json_bus_object['schedule_weekend'] = schedule['schedule_table']
+            json_bus_object['stations_weekend'] = schedule['stations_list']
 
         # Case when bus have workdays, and maybe weekend schedule
         else:
             # Case of '7a' bus (everyday)
             # @TODO: could be others buses like this
             if schedule['everyday'] is True:
-                json_bus_object['schedule_workdays'] = (
+                json_bus_object['everyday'] = True
+                json_bus_object['schedule_everyday'] = (
                     schedule['schedule_table']
                 )
-                json_bus_object['schedule_weekend'] = (
-                    schedule['schedule_table']
-                )
+                json_bus_object['stations_everyday'] = schedule['stations_list']
             else:
                 json_bus_object['workdays'] = True,
+                json_bus_object['weekend'] = False,
                 json_bus_object['schedule_workdays'] = (
                     schedule['schedule_table']
                 )
-                json_bus_object['weekend'] = False,
+                json_bus_object['stations_workdays'] = schedule['stations_list']
                 if schedule['weekend'] is True:
+                    json_bus_object['weekend'] = True
                     html = parser_utils.download_page(
                         schedule['weekend_link']
                     )
@@ -98,14 +99,13 @@ if __name__ == "__main__":
                     json_bus_object['schedule_weekend'] = (
                         schedule_weekend['schedule_table']
                     )
-                    json_bus_object['weekend'] = False,
 
         parser_utils.save_json_file(
             directories["BUSES_DIR"] + bus["id"] + ".json",
             json_bus_object
         )
 
-    for trolley in transport["bus_list"]:
+    for trolley in transport["trolley_list"]:
         logging.info("Parsing schedule for trolley with id: %s", trolley["id"])
         print "Current trolley_id is:", trolley["id"]
 
@@ -115,15 +115,13 @@ if __name__ == "__main__":
         )
         schedule = ScheduleParser.parse_html(html)
 
-        stations_list = [
-            {
-                "name": x.encode('utf-8') for x in ScheduleParser.stations_list
-            }
-        ]
-
         json_trolley_object = {
             'type': 'trolley',
-            'stations': stations_list,
+            'stations': schedule['stations_list'],
             'id': trolley["id"],
             'name': trolley["name"]
         }
+        parser_utils.save_json_file(
+            directories["TROLLEYS_DIR"] + trolley["id"] + ".json",
+            json_trolley_object
+        )

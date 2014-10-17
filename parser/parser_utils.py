@@ -7,10 +7,9 @@ import json
 import urllib2
 import time
 import logging
+import codecs
 
-"""
-Pretty printing json function.
-"""
+
 json_pretty_dumps = partial(
     json.dumps,
     sort_keys=True,
@@ -29,6 +28,7 @@ def load_json_file(filename):
 def save_json_file(filename, data):
     json_txt = json_pretty_dumps(data)
     json_f = open(filename, 'w')
+    # json_f = codecs.open(filename, 'w', 'utf-8')
     json_f.write(json_txt)
     json_f.close()
 

@@ -63,7 +63,7 @@ class TransportParser(HTMLParser):
                 workdays = TransportParser._check_workdays(trolley_id)
                 trolley_list.append(
                     {
-                        "id": 'trolley_' + trolley_id[0],
+                        "id": 'trolley_' + trolley_id[0][:-1],
                         "name": trolley_number,
                         "post_data": (
                             TransportParser._get_post_data_trolley(

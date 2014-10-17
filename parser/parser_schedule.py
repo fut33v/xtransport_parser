@@ -15,9 +15,10 @@ class ScheduleParser(HTMLParser):
         parser.feed(html_page)
 
         schedule_dict = {
-            "schedule_table": parser.schedule_table,
-            "weekend": parser._with_weekends,
-            'everyday': False
+            'schedule_table': parser.schedule_table,
+            'weekend': parser._with_weekends,
+            'everyday': False,
+            'stations_list': parser.stations_list
         }
 
         # Case of '7a' bus which works every day
@@ -94,7 +95,7 @@ class ScheduleParser(HTMLParser):
                 ScheduleParser._current_bus_counter = 0
                 ScheduleParser._current_bus = []
         if ScheduleParser._station_name_started:
-            ScheduleParser.stations_list.append(data)
+            ScheduleParser.stations_list.append(unicode(data))
 
     @staticmethod
     def _reset_parser():
