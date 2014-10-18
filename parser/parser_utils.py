@@ -7,7 +7,7 @@ import json
 import urllib2
 import time
 import logging
-import codecs
+# import codecs
 
 
 json_pretty_dumps = partial(
