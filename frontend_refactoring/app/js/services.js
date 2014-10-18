@@ -30,6 +30,12 @@
           });
         };
 
+        TransportManager.prototype.getTransport = function(transportId) {
+          return $http.get('json/transport/' + transportId + '.json').success(function(data) {
+            return console.log(data);
+          });
+        };
+
         return TransportManager;
 
       })());

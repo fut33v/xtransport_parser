@@ -12,7 +12,7 @@
       }).when('/buses_trolleys/', obj = {
         templateUrl: 'html/buses_trolleys_view.html',
         controller: 'BusesTrolleysController'
-      }).when('/schedule/:busId', obj = {
+      }).when('/schedule/:transportId', obj = {
         templateUrl: 'html/schedule_view.html',
         controller: 'ScheduleController'
       }).when('/stops/', obj = {

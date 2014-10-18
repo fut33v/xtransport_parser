@@ -31,6 +31,12 @@ class BusesTrolleysController
   hideFullName: (bus) ->
     @$scope.currentBus = ""
 
+class ScheduleController
+  constructor: (@$scope, @$routeParams, @$filter,  @TransportManager) ->
+    TransportManager.getTransport($routeParams.transportId).success (data) ->
+      $scope.transportObject = data
+
+###############################################################################
 transportControllers.controller 'MainViewController', [
   '$scope',
   MainViewController
@@ -42,28 +48,16 @@ transportControllers.controller 'BusesTrolleysController', [
   BusesTrolleysController
 ]
 
+transportControllers.controller 'ScheduleController', [
+  '$scope',
+  '$routeParams',
+  '$filter',
+  'TransportManager',
+  ScheduleController
+]
+
 transportControllers.controller 'TestController', [
   '$scope',
   'TransportManager',
   TestController
 ]
-
-# transportControllers.controller('BusesController', ['$scope', '$http', 
-#     function($scope, $http) { 
-#         $http.get('transport/buses.json').
-#             success(function(data) {
-#             $scope.buses = data; 
-#         });
-#         $scope.nameInInt = function(name) {
-#             return parseInt(name);
-#         }
-#         this.showFullName = function(bus) {
-#             console.log ("testing", bus);
-#             $scope.showFullName = true;
-#             $scope.currentBus = bus;
-#         }
-#         this.hideFullName = function(bus) {
-#             $scope.currentBus = "";
-#         }
-#     }
-# ]);

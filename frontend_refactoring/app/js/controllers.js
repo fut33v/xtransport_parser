@@ -1,5 +1,5 @@
 (function() {
-  var BusesTrolleysController, MainViewController, TestController, transportControllers;
+  var BusesTrolleysController, MainViewController, ScheduleController, TestController, transportControllers;
 
   transportControllers = angular.module('transportControllers', []);
 
@@ -57,9 +57,26 @@
 
   })();
 
+  ScheduleController = (function() {
+    function ScheduleController($scope, $routeParams, $filter, TransportManager) {
+      this.$scope = $scope;
+      this.$routeParams = $routeParams;
+      this.$filter = $filter;
+      this.TransportManager = TransportManager;
+      TransportManager.getTransport($routeParams.transportId).success(function(data) {
+        return $scope.transportObject = data;
+      });
+    }
+
+    return ScheduleController;
+
+  })();
+
   transportControllers.controller('MainViewController', ['$scope', MainViewController]);
 
   transportControllers.controller('BusesTrolleysController', ['$scope', 'TransportManager', BusesTrolleysController]);
+
+  transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', ScheduleController]);
 
   transportControllers.controller('TestController', ['$scope', 'TransportManager', TestController]);
 

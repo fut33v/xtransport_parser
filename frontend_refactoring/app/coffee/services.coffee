@@ -18,4 +18,8 @@ transportServices.factory 'TransportManager', [
       getTrolley: (bus_id) ->
         $http.get('json/trolleys/' + bus_id + '.json').success (data) ->
           console.log data
+      
+      getTransport: (transportId) ->
+        $http.get('json/transport/' + transportId + '.json').success (data) ->
+          console.log data
 ]
