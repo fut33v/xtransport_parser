@@ -16,13 +16,15 @@ class ScheduleParser(HTMLParser):
         parser = ScheduleParser()
         parser.feed(html_page)
 
+        stations = [{'name': x } for x in parser.stations_list]
         schedule_dict = {
             'schedule_table': parser.schedule_table,
             'workdays': False,
             'weekend': False,
             'everyday': False,
-            'stations_list': parser.stations_list
+            'stations_list': stations
         }
+
         if len(parser.workdays_weekends_links) == 0:
             everyday = parser._regex_everyday.search(html_page)
             workdays = parser._regex_workdays.search(html_page)
