@@ -2,7 +2,9 @@ transportApp = angular.module 'transportApp', [
   'ngRoute',
   'transportControllers',
   'transportServices',
-  'transportFilters'
+  'transportDirectives',
+  'transportFilters',
+  'oci.fixedHeader'
 ]
 
 transportApp.config [

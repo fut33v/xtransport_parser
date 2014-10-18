@@ -4,22 +4,51 @@ transportServices.factory 'TransportManager', [
   '$http',
   ($http) ->
     new class TransportManager
-      constructor: (@$scope) ->
-        console.log "TransportManager constructor invoked"
+      constructor: () ->
+        true
       
       getTransportList: () ->
         $http.get('json/transport.json').success (data) ->
-          console.log data
       
       getBus: (bus_id) ->
         $http.get('json/buses/' + bus_id + '.json').success (data) ->
-          console.log data
       
       getTrolley: (bus_id) ->
         $http.get('json/trolleys/' + bus_id + '.json').success (data) ->
-          console.log data
       
       getTransport: (transportId) ->
         $http.get('json/transport/' + transportId + '.json').success (data) ->
-          console.log data
+]
+
+
+transportServices.factory 'TimeManager', [
+  '$http',
+  ($http) ->
+    new class TimeManager
+      constructor: () ->
+        @daysOfWeek = [
+          "воскресенье",
+          "понедельник",
+          "вторник",
+          "среда",
+          "четверг",
+          "пятница",
+          "суббота"
+        ]
+        @workday = "рабочий"
+        @weekend = "выходной"
+
+      getToday:() ->
+        currentDate = new Date()
+        currentDay = currentDate.getDay()
+        if currentDay == 0 or currentDay == 6
+          dayType = @weekend
+          weekend = true
+        else
+          dayType = @workday
+          weekend = false
+        obj =
+          dayName: @daysOfWeek[currentDay]
+          dayType: dayType
+          weekend: weekend
 ]
