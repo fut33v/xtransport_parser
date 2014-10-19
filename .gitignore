@@ -16,6 +16,9 @@
 
 *.fuse_hidden*
 
+# log files
+*.log
+
 #################################
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
