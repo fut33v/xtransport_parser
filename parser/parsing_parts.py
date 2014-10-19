@@ -5,6 +5,11 @@ from parser_transport import TransportParser
 import parser_utils
 import parser_configs
 
+MIX_LIST = [
+    'bus_1cr',
+    'bus_1418'
+]
+
 
 def parse_schedules_bus(bus_list):
     for bus in bus_list:
@@ -20,11 +25,17 @@ def parse_schedules_bus(bus_list):
 
         json_bus_object = {
             'type': 'bus',
-            # 'stations': schedule['stations_list'],
             'id': bus["id"],
             'name': bus["name"],
             'everyday': False
         }
+
+        if bus['id'] in MIX_LIST:
+            type_ = 'mixed'
+        else:
+            type_ = 'bus'
+
+        json_bus_object['type'] = type_
 
         # Case when bus have only weekend schedule
         if bus['weekend'] is True:

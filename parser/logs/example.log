@@ -4655,3 +4655,184 @@ INFO:18-10-2014 17:48:13:Page with URL: http://transport.nov.ru/urban_trans/1 an
 INFO:18-10-2014 17:48:13:Parsing schedule for trolley with id: trolley_5
 INFO:18-10-2014 17:48:13:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&trol=5t_r downloaded
 INFO:18-10-2014 17:48:14:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=5t_v downloaded
+INFO:19-10-2014 15:36:35:Parsing transport id's started.
+INFO:19-10-2014 15:36:35:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:36:35:Parsing transport id's finished.
+INFO:19-10-2014 15:36:56:Parsing transport id's started.
+INFO:19-10-2014 15:36:56:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:36:56:Parsing transport id's finished.
+INFO:19-10-2014 15:37:00:Parsing transport id's started.
+INFO:19-10-2014 15:37:01:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:37:01:Parsing transport id's finished.
+INFO:19-10-2014 15:38:31:Parsing transport id's started.
+INFO:19-10-2014 15:38:31:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:38:31:Parsing transport id's finished.
+INFO:19-10-2014 15:38:40:Parsing transport id's started.
+INFO:19-10-2014 15:38:40:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:38:40:Parsing transport id's finished.
+INFO:19-10-2014 15:39:01:Parsing transport id's started.
+INFO:19-10-2014 15:39:01:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:39:01:Parsing transport id's finished.
+INFO:19-10-2014 15:40:04:Parsing transport id's started.
+INFO:19-10-2014 15:40:04:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:40:04:Parsing transport id's finished.
+INFO:19-10-2014 15:43:40:Parsing transport id's started.
+INFO:19-10-2014 15:43:41:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:43:41:Parsing transport id's finished.
+INFO:19-10-2014 15:58:23:Parsing transport id's started.
+INFO:19-10-2014 15:58:23:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:58:35:Parsing transport id's started.
+INFO:19-10-2014 15:58:35:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:58:48:Parsing transport id's started.
+INFO:19-10-2014 15:58:48:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:59:15:Parsing transport id's started.
+INFO:19-10-2014 15:59:15:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 15:59:59:Parsing transport id's started.
+INFO:19-10-2014 15:59:59:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:00:41:Parsing transport id's started.
+INFO:19-10-2014 16:00:41:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:01:09:Parsing transport id's started.
+INFO:19-10-2014 16:01:09:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:02:20:Parsing transport id's started.
+INFO:19-10-2014 16:02:20:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:05:43:Parsing transport id's started.
+INFO:19-10-2014 16:05:43:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:05:50:Parsing transport id's started.
+INFO:19-10-2014 16:05:51:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:05:55:Parsing transport id's started.
+INFO:19-10-2014 16:05:55:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:06:40:Parsing transport id's started.
+INFO:19-10-2014 16:06:40:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:24:02:Parsing transport id's started.
+INFO:19-10-2014 16:24:03:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:26:18:Parsing transport id's started.
+INFO:19-10-2014 16:26:18:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:27:28:Parsing transport id's started.
+INFO:19-10-2014 16:27:28:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:28:31:Parsing transport id's started.
+INFO:19-10-2014 16:28:31:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:28:55:Parsing transport id's started.
+INFO:19-10-2014 16:28:55:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:32:11:Parsing transport id's started.
+INFO:19-10-2014 16:32:11:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:32:11:Parsing transport id's finished.
+INFO:19-10-2014 16:32:11:Parsing buses schedules started.
+INFO:19-10-2014 16:32:11:Parsing schedule for bus with id: bus_1
+INFO:19-10-2014 16:32:11:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=1_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:12:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=1_v downloaded
+INFO:19-10-2014 16:32:12:Parsing schedule for bus with id: bus_1a
+INFO:19-10-2014 16:32:12:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=1a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:12:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=1a_v downloaded
+INFO:19-10-2014 16:32:12:Parsing schedule for bus with id: bus_1cr
+INFO:19-10-2014 16:32:12:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=1cr_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:13:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=1cr_v downloaded
+INFO:19-10-2014 16:32:13:Parsing schedule for bus with id: bus_2
+INFO:19-10-2014 16:32:13:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=2_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:13:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=2_v downloaded
+INFO:19-10-2014 16:32:13:Parsing schedule for bus with id: bus_2k
+INFO:19-10-2014 16:32:13:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=2k_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:14:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=2k_v downloaded
+INFO:19-10-2014 16:32:14:Parsing schedule for bus with id: bus_4
+INFO:19-10-2014 16:32:14:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=4_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:14:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=4_v downloaded
+INFO:19-10-2014 16:32:14:Parsing schedule for bus with id: bus_5
+INFO:19-10-2014 16:32:14:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=5_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:15:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=5_v downloaded
+INFO:19-10-2014 16:32:15:Parsing schedule for bus with id: bus_6
+INFO:19-10-2014 16:32:15:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=6_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:15:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=6_v downloaded
+INFO:19-10-2014 16:32:15:Parsing schedule for bus with id: bus_7
+INFO:19-10-2014 16:32:15:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=7_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:16:Parsing schedule for bus with id: bus_7a
+INFO:19-10-2014 16:32:16:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=7a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:16:Parsing schedule for bus with id: bus_8a
+INFO:19-10-2014 16:32:16:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=8a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:16:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=8a_v downloaded
+INFO:19-10-2014 16:32:16:Parsing schedule for bus with id: bus_8
+INFO:19-10-2014 16:32:16:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=8_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:17:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=8_v downloaded
+INFO:19-10-2014 16:32:17:Parsing schedule for bus with id: bus_8en
+INFO:19-10-2014 16:32:17:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=8en_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:17:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=8en_v downloaded
+INFO:19-10-2014 16:32:17:Parsing schedule for bus with id: bus_9
+INFO:19-10-2014 16:32:17:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=9_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:18:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=9_v downloaded
+INFO:19-10-2014 16:32:18:Parsing schedule for bus with id: bus_9a
+INFO:19-10-2014 16:32:18:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=9a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:18:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=9a_v downloaded
+INFO:19-10-2014 16:32:18:Parsing schedule for bus with id: bus_10
+INFO:19-10-2014 16:32:18:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=10_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:19:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=10_v downloaded
+INFO:19-10-2014 16:32:19:Parsing schedule for bus with id: bus_11
+INFO:19-10-2014 16:32:19:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=11_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:19:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=11_s downloaded
+INFO:19-10-2014 16:32:19:Parsing schedule for bus with id: bus_12
+INFO:19-10-2014 16:32:19:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=12_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:20:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=12_v downloaded
+INFO:19-10-2014 16:32:20:Parsing schedule for bus with id: bus_13
+INFO:19-10-2014 16:32:20:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=13_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:20:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=13_v downloaded
+INFO:19-10-2014 16:32:20:Parsing schedule for bus with id: bus_1418
+INFO:19-10-2014 16:32:20:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=1418_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:21:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=1418_v downloaded
+INFO:19-10-2014 16:32:21:Parsing schedule for bus with id: bus_14
+INFO:19-10-2014 16:32:21:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=14_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:21:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=14_v downloaded
+INFO:19-10-2014 16:32:21:Parsing schedule for bus with id: bus_15ac
+INFO:19-10-2014 16:32:21:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=15ac_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:21:Parsing schedule for bus with id: bus_16
+INFO:19-10-2014 16:32:21:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=16_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:22:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=16_v downloaded
+INFO:19-10-2014 16:32:22:Parsing schedule for bus with id: bus_17
+INFO:19-10-2014 16:32:22:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=17_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:22:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=17_v downloaded
+INFO:19-10-2014 16:32:22:Parsing schedule for bus with id: bus_17a
+INFO:19-10-2014 16:32:22:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=17a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:22:Parsing schedule for bus with id: bus_18
+INFO:19-10-2014 16:32:22:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=18_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:23:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=18_v downloaded
+INFO:19-10-2014 16:32:23:Parsing schedule for bus with id: bus_19
+INFO:19-10-2014 16:32:23:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=19_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:23:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=19_v downloaded
+INFO:19-10-2014 16:32:23:Parsing schedule for bus with id: bus_20
+INFO:19-10-2014 16:32:23:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=20_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:24:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=20_v downloaded
+INFO:19-10-2014 16:32:24:Parsing schedule for bus with id: bus_22
+INFO:19-10-2014 16:32:24:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=22_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:24:Parsing schedule for bus with id: bus_24
+INFO:19-10-2014 16:32:24:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=24_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:24:Parsing schedule for bus with id: bus_26
+INFO:19-10-2014 16:32:24:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=26_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:24:Parsing schedule for bus with id: bus_27
+INFO:19-10-2014 16:32:24:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=27_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:25:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=27_v downloaded
+INFO:19-10-2014 16:32:25:Parsing schedule for bus with id: bus_27a
+INFO:19-10-2014 16:32:25:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=27a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:25:Parsing schedule for bus with id: bus_33
+INFO:19-10-2014 16:32:25:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=33_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:25:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=33_v downloaded
+INFO:19-10-2014 16:32:25:Parsing schedule for bus with id: bus_35
+INFO:19-10-2014 16:32:26:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=35_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:26:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=35_v downloaded
+INFO:19-10-2014 16:32:26:Parsing schedule for bus with id: bus_35a
+INFO:19-10-2014 16:32:26:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=35a_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:26:Parsing schedule for bus with id: bus_101
+INFO:19-10-2014 16:32:27:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&avt=101_r&trol=%23 downloaded
+INFO:19-10-2014 16:32:27:Parsing trolleys schedules started.
+INFO:19-10-2014 16:32:27:Parsing schedule for trolley with id: trolley_1
+INFO:19-10-2014 16:32:27:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&trol=1t_r downloaded
+INFO:19-10-2014 16:32:27:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=1t_v downloaded
+INFO:19-10-2014 16:32:27:Parsing schedule for trolley with id: trolley_2
+INFO:19-10-2014 16:32:27:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&trol=2t_r downloaded
+INFO:19-10-2014 16:32:28:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=2t_v downloaded
+INFO:19-10-2014 16:32:28:Parsing schedule for trolley with id: trolley_3
+INFO:19-10-2014 16:32:28:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&trol=3t_r downloaded
+INFO:19-10-2014 16:32:28:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=3t_v downloaded
+INFO:19-10-2014 16:32:28:Parsing schedule for trolley with id: trolley_4
+INFO:19-10-2014 16:32:28:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&trol=4t_r downloaded
+INFO:19-10-2014 16:32:28:Parsing schedule for trolley with id: trolley_5
+INFO:19-10-2014 16:32:28:Page with URL: http://transport.nov.ru/urban_trans/1 and POST data: select+value=&trol=5t_r downloaded
+INFO:19-10-2014 16:32:29:Page with URL: http://transport.nov.ru/urban_trans/1/?mar=5t_v downloaded
+INFO:19-10-2014 16:33:01:Parsing transport id's started.
+INFO:19-10-2014 16:33:02:Page with URL: http://transport.nov.ru/urban_trans/1 downloaded
+INFO:19-10-2014 16:33:02:Parsing transport id's finished.

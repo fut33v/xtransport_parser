@@ -11,11 +11,6 @@
             "type": "bus"
         },
         {
-            "id": "bus_1cr",
-            "name": "\u043e\u0442 \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0440\u044b\u043d\u043a\u0430",
-            "type": "bus"
-        },
-        {
             "id": "bus_2",
             "name": "2",
             "type": "bus"
@@ -96,11 +91,6 @@
             "type": "bus"
         },
         {
-            "id": "bus_1418",
-            "name": "\u211614,18 \u043f\u043e \u041c\u0430\u0433\u0438\u0441\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439",
-            "type": "bus"
-        },
-        {
             "id": "bus_14",
             "name": "14",
             "type": "bus"
@@ -141,11 +131,6 @@
             "type": "bus"
         },
         {
-            "id": "bus_21",
-            "name": "21",
-            "type": "bus"
-        },
-        {
             "id": "bus_22",
             "name": "22",
             "type": "bus"
@@ -171,11 +156,6 @@
             "type": "bus"
         },
         {
-            "id": "bus_32",
-            "name": "32",
-            "type": "bus"
-        },
-        {
             "id": "bus_33",
             "name": "33",
             "type": "bus"
@@ -194,6 +174,18 @@
             "id": "bus_101",
             "name": "101",
             "type": "bus"
+        }
+    ],
+    "mixed": [
+        {
+            "id": "bus_1cr",
+            "name": "\u043e\u0442 \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0440\u044b\u043d\u043a\u0430",
+            "type": "mixed"
+        },
+        {
+            "id": "bus_1418",
+            "name": "\u211614,18 \u043f\u043e \u041c\u0430\u0433\u0438\u0441\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439",
+            "type": "mixed"
         }
     ],
     "trolleys": [

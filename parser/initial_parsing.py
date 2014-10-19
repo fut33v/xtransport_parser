@@ -12,6 +12,10 @@ from parsing_parts import get_transport_json
 
 import parser_utils
 
+MIX_LIST = [
+    'bus_1cr',
+    'bus_1418'
+]
 
 if __name__ == "__main__":
 
@@ -44,21 +48,35 @@ if __name__ == "__main__":
     transport = transport_parser.parse_html(html)
     logging.info("Parsing transport id's finished.")
 
-    logging.info("Parsing buses schedules started.")
-    parse_schedules_bus(transport["bus_list"])
+    # logging.info("Parsing buses schedules started.")
+    # parse_schedules_bus(transport["bus_list"])
 
-    logging.info("Parsing trolleys schedules started.")
-    parse_schedules_trolley(transport["trolley_list"])
+    # logging.info("Parsing trolleys schedules started.")
+    # parse_schedules_trolley(transport["trolley_list"])
 
-    transport_list = []
     buses_trolleys = transport["trolley_list"] + transport["bus_list"]
 
+    regular_buses = [
+        elem for elem in transport["bus_list"] if elem['id'] not in MIX_LIST
+    ]
+
+    mixed_buses = [
+        elem for elem in transport["bus_list"] if elem['id'] in MIX_LIST
+    ]
+
+    buses = get_transport_json(regular_buses, 'bus')
     trolleys = get_transport_json(transport["trolley_list"], 'trolley')
-    buses = get_transport_json(transport["bus_list"], 'bus')
+    mixed = get_transport_json(mixed_buses, 'mixed')
+
+    # for bus in regular_buses:
+    #     print bus['id']
+    # for bus in mixed_buses:
+    #     print bus['id']
 
     transport_dict = {
         'buses': buses,
-        'trolleys': trolleys
+        'trolleys': trolleys,
+        'mixed': mixed
     }
 
     parser_utils.save_json_file(

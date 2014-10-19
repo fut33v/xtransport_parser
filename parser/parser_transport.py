@@ -10,9 +10,9 @@ import string
 class TransportParser(HTMLParser):
 
     _bus_number_list = []
-    trolley_number_list = []
-    bus_descriptor_list = []
-    trolley_descriptor_list = []
+    _trolley_number_list = []
+    _bus_descriptor_list = []
+    _trolley_descriptor_list = []
 
     _transport_bus_started = False
     _transport_trolley_started = False
@@ -27,13 +27,16 @@ class TransportParser(HTMLParser):
         parser = TransportParser()
         parser.feed(html_page)
 
+        print parser._bus_descriptor_list, parser._bus_number_list
+
         i = 0
         TransportParser.bus_dictionary = {}
         bus_list = []
         for bus_number in TransportParser._bus_number_list:
-            if TransportParser.bus_descriptor_list[i] != "#":
+            print i, ')', bus_number, TransportParser._bus_descriptor_list[i]
+            if TransportParser._bus_descriptor_list[i] != '#':
                 bus_id = string.split(
-                    TransportParser.bus_descriptor_list[i], '_'
+                    TransportParser._bus_descriptor_list[i], '_'
                 )
                 weekend = TransportParser._check_weekend(bus_id)
                 workdays = TransportParser._check_workdays(bus_id)
@@ -43,7 +46,7 @@ class TransportParser(HTMLParser):
                         "name": bus_number,
                         "post_data": (
                             TransportParser._get_post_data_bus(
-                                TransportParser.bus_descriptor_list[i]
+                                TransportParser._bus_descriptor_list[i]
                             )
                         ),
                         "workdays": workdays,
@@ -54,10 +57,10 @@ class TransportParser(HTMLParser):
 
         i = 0
         trolley_list = []
-        for trolley_number in TransportParser.trolley_number_list:
-            if TransportParser.trolley_descriptor_list[i] != "#":
+        for trolley_number in TransportParser._trolley_number_list:
+            if TransportParser._trolley_descriptor_list[i] != "#":
                 trolley_id = string.split(
-                    TransportParser.trolley_descriptor_list[i], '_'
+                    TransportParser._trolley_descriptor_list[i], '_'
                 )
                 weekend = TransportParser._check_weekend(trolley_id)
                 workdays = TransportParser._check_workdays(trolley_id)
@@ -67,7 +70,7 @@ class TransportParser(HTMLParser):
                         "name": trolley_number,
                         "post_data": (
                             TransportParser._get_post_data_trolley(
-                                TransportParser.trolley_descriptor_list[i]
+                                TransportParser._trolley_descriptor_list[i]
                             )
                         ),
                         "workdays": workdays,
@@ -92,11 +95,11 @@ class TransportParser(HTMLParser):
             if TransportParser._transport_bus_started:
                 for attr in attrs:
                     if attr[0] == "value":  # and attr[1] != "#":
-                        TransportParser.bus_descriptor_list.append(attr[1])
+                        TransportParser._bus_descriptor_list.append(attr[1])
             if TransportParser._transport_trolley_started:
                 for attr in attrs:
                     if attr[0] == "value":  # and attr[1] != "#":
-                        TransportParser.trolley_descriptor_list.append(attr[1])
+                        TransportParser._trolley_descriptor_list.append(attr[1])
 
     def handle_endtag(self, tag):
         if "select" == tag:
@@ -106,11 +109,19 @@ class TransportParser(HTMLParser):
                 TransportParser._transport_trolley_started = False
 
     def handle_data(self, data):
-        if data != u"\r\n  " and data != u"\r\n":
+        # if data != u"\r\n  " and data != u"\r\n" and data != u"\r\n\r\n":
+        if self._check_not_rn(data):
             if TransportParser._transport_bus_started:
                 TransportParser._bus_number_list.append(data)
             if TransportParser._transport_trolley_started:
-                TransportParser.trolley_number_list.append(data)
+                TransportParser._trolley_number_list.append(data)
+
+    @staticmethod
+    def _check_not_rn(data):
+        if '\r' in data or '\n' in data:
+            return False
+        else:
+            return True
 
     @staticmethod
     def _check_weekend(transport_id):
@@ -139,9 +150,9 @@ class TransportParser(HTMLParser):
     @staticmethod
     def _reset_parser():
         TransportParser._bus_number_list = []
-        TransportParser.trolley_number_list = []
-        TransportParser.bus_descriptor_list = []
-        TransportParser.trolley_descriptor_list = []
+        TransportParser._trolley_number_list = []
+        TransportParser._bus_descriptor_list = []
+        TransportParser._trolley_descriptor_list = []
         TransportParser._transport_bus_started = False
         TransportParser._transport_trolley_started = False
         TransportParser._current_bus = []
