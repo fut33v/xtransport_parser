@@ -163,19 +163,23 @@ div.schedule-table div.fixed-table-container-inner {
     top: 0;
     width: 90px;
     height: 75px;
-    text-align: center;
+    /*text-align: center;*/
     border-left: 1px #d7d7d7 solid;
     padding-left: 5px;
 }
 
 /* the height of the header row */
 div.schedule-table div.th-inner {
-    line-height: 50px;
+    line-height: 25px;
 }
 
 /* the height of the header row - this needs to match line-height above */
 div.schedule-table div.fixed-table-container {
    padding-top: 25px;
+}
+
+div.fixed-table-container-inner > table > tbody >tr > td {
+    padding: 0;
 }
 
 div.schedule-table tr.hidden-header .th-inner {
