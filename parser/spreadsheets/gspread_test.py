@@ -1,21 +1,25 @@
 #!/usr/bin/env python
 
+__author__ = 'Ilya Fateev'
+
 import gspread
 import json
 import string
 import urllib2
 from os import listdir
 from os.path import isfile, join
+# import parser_utils
 
-from ..parser_utils import load_json_file
 
 GMAIL_ADDRESS = 'brd.work.mail@gmail.com'
 GMAIL_PASSWORD = 'casAph7N'
 
 
-# def load_json_file(filename):
-#     json_f = open(filename, 'r')
-#     return json.loads(json_f.read())
+def load_json_file(filename):
+    json_f = open(filename, 'r')
+    json_obj = json.loads(json_f.read())
+    json_f.close()
+    return json_obj
 
 
 class SpreadsheetSerialization:
@@ -23,9 +27,9 @@ class SpreadsheetSerialization:
         self._gs = gspread.authorize(credentials)
         self._spreadsheet_creator = SpreadsheetCreator(credentials)
 
-    def serialize_schedule_json(self, json_filename):
-        schedule = load_json_file(json_filename)
-        schedule_table = schedule['schedule']
+    def serialize_transport_json(self, json_filename):
+        transport = load_json_file(json_filename)
+        # schedule_table = transport['schedule_workdays']
 
         spreadsheet_name = string.split(json_filename, '.')[:-1]
         print spreadsheet_name
@@ -33,12 +37,43 @@ class SpreadsheetSerialization:
         print spreadsheet_name
         self._spreadsheet_creator.create_spreadsheet(spreadsheet_name)
         spreadsheet = self._gs.open(spreadsheet_name)
-        # PADDING = 2
-        worksheet = spreadsheet.add_worksheet('workdays', 1, 1)
+
+        # worksheet = spreadsheet.add_worksheet('workdays', 1, 1)
+        worksheet = spreadsheet.add_worksheet('stations', 1, 1)
         # worksheet = spreadsheet.sheet1
-        for bus_entry in schedule_table:
-            print bus_entry
-            worksheet.append_row(bus_entry)
+        stations_workdays = [
+            station['name'] for station in transport['stations_workdays']
+        ]
+        stations_weekend = [
+            station['name'] for station in transport['stations_weekend']
+        ]
+
+        if transport['weekend'] is True and transport['workdays'] is True:
+            i = 0
+            max_length = max(len(stations_workdays), len(stations_weekend))
+            stations = []
+            for i in range(max_length):
+                try:
+                    st_wrk = stations_workdays[i]
+                except IndexError:
+                    st_wrk = ''
+                try:
+                    st_wknd = stations_weekend[i]
+                except IndexError:
+                    st_wknd = ''
+
+                tmp = [st_wrk, st_wknd]
+                stations.append(tmp)
+
+            for row in stations:
+                worksheet.append_row(row)
+
+        # worksheet.append_row(stations_workdays)
+        # worksheet.append_row(stations_weekend)
+
+        # for bus_entry in schedule_table:
+        #     print bus_entry
+        #     worksheet.append_row(bus_entry)
 
         # self._fill_time(worksheet, schedule_table)
 
@@ -115,12 +150,24 @@ class SpreadsheetCreator:
         return response
 
 
-if __name__ == "__main__":
+def main():
     credentials = Credentials('credentials.json')
     print credentials.access_token
     spreadsheet_serialization = SpreadsheetSerialization(credentials)
-    JSON_DIR = 'json/'
-    onlyfiles = [f for f in listdir(JSON_DIR) if isfile(join(JSON_DIR, f))]
+    TRANSPORT_DIR = 'json/transport/'
+    # spreadsheet_serialization.serialize_transport_json(
+    #     TRANSPORT_DIR +
+    #     'bus_1.json'
+    # )
+    onlyfiles = [
+        f for f in listdir(TRANSPORT_DIR) if isfile(join(TRANSPORT_DIR, f))
+    ]
     print onlyfiles
     for filename in onlyfiles:
-        spreadsheet_serialization.serialize_schedule_json(JSON_DIR + filename)
+        spreadsheet_serialization.serialize_transport_json(
+            TRANSPORT_DIR + filename
+        )
+
+
+if __name__ == "__main__":
+    main()
