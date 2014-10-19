@@ -69,6 +69,12 @@ class ScheduleController
         currentSchedule = currentTransport['schedule_workdays']
         currentStations = currentTransport['stations_workdays']
         station.selected = true for station in currentStations
+      else if not currentTransport.workdays and currentTransport.weekend
+        console.log "hi"
+        $scope.weekendOnly = true
+        currentSchedule = currentTransport['schedule_weekend']
+        currentStations = currentTransport['stations_weekend']
+        station.selected = true for station in currentStations
 
       # ctrl.currentSchedule = currentSchedule
       # ctrl.currentStations = currentStations

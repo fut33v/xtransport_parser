@@ -63,7 +63,7 @@
       this.TimeManager = TimeManager;
       ctrl = this;
       TransportManager.getTransport($routeParams.transportId).success(function(data) {
-        var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1;
+        var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
         console.log(data);
         ctrl.currentTransport = data;
         currentTransport = data;
@@ -105,6 +105,15 @@
           currentStations = currentTransport['stations_workdays'];
           for (_l = 0, _len3 = currentStations.length; _l < _len3; _l++) {
             station = currentStations[_l];
+            station.selected = true;
+          }
+        } else if (!currentTransport.workdays && currentTransport.weekend) {
+          console.log("hi");
+          $scope.weekendOnly = true;
+          currentSchedule = currentTransport['schedule_weekend'];
+          currentStations = currentTransport['stations_weekend'];
+          for (_m = 0, _len4 = currentStations.length; _m < _len4; _m++) {
+            station = currentStations[_m];
             station.selected = true;
           }
         }

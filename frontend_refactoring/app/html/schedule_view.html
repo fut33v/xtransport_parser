@@ -53,7 +53,7 @@
    
 
     <div class="col-md-4 schedule-menu-group schedule-menu-well well well-lg">
-      <div ng-show="!everydayIsTheSame && !workdaysOnly" class="row" data-toggle="buttons">
+      <div ng-show="!everydayIsTheSame && !workdaysOnly && !weekendOnly" class="row" data-toggle="buttons">
         <div class="schedule-menu-button-row">
           Сегодня {{currentDayName}}, {{currentDayType}} день.
         </div>
@@ -84,6 +84,10 @@
       <div ng-show="workdaysOnly" class="row">
         По рабочим дням.
       </div>
+      <div ng-show="weekendOnly" class="row">
+        По выходным дням.
+      </div>
+
 
       <div class="row schedule-menu-button-row">
         <div>Фильтрация по времени:</div>
@@ -162,6 +166,7 @@
               <div class="schedule-header">
                 {{station.name}}   
               </div>
+              <!--{{station.name}}-->
           </th>
         </tr>
       </thead>
