@@ -14,6 +14,16 @@
             </button>
           </a>
         </div>
+        <div class="button-container mixed-container">
+          <a href="#/schedule/{{bus.id}}" ng-repeat="bus in mixedList | ordertransport">
+            <button 
+              ng-mouseover="ctrl.showFullName(bus)" 
+              ng-mouseleave="ctrl.hideFullName()" 
+              class="btn btn-danger mixed-button">
+              {{bus.name}}
+            </button>
+          </a>
+        </div>
       </div>                   
       
       <div class="col-md-6 "> 

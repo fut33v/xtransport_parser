@@ -11,6 +11,11 @@ body {
     font-size: 40px;
 }
 
+#main-text-about-left {
+    text-align: left;
+    font-size: 40px;
+}
+
 .main-text {
     line-height: 256px;
 }
@@ -26,10 +31,12 @@ body {
 
 .main-features-container ul > li {
     font-size: 20px;
+    list-style-type: none;
 }
 
 .main-row {
     display: flex;
+    margin-top: 20px;
 }
 
 .header-main {
@@ -56,12 +63,14 @@ body {
 
 /* Main view */
 
+
 /* Stops view */
 .stops-not-impl {
     text-align: center;
     font-size: 40px;
 }
 /* Stops view */
+
 
 /* Buses view */
 .buses-txt-transport {
@@ -96,9 +105,19 @@ body {
     margin: 15px;
     color: #333333;
 }
+
+.bus-button {
+    width: 70px;
+    /*border-radius: 0;*/
+}
+
+.mixed-container {
+    border-top: 1px #d7d7d7 solid;
+}
 /* Buses view */
 
 
+/* Schedule view*/
 .checkbox-container {
     overflow-y: auto;
 }
@@ -114,11 +133,6 @@ body {
     margin-right: 5px;
 }
 
-.bus-button {
-    width: 70px;
-    /*height: 70px;*/
-    /*border-radius: 0;*/
-}
 
 /*
 thead, tbody, tr, td, th { display: block; }
@@ -205,6 +219,15 @@ div.schedule-table > td {
     margin-right: auto;
 }
 
+.schedule-transport-icon {
+    width: 125px;
+}
+
+.schedule-transport-div {
+    padding: 0;
+    padding-top: 30px;
+}
+
 .schedule-menu-button {
     width: 150px;
 }
@@ -261,3 +284,8 @@ div.schedule-table > td {
 #buses-container {
     border-right: 1px #d7d7d7 solid;
 }
+
+.schedule-menu-row {
+    display: flex;
+}
+/* Schedule view*/

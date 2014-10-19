@@ -1,10 +1,10 @@
 <div ng-controller="ScheduleController as ctrl">
   
-  <div class="row nav-bar-schedule">
+  <div class="nav-bar-schedule">
     <a href="/#/buses_trolleys/"><button 
       class="btn btn-primary">
         <span class="glyphicon glyphicon-list"></span>
-        Вернуться к списку автобусов 
+        Вернуться к списку автобусов/троллейбусов
     </button></a>
   </div>
 
@@ -17,13 +17,30 @@
           <span class="glyphicon glyphicon-list"></span>
           Показать меню
       </button>
+
       <div class="row schedule-menu-well well">
         <div id="bus-number">{{currentTransport.name}}</div>
       </div>
     </div>
   
   <!-- @Menu @start --> 
-  <div class="row" ng-hide="hideMenu">
+  <div 
+    ng-hide="ctrl.showShortDescription()"
+    class="row schedule-transport-div schedule-menu-well well well-lg">
+    <img ng-src="{{currentTransport.icon}}" class="centerized schedule-transport-icon"/>
+    <div id="bus-number">{{currentTransport.name}}</div>
+  </div>
+
+  <div class="schedule-menu-row row" ng-hide="hideMenu || ctrl.isNoMenu()">
+    
+    <div 
+      ng-show="ctrl.showShortDescription()"
+      class="schedule-transport-div col-md-2 schedule-menu-well well well-lg">
+      <img ng-src="{{currentTransport.icon}}" class="centerized schedule-transport-icon"/>
+      <div id="bus-number">{{currentTransport.name}}</div>
+    </div>
+    
+
     <div class="col-md-6 well well-lg schedule-menu-well" id="stations-choosing-container">
       <div class="checkbox-container schedule-menu-group" data-toggle="buttons">
         <p>Остановки:</p>
@@ -117,15 +134,12 @@
 
       <div class="row">
         <label> 
-          <input type="checkbox" ng-model="highlightOn">Подсвечивать уехавшие автобусы</input>
+          <input type="checkbox" ng-model="highlightOn">Подсвечивать уехавшие {{currentTransport.typeName}}</input>
         </label> 
       </div>
 
     </div>
     
-    <div class="col-md-2 schedule-menu-group schedule-menu-well well well-lg">
-      <div id="bus-number">{{currentTransport.name}}</div>
-    </div>
   </div>
   <!-- @Menu @end --> 
    
@@ -146,7 +160,7 @@
 </div>
 -->
     <div 
-      ng-hide="hideMenu" 
+      ng-hide="hideMenu || ctrl.isNoMenu()" 
       class="row">
         <button 
           ng-click="ctrl.hideButton()" 

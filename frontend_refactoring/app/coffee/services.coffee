@@ -18,6 +18,12 @@ transportServices.factory 'TransportManager', [
       
       getTransport: (transportId) ->
         $http.get('json/transport/' + transportId + '.json').success (data) ->
+          if data.type == 'bus'
+            data.typeName = 'автобусы'
+            data.icon = 'img/bus.png'
+          if data.type == 'trolley'
+            data.icon = 'img/trolley.png'
+            data.typeName = 'троллейбусы'
 ]
 
 

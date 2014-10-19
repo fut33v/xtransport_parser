@@ -24,7 +24,16 @@
         };
 
         TransportManager.prototype.getTransport = function(transportId) {
-          return $http.get('json/transport/' + transportId + '.json').success(function(data) {});
+          return $http.get('json/transport/' + transportId + '.json').success(function(data) {
+            if (data.type === 'bus') {
+              data.typeName = 'автобусы';
+              data.icon = 'img/bus.png';
+            }
+            if (data.type === 'trolley') {
+              data.icon = 'img/trolley.png';
+              return data.typeName = 'троллейбусы';
+            }
+          });
         };
 
         return TransportManager;

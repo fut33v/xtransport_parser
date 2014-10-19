@@ -36,6 +36,7 @@
         $scope.transportList = data;
         transportList = data;
         $scope.busesList = transportList['buses'];
+        $scope.mixedList = transportList['mixed'];
         return $scope.trolleysList = transportList['trolleys'];
       });
     }
@@ -207,6 +208,9 @@
       currentHour = d.getHours();
       currentMinute = d.getMinutes();
       timeSplited = time.split(':');
+      if (timeSplited.length !== 2) {
+        return false;
+      }
       hour = timeSplited[0];
       minute = timeSplited[1];
       if (hour === 0 || hour === 1) {
@@ -227,6 +231,23 @@
         return this.$scope.hideMenu = false;
       } else {
         return this.$scope.hideMenu = true;
+      }
+    };
+
+    ScheduleController.prototype.showShortDescription = function() {
+      console.log('kydax', this.currentTransport);
+      if (this.currentTransport.name.length <= 4) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    ScheduleController.prototype.isNoMenu = function() {
+      if (this.currentTransport.type === 'mixed') {
+        return true;
+      } else {
+        return false;
       }
     };
 

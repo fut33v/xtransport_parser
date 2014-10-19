@@ -19,6 +19,7 @@ class BusesTrolleysController
       $scope.transportList = data
       transportList = data
       $scope.busesList = transportList['buses']
+      $scope.mixedList = transportList['mixed']
       $scope.trolleysList = transportList['trolleys']
 
   showFullName: (bus) ->
@@ -79,7 +80,7 @@ class ScheduleController
       # ctrl.currentSchedule = currentSchedule
       # ctrl.currentStations = currentStations
 
-
+      #$scope.currentTransport.typeName
       $scope.currentTransport = currentTransport
       $scope.currentSchedule = currentSchedule
       $scope.currentStations = currentStations
@@ -146,6 +147,8 @@ class ScheduleController
     currentHour = d.getHours()
     currentMinute = d.getMinutes()
     timeSplited = time.split(':')
+    if timeSplited.length != 2
+      return false
     hour = timeSplited[0]
     minute = timeSplited[1]
     # night hours of the next day
@@ -163,6 +166,20 @@ class ScheduleController
       @$scope.hideMenu = false
     else
       @$scope.hideMenu = true
+
+  showShortDescription: () ->
+    console.log 'kydax', @currentTransport
+    if  @currentTransport.name.length <= 4
+      return true
+    else
+      false
+
+  isNoMenu: () ->
+    if @currentTransport.type == 'mixed'
+      return true
+    else
+      false
+
 
 ###############################################################################
 transportControllers.controller 'MainViewController', [
