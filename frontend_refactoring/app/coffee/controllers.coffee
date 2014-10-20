@@ -2,8 +2,6 @@ transportControllers = angular.module 'transportControllers', []
 
 class TestController
   constructor: (@$scope, @TransportManager) ->
-    TransportManager.getBus('bus_20')
-    TransportManager.getTrolley('trolley_2')
     TransportManager.getTransportList()
     $scope.helloWorld = "Hello world"
 
@@ -181,6 +179,78 @@ class ScheduleController
       false
 
 
+class ServiceController
+  constructor: (
+    @$scope,
+    @TransportManager
+  ) ->
+    console.log "Hello, Petuh"
+    ctrl = @
+    TransportManager.getTransportList().success (data) ->
+      transportList = data
+      $scope.transportList = transportList
+      $scope.allTransport = []
+      for bus in transportList['buses']
+        TransportManager.getTransport(bus.id).success (data) ->
+          $scope.allTransport.push data
+          $scope.allTransport = _.reject($scope.allTransport, ctrl.toReject)
+      for trolley in transportList['trolleys']
+        TransportManager.getTransport(trolley.id).success (data) ->
+          $scope.allTransport.push data
+          $scope.allTransport = _.reject($scope.allTransport, ctrl.toReject)
+ 
+  isTransportOk: (transport) ->
+    return @isStationsSame(transport) and @isLengthOk(transport)
+    
+  isStationsSame: (transport) ->
+    if transport? and transport.stations_workdays? and transport.stations_weekend?
+      console.log "asdf", transport.stations_workdays, transport.stations_weekend
+      stations_workdays = _.pluck(transport.stations_workdays, 'name')
+      stations_weekend = _.pluck(transport.stations_weekend, 'name')
+      _.isEqual(stations_workdays, stations_weekend)
+
+  isLengthOk: (transport) ->
+    if transport? and transport.stations_workdays? and transport.stations_weekend?
+      if transport.stations_workdays.length != transport.stations_weekend.length
+        return false
+      true
+ 
+  withDifferentCountOfStations: () ->
+    if @$scope.allTransport?
+      count = 0
+      for transport in @$scope.allTransport
+        if not @isLengthOk transport
+          count += 1
+      count
+
+  withSameStations: () ->
+    if @$scope.allTransport?
+      count = 0
+      for transport in @$scope.allTransport
+        if @isStationsSame transport
+          count += 1
+      count
+
+  isTransportShown: (transport) ->
+    if transport?
+      if @isStationsSame transport
+        return false
+      if not @isLengthOk transport
+        return false
+      true
+
+    
+  # transport to reject (workdays only, weekend only, same for everyday)
+  toReject: (transport) ->
+    if transport.everyday
+      return true
+    if transport.weekend and not transport.workdays
+      return true
+    if not transport.weekend and transport.workdays
+      return true
+    false
+      
+
 ###############################################################################
 transportControllers.controller 'MainViewController', [
   '$scope',
@@ -200,6 +270,12 @@ transportControllers.controller 'ScheduleController', [
   'TransportManager',
   'TimeManager',
   ScheduleController
+]
+
+transportControllers.controller 'ServiceController', [
+  '$scope',
+  'TransportManager',
+  ServiceController
 ]
 
 transportControllers.controller 'TestController', [

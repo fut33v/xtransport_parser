@@ -10,20 +10,16 @@ transportServices.factory 'TransportManager', [
       getTransportList: () ->
         $http.get('json/transport.json').success (data) ->
       
-      getBus: (bus_id) ->
-        $http.get('json/buses/' + bus_id + '.json').success (data) ->
-      
-      getTrolley: (bus_id) ->
-        $http.get('json/trolleys/' + bus_id + '.json').success (data) ->
-      
       getTransport: (transportId) ->
         $http.get('json/transport/' + transportId + '.json').success (data) ->
           if data.type == 'bus'
-            data.typeName = 'автобусы'
             data.icon = 'img/bus.png'
+            data.typeName = 'автобусы'
+            data.typeNameSingle = 'автобус'
           if data.type == 'trolley'
             data.icon = 'img/trolley.png'
             data.typeName = 'троллейбусы'
+            data.typeNameSingle = 'троллейбус'
 ]
 
 

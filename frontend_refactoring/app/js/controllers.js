@@ -1,5 +1,5 @@
 (function() {
-  var BusesTrolleysController, MainViewController, ScheduleController, TestController, transportControllers;
+  var BusesTrolleysController, MainViewController, ScheduleController, ServiceController, TestController, transportControllers;
 
   transportControllers = angular.module('transportControllers', []);
 
@@ -7,8 +7,6 @@
     function TestController($scope, TransportManager) {
       this.$scope = $scope;
       this.TransportManager = TransportManager;
-      TransportManager.getBus('bus_20');
-      TransportManager.getTrolley('trolley_2');
       TransportManager.getTransportList();
       $scope.helloWorld = "Hello world";
     }
@@ -255,11 +253,128 @@
 
   })();
 
+  ServiceController = (function() {
+    function ServiceController($scope, TransportManager) {
+      var ctrl;
+      this.$scope = $scope;
+      this.TransportManager = TransportManager;
+      console.log("Hello, Petuh");
+      ctrl = this;
+      TransportManager.getTransportList().success(function(data) {
+        var bus, transportList, trolley, _i, _j, _len, _len1, _ref, _ref1, _results;
+        transportList = data;
+        $scope.transportList = transportList;
+        $scope.allTransport = [];
+        _ref = transportList['buses'];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          bus = _ref[_i];
+          TransportManager.getTransport(bus.id).success(function(data) {
+            $scope.allTransport.push(data);
+            return $scope.allTransport = _.reject($scope.allTransport, ctrl.toReject);
+          });
+        }
+        _ref1 = transportList['trolleys'];
+        _results = [];
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          trolley = _ref1[_j];
+          _results.push(TransportManager.getTransport(trolley.id).success(function(data) {
+            $scope.allTransport.push(data);
+            return $scope.allTransport = _.reject($scope.allTransport, ctrl.toReject);
+          }));
+        }
+        return _results;
+      });
+    }
+
+    ServiceController.prototype.isTransportOk = function(transport) {
+      return this.isStationsSame(transport) && this.isLengthOk(transport);
+    };
+
+    ServiceController.prototype.isStationsSame = function(transport) {
+      var stations_weekend, stations_workdays;
+      if ((transport != null) && (transport.stations_workdays != null) && (transport.stations_weekend != null)) {
+        console.log("asdf", transport.stations_workdays, transport.stations_weekend);
+        stations_workdays = _.pluck(transport.stations_workdays, 'name');
+        stations_weekend = _.pluck(transport.stations_weekend, 'name');
+        return _.isEqual(stations_workdays, stations_weekend);
+      }
+    };
+
+    ServiceController.prototype.isLengthOk = function(transport) {
+      if ((transport != null) && (transport.stations_workdays != null) && (transport.stations_weekend != null)) {
+        if (transport.stations_workdays.length !== transport.stations_weekend.length) {
+          return false;
+        }
+        return true;
+      }
+    };
+
+    ServiceController.prototype.withDifferentCountOfStations = function() {
+      var count, transport, _i, _len, _ref;
+      if (this.$scope.allTransport != null) {
+        count = 0;
+        _ref = this.$scope.allTransport;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          transport = _ref[_i];
+          if (!this.isLengthOk(transport)) {
+            count += 1;
+          }
+        }
+        return count;
+      }
+    };
+
+    ServiceController.prototype.withSameStations = function() {
+      var count, transport, _i, _len, _ref;
+      if (this.$scope.allTransport != null) {
+        count = 0;
+        _ref = this.$scope.allTransport;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          transport = _ref[_i];
+          if (this.isStationsSame(transport)) {
+            count += 1;
+          }
+        }
+        return count;
+      }
+    };
+
+    ServiceController.prototype.isTransportShown = function(transport) {
+      if (transport != null) {
+        if (this.isStationsSame(transport)) {
+          return false;
+        }
+        if (!this.isLengthOk(transport)) {
+          return false;
+        }
+        return true;
+      }
+    };
+
+    ServiceController.prototype.toReject = function(transport) {
+      if (transport.everyday) {
+        return true;
+      }
+      if (transport.weekend && !transport.workdays) {
+        return true;
+      }
+      if (!transport.weekend && transport.workdays) {
+        return true;
+      }
+      return false;
+    };
+
+    return ServiceController;
+
+  })();
+
   transportControllers.controller('MainViewController', ['$scope', MainViewController]);
 
   transportControllers.controller('BusesTrolleysController', ['$scope', 'TransportManager', BusesTrolleysController]);
 
   transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', ScheduleController]);
+
+  transportControllers.controller('ServiceController', ['$scope', 'TransportManager', ServiceController]);
 
   transportControllers.controller('TestController', ['$scope', 'TransportManager', TestController]);
 

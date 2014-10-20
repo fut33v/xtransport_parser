@@ -289,3 +289,14 @@ div.schedule-table > td {
     display: flex;
 }
 /* Schedule view*/
+
+
+/* Service view */
+.service-transport {
+    margin: 30px;
+    border-top: 1px #d7d7d7 solid;
+}
+.service-controller > h2 {
+    text-align: center;
+}
+/* Service view */

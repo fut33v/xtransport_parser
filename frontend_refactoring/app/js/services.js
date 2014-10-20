@@ -15,23 +15,17 @@
           return $http.get('json/transport.json').success(function(data) {});
         };
 
-        TransportManager.prototype.getBus = function(bus_id) {
-          return $http.get('json/buses/' + bus_id + '.json').success(function(data) {});
-        };
-
-        TransportManager.prototype.getTrolley = function(bus_id) {
-          return $http.get('json/trolleys/' + bus_id + '.json').success(function(data) {});
-        };
-
         TransportManager.prototype.getTransport = function(transportId) {
           return $http.get('json/transport/' + transportId + '.json').success(function(data) {
             if (data.type === 'bus') {
-              data.typeName = 'автобусы';
               data.icon = 'img/bus.png';
+              data.typeName = 'автобусы';
+              data.typeNameSingle = 'автобус';
             }
             if (data.type === 'trolley') {
               data.icon = 'img/trolley.png';
-              return data.typeName = 'троллейбусы';
+              data.typeName = 'троллейбусы';
+              return data.typeNameSingle = 'троллейбус';
             }
           });
         };

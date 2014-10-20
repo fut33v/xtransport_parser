@@ -18,6 +18,9 @@
       }).when('/stops/', obj = {
         templateUrl: 'html/stops_view.html',
         controller: 'BusesController'
+      }).when('/service/', obj = {
+        templateUrl: 'html/service_view.html',
+        controller: 'ServiceController'
       }).otherwise(obj = {
         redirectTo: '/'
       });
