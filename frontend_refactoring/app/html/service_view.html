@@ -1,17 +1,17 @@
 <div ng-controller="ServiceController as ctrl" class="service-controller">
   <div class="well">
-    <h3>С разным количеством станций: {{ctrl.withDifferentCountOfStations()}}</h3>
-    <h3>С одинаковым количеством станций и одинаковыми названиями станций (ОК): {{ctrl.withSameStations()}}</h3>
+    <h3>С разным количеством остановок: {{ctrl.withDifferentCountOfStations()}}</h3>
+    <h3>С одинаковым количеством остановок и одинаковыми названиями остановок (ОК): {{ctrl.withSameStations()}}</h3>
   </div>
-  <h2>Станции, у которых одинаковое количество станций, но названия отличаются</h2>
+  <h2>Станции, у которых одинаковое количество остановок, но названия отличаются</h2>
   <div 
-    ng-repeat="transport in allTransport" 
+    ng-repeat="transport in allTransport | ordertransport" 
     ng-show="ctrl.isTransportShown(transport)"
     class="service-transport">
     <h2 
       ng-class="{'bg-danger': !ctrl.isTransportOk(transport), 'bg-success': ctrl.isTransportOk(transport)}">
         {{transport.name}} ({{transport.typeNameSingle}})
-        <span ng-show="!ctrl.isLengthOk(transport)"> | разное количество станций </span>
+        <span ng-show="!ctrl.isLengthOk(transport)"> | разное количество остановок </span>
         <span ng-show="!ctrl.isStationsSame(transport)"> | станции различаются </span>
 
     </h2>
