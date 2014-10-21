@@ -30,6 +30,8 @@ if __name__ == "__main__":
                 for i in range(len(transport['stations_weekend'])):
                     wrkd = transport['stations_workdays'][i]['name']
                     wknd = transport['stations_weekend'][i]['name']
+                    if transport['id'] == 'bus_8en':
+                        print wrkd, '|', wknd
                     for what in replace:
                         if what['what'] == wrkd:
                             print "\t", wrkd, "=>", what['replace']
@@ -41,9 +43,10 @@ if __name__ == "__main__":
 
                         if what['what'] == wknd:
                             print "\t", wknd, "=>", what['replace']
-                            transport['stations_workdays'][i]['name'] = (
+                            transport['stations_weekend'][i]['name'] = (
                                 what['replace']
                             )
                             # for station in transport['stations_workdays']:
                             #     print station['name']
                 print "####################"
+        parser_utils.save_json_file(filename, transport)
