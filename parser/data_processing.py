@@ -10,6 +10,28 @@ import parser_utils
 
 JSON_REPLACE = "json/replace.json"
 
+
+def do_replace(transport, replace):
+    if 'stations_workdays' in transport:
+        for i in range(len(transport['stations_workdays'])):
+            station = transport['stations_workdays'][i]['name']
+            for what in replace:
+                if what['what'] == station:
+                    print "\t", station, "=>", what['replace']
+                    transport['stations_workdays'][i]['name'] = (
+                        what['replace']
+                    )
+    if 'stations_weekend' in transport:
+        for i in range(len(transport['stations_weekend'])):
+            station = transport['stations_weekend'][i]['name']
+            for what in replace:
+                if what['what'] == station:
+                    print "\t", station, "=>", what['replace']
+                    transport['stations_weekend'][i]['name'] = (
+                        what['replace']
+                    )
+
+
 if __name__ == "__main__":
     TRANSPORT_DIR = 'json/transport/'
     onlyfiles = [
@@ -21,32 +43,20 @@ if __name__ == "__main__":
     for filename in onlyfiles:
         filename = TRANSPORT_DIR + filename
         transport = parser_utils.load_json_file(filename)
+        # print transport['name']
+        if transport['id'] == "bus_27a":
+            if 'stations_workdays' in transport:
+                for station in transport['stations_workdays']:
+                    print station['name'] + "|"
+            if 'stations_weekend' in transport:
+                for station in transport['stations_weekend']:
+                    print station['name'] + "|"
+
+        do_replace(transport, replace)
+
         if 'stations_weekend' in transport and 'stations_workdays' in transport:
-            if (len(transport['stations_weekend']) ==
-                    len(transport['stations_workdays'])):
-
-                print ">", transport['name'], transport['type']
-
-                for i in range(len(transport['stations_weekend'])):
-                    wrkd = transport['stations_workdays'][i]['name']
-                    wknd = transport['stations_weekend'][i]['name']
-                    if transport['id'] == 'bus_8en':
-                        print wrkd, '|', wknd
-                    for what in replace:
-                        if what['what'] == wrkd:
-                            print "\t", wrkd, "=>", what['replace']
-                            transport['stations_workdays'][i]['name'] = (
-                                what['replace']
-                            )
-                            # for station in transport['stations_workdays']:
-                            #     print station['name']
-
-                        if what['what'] == wknd:
-                            print "\t", wknd, "=>", what['replace']
-                            transport['stations_weekend'][i]['name'] = (
-                                what['replace']
-                            )
-                            # for station in transport['stations_workdays']:
-                            #     print station['name']
-                print "####################"
+            if transport['stations_weekend'] == transport['stations_workdays']:
+                transport['stations'] = transport['stations_weekend']
+                print "stations is the same"
+        print "##############################"
         parser_utils.save_json_file(filename, transport)
