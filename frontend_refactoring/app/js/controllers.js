@@ -290,10 +290,21 @@
       return this.isStationsSame(transport) && this.isLengthOk(transport);
     };
 
+    ServiceController.prototype.isStationOk = function(stations_wrkd, stations_wknd, index) {
+      if ((stations_wrkd != null) && (stations_wknd != null) && (index != null)) {
+        if ((stations_wrkd[index] != null) && stations_wknd[index]) {
+          if (stations_wrkd[index].name === stations_wknd[index].name) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+    };
+
     ServiceController.prototype.isStationsSame = function(transport) {
       var stations_weekend, stations_workdays;
       if ((transport != null) && (transport.stations_workdays != null) && (transport.stations_weekend != null)) {
-        console.log("asdf", transport.stations_workdays, transport.stations_weekend);
         stations_workdays = _.pluck(transport.stations_workdays, 'name');
         stations_weekend = _.pluck(transport.stations_weekend, 'name');
         return _.isEqual(stations_workdays, stations_weekend);

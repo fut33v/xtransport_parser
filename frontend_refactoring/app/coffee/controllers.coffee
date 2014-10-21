@@ -201,10 +201,17 @@ class ServiceController
  
   isTransportOk: (transport) ->
     return @isStationsSame(transport) and @isLengthOk(transport)
-    
+
+  isStationOk: (stations_wrkd, stations_wknd, index) ->
+    if stations_wrkd? and stations_wknd? and index?
+      if stations_wrkd[index]? and stations_wknd[index]
+        if stations_wrkd[index].name == stations_wknd[index].name
+          return true
+        else
+          false
+
   isStationsSame: (transport) ->
     if transport? and transport.stations_workdays? and transport.stations_weekend?
-      console.log "asdf", transport.stations_workdays, transport.stations_weekend
       stations_workdays = _.pluck(transport.stations_workdays, 'name')
       stations_weekend = _.pluck(transport.stations_weekend, 'name')
       _.isEqual(stations_workdays, stations_weekend)

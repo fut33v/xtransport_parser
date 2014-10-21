@@ -17,12 +17,16 @@
     </h2>
     <table class="table table-bordered">
     <tr>
-      <td ng-repeat="station in transport.stations_workdays">  
+      <td 
+        ng-repeat="station in transport.stations_workdays track by $index"
+        ng-class="{'bg-danger':!ctrl.isStationOk(transport.stations_workdays, transport.stations_weekend, $index)}">
         {{station.name}}
       </td>
     </tr>  
     <tr>
-      <td ng-repeat="station in transport.stations_weekend">  
+      <td 
+        ng-repeat="station in transport.stations_weekend"
+        ng-class="{'bg-danger':!ctrl.isStationOk(transport.stations_workdays, transport.stations_weekend, $index)}">
         {{station.name}}
       </td>
     </tr>  
