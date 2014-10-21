@@ -1,176 +1,392 @@
-'use strict';
+(function() {
+  var BusesTrolleysController, MainViewController, ScheduleController, ServiceController, TestController, transportControllers;
 
-/* Controllers */
+  transportControllers = angular.module('transportControllers', []);
 
-var transportControllers = angular.module('transportControllers', []);
-
-transportControllers.controller('MainViewController', ['$scope', '$http', 
-    function($scope, $http) {
-        $http.get('transport/buses.json').
-            success(function(data) {
-                $scope.buses = data;
-        });    
-    
-        $http.get('transport/stations.json').
-            success(function(data) {
-                $scope.stations = data;
-        });    
-}]);
-
-transportControllers.controller('BusesController', ['$scope', '$http', 
-    function($scope, $http) { 
-        $http.get('transport/buses.json').
-            success(function(data) {
-            $scope.buses = data; 
-        });
-        $scope.nameInInt = function(name) {
-            return parseInt(name);
-        }
-        this.showFullName = function(bus) {
-            console.log ("testing", bus);
-            $scope.showFullName = true;
-            $scope.currentBus = bus;
-        }
-        this.hideFullName = function(bus) {
-            $scope.currentBus = "";
-        }
+  TestController = (function() {
+    function TestController($scope, TransportManager) {
+      this.$scope = $scope;
+      this.TransportManager = TransportManager;
+      TransportManager.getTransportList();
+      $scope.helloWorld = "Hello world";
     }
-]);
 
-transportControllers.controller('BusScheduleController', ['$scope', '$http', '$routeParams', '$filter',
-    function($scope, $http, $routeParams, $filter) {
-        
-        $scope.busId = $routeParams.busId;
+    return TestController;
 
-        $http.get('transport/schedules/' + $scope.busId + ".json").
-            success(function(data) {
-            $scope.busSchedule = data; 
-            
-            $scope.daysOfWeek = [
-                "воскресенье", 
-                "понедельник",
-                "вторник",
-                "среда",
-                "четверг",
-                "пятница",
-                "суббота"
-            ]; 
-            var currentDate = new Date();
-            $scope.currentDay = currentDate.getDay();
-            console.log($scope.currentDay);
+  })();
 
-            if ($scope.currentDay == 0 || $scope.currentDay == 6) {
-                $scope.isCurrentDayWeekend = true;
-                $scope.dayEndString = "выходной";
-            } else {
-                $scope.dayEndString = "рабочий";
-                $scope.isCurrentDayWeekend = false;
-            }
+  MainViewController = (function() {
+    function MainViewController($scope) {
+      this.$scope = $scope;
+      true;
+    }
 
-            $scope.isSelectedWorkdays = !$scope.isCurrentDayWeekend;
-            if ($scope.isSelectedWorkdays) { 
-                $scope.currentSchedule = $scope.busSchedule.schedule;
-            } else {
-                $scope.currentSchedule = $scope.busSchedule.scheduleWeekend;
-            }
-        });
-        
-        $http.get('transport/buses.json').
-            success(function(data) {
-            $scope.buses = data; 
-            for (var i=0; i < $scope.buses.length; i++) {
-                if ($scope.busId === $scope.buses[i].id) { 
-                    $scope.currentBus = $scope.buses[i];
-                }
-            }
-            $scope.checkedStations = $scope.currentBus.stations;
-            for (var x=0; x < $scope.checkedStations.length; x++) {
-                $scope.checkedStations[x].selected = true;
-            } 
-            $scope.checkedStationsInit = [0];
-        });
-       
+    return MainViewController;
 
-        this.hideButton = function() {
-            if($scope.hideMenu) {
-                $scope.hideMenu = false;
-            } else {
-                $scope.hideMenu = true;
-            }    
+  })();
+
+  BusesTrolleysController = (function() {
+    function BusesTrolleysController($scope, TransportManager) {
+      this.$scope = $scope;
+      this.TransportManager = TransportManager;
+      TransportManager.getTransportList().success(function(data) {
+        var transportList;
+        $scope.transportList = data;
+        transportList = data;
+        $scope.busesList = transportList['buses'];
+        $scope.mixedList = transportList['mixed'];
+        return $scope.trolleysList = transportList['trolleys'];
+      });
+    }
+
+    BusesTrolleysController.prototype.showFullName = function(bus) {
+      this.$scope.showFullName = true;
+      return this.$scope.currentBus = bus;
+    };
+
+    BusesTrolleysController.prototype.hideFullName = function(bus) {
+      return this.$scope.currentBus = "";
+    };
+
+    return BusesTrolleysController;
+
+  })();
+
+  ScheduleController = (function() {
+    function ScheduleController($scope, $routeParams, $filter, TransportManager, TimeManager) {
+      var ctrl, i, _i, _j;
+      this.$scope = $scope;
+      this.$routeParams = $routeParams;
+      this.$filter = $filter;
+      this.TransportManager = TransportManager;
+      this.TimeManager = TimeManager;
+      ctrl = this;
+      TransportManager.getTransport($routeParams.transportId).success(function(data) {
+        var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+        console.log(data);
+        ctrl.currentTransport = data;
+        currentTransport = data;
+        if (currentTransport.weekend) {
+          console.log('Weekend!');
         }
+        if (currentTransport.everyday) {
+          $scope.everydayIsTheSame = true;
+          currentSchedule = currentTransport['schedule_everyday'];
+          currentStations = currentTransport['stations_everyday'];
+          for (_i = 0, _len = currentStations.length; _i < _len; _i++) {
+            station = currentStations[_i];
+            station.selected = true;
+          }
+        } else if (currentTransport.workdays && currentTransport.weekend) {
+          today = TimeManager.getToday();
+          if (today.weekend) {
+            currentSchedule = currentTransport['schedule_weekend'];
+            currentStations = currentTransport['stations_weekend'];
+            ctrl.selectedDay = 'weekend';
+          } else {
+            currentSchedule = currentTransport['schedule_workdays'];
+            currentStations = currentTransport['stations_workdays'];
+            ctrl.selectedDay = 'workdays';
+          }
+          _ref = currentTransport['stations_workdays'];
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            station = _ref[_j];
+            station.selected = true;
+          }
+          _ref1 = currentTransport['stations_weekend'];
+          for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
+            station = _ref1[_k];
+            station.selected = true;
+          }
+        } else if (currentTransport.workdays && !currentTransport.weekend) {
+          $scope.workdaysOnly = true;
+          currentSchedule = currentTransport['schedule_workdays'];
+          currentStations = currentTransport['stations_workdays'];
+          for (_l = 0, _len3 = currentStations.length; _l < _len3; _l++) {
+            station = currentStations[_l];
+            station.selected = true;
+          }
+        } else if (!currentTransport.workdays && currentTransport.weekend) {
+          console.log("hi");
+          $scope.weekendOnly = true;
+          currentSchedule = currentTransport['schedule_weekend'];
+          currentStations = currentTransport['stations_weekend'];
+          for (_m = 0, _len4 = currentStations.length; _m < _len4; _m++) {
+            station = currentStations[_m];
+            station.selected = true;
+          }
+        }
+        $scope.currentTransport = currentTransport;
+        $scope.currentSchedule = currentSchedule;
+        return $scope.currentStations = currentStations;
+      });
+      this.today = TimeManager.getToday();
+      this.initialCheckedStations = true;
+      $scope.currentDayType = this.today.dayType;
+      $scope.currentDayName = this.today.dayName;
+      $scope.selectedHour = 0;
+      $scope.selectedMinute = 0;
+      $scope.highlightOn = true;
+      $scope.hours = [];
+      $scope.minutes = [];
+      for (i = _i = 0; _i <= 23; i = ++_i) {
+        $scope.hours.push(i);
+      }
+      for (i = _j = 0; _j <= 59; i = ++_j) {
+        $scope.minutes.push(i);
+      }
+      $scope.hideMenu = false;
+    }
 
-        this.setCurrentTime = function() {
-            var d = new Date();
-            var h = d.getHours();
-            var m = d.getMinutes();
-            // console.log(h, m);
-            $scope.selectedHour = h;
-            $scope.selectedMinute = m;
+    ScheduleController.prototype.isSelectedWorkdays = function() {
+      if (this.selectedDay === 'workdays') {
+        return true;
+      }
+      return false;
+    };
+
+    ScheduleController.prototype.isSelectedWeekend = function() {
+      if (this.selectedDay === 'weekend') {
+        return true;
+      }
+      return false;
+    };
+
+    ScheduleController.prototype.setCurrentWorkdays = function() {
+      this.selectedDay = 'workdays';
+      this.$scope.currentSchedule = this.currentTransport.schedule_workdays;
+      return this.$scope.currentStations = this.currentTransport.stations_workdays;
+    };
+
+    ScheduleController.prototype.setCurrentWeekend = function() {
+      this.selectedDay = 'weekend';
+      this.$scope.currentSchedule = this.currentTransport.schedule_weekend;
+      return this.$scope.currentStations = this.currentTransport.stations_weekend;
+    };
+
+    ScheduleController.prototype.setCurrentTime = function() {
+      var d, h, m;
+      d = new Date();
+      h = d.getHours();
+      m = d.getMinutes();
+      this.$scope.selectedHour = h;
+      return this.$scope.selectedMinute = m;
+    };
+
+    ScheduleController.prototype.setNullTime = function() {
+      this.$scope.selectedHour = 0;
+      return this.$scope.selectedMinute = 0;
+    };
+
+    ScheduleController.prototype.setAllStationsChecked = function() {
+      var station, _i, _len, _ref;
+      _ref = this.$scope.currentStations;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        station = _ref[_i];
+        station.selected = true;
+      }
+      return this.initialCheckedStations = true;
+    };
+
+    ScheduleController.prototype.stationClicked = function(selectedStation) {
+      var station, _i, _len, _ref;
+      if (this.initialCheckedStations) {
+        _ref = this.$scope.currentStations;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          station = _ref[_i];
+          station.selected = false;
         }
-        
-        this.setNullTime = function(time) {
-            $scope.selectedHour = 0;
-            $scope.selectedMinute = 0;
+        return this.initialCheckedStations = false;
+      }
+    };
+
+    ScheduleController.prototype.isTimeExpired = function(time) {
+      var currentHour, currentMinute, d, hour, minute, timeSplited;
+      d = new Date();
+      currentHour = d.getHours();
+      currentMinute = d.getMinutes();
+      timeSplited = time.split(':');
+      if (timeSplited.length !== 2) {
+        return false;
+      }
+      hour = timeSplited[0];
+      minute = timeSplited[1];
+      if (hour === 0 || hour === 1) {
+        return false;
+      }
+      if (currentHour > hour) {
+        return true;
+      } else {
+        if (currentHour === hour && currentMinute > minute) {
+          return true;
         }
-       
-        this.isTimeExpired = function(time) {
-            var d = new Date();
-            var currentHour = d.getHours();
-            var currentMinute = d.getMinutes();
-            var timeSplited = time.split(':');
-            var hour = timeSplited[0];
-            var minute = timeSplited[1];
-            // @comment: night hours of the next day 
-            if (hour == 0 || hour == 1) {
-                return false;
-            }  
-            if (currentHour > hour) {
-                return true;
-            } else {
-                if (currentHour == hour && currentMinute > minute) {
-                    return true;
-                }
-            }
+      }
+      return false;
+    };
+
+    ScheduleController.prototype.hideButton = function() {
+      if (this.$scope.hideMenu) {
+        return this.$scope.hideMenu = false;
+      } else {
+        return this.$scope.hideMenu = true;
+      }
+    };
+
+    ScheduleController.prototype.showShortDescription = function() {
+      console.log('kydax', this.currentTransport);
+      if (this.currentTransport.name.length <= 4) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    ScheduleController.prototype.isNoMenu = function() {
+      if (this.currentTransport.type === 'mixed') {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    return ScheduleController;
+
+  })();
+
+  ServiceController = (function() {
+    function ServiceController($scope, TransportManager) {
+      var ctrl;
+      this.$scope = $scope;
+      this.TransportManager = TransportManager;
+      console.log("Hello, Petuh");
+      ctrl = this;
+      TransportManager.getTransportList().success(function(data) {
+        var bus, transportList, trolley, _i, _j, _len, _len1, _ref, _ref1, _results;
+        transportList = data;
+        $scope.transportList = transportList;
+        $scope.allTransport = [];
+        _ref = transportList['buses'];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          bus = _ref[_i];
+          TransportManager.getTransport(bus.id).success(function(data) {
+            $scope.allTransport.push(data);
+            return $scope.allTransport = _.reject($scope.allTransport, ctrl.toReject);
+          });
+        }
+        _ref1 = transportList['trolleys'];
+        _results = [];
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          trolley = _ref1[_j];
+          _results.push(TransportManager.getTransport(trolley.id).success(function(data) {
+            $scope.allTransport.push(data);
+            return $scope.allTransport = _.reject($scope.allTransport, ctrl.toReject);
+          }));
+        }
+        return _results;
+      });
+    }
+
+    ServiceController.prototype.isTransportOk = function(transport) {
+      return this.isStationsSame(transport) && this.isLengthOk(transport);
+    };
+
+    ServiceController.prototype.isStationOk = function(stations_wrkd, stations_wknd, index) {
+      if ((stations_wrkd != null) && (stations_wknd != null) && (index != null)) {
+        if ((stations_wrkd[index] != null) && stations_wknd[index]) {
+          if (stations_wrkd[index].name === stations_wknd[index].name) {
+            return true;
+          } else {
             return false;
+          }
         }
+      }
+    };
 
-        this.setAllStationsChecked = function() {
-            for (var x=0; x < $scope.checkedStations.length; x++) {
-                $scope.checkedStations[x].selected = true;
-            } 
-            $scope.initialCheckedStations = true;
-        }
+    ServiceController.prototype.isStationsSame = function(transport) {
+      var stations_weekend, stations_workdays;
+      if ((transport != null) && (transport.stations_workdays != null) && (transport.stations_weekend != null)) {
+        stations_workdays = _.pluck(transport.stations_workdays, 'name');
+        stations_weekend = _.pluck(transport.stations_weekend, 'name');
+        return _.isEqual(stations_workdays, stations_weekend);
+      }
+    };
 
-        this.stationClicked = function(selectedStation) {
-            if ($scope.initialCheckedStations) {
-                for (var x=0; x < $scope.checkedStations.length; x++) {
-                    $scope.currentBus.stations[x].selected = false;
-                }
-                $scope.initialCheckedStations = false;
-            }
+    ServiceController.prototype.isLengthOk = function(transport) {
+      if ((transport != null) && (transport.stations_workdays != null) && (transport.stations_weekend != null)) {
+        if (transport.stations_workdays.length !== transport.stations_weekend.length) {
+          return false;
         }
+        return true;
+      }
+    };
 
-        this.setCurrentWorkdays = function() {
-            $scope.isSelectedWorkdays = true; 
-            $scope.currentSchedule = $scope.busSchedule.schedule;
+    ServiceController.prototype.withDifferentCountOfStations = function() {
+      var count, transport, _i, _len, _ref;
+      if (this.$scope.allTransport != null) {
+        count = 0;
+        _ref = this.$scope.allTransport;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          transport = _ref[_i];
+          if (!this.isLengthOk(transport)) {
+            count += 1;
+          }
         }
+        return count;
+      }
+    };
 
-        this.setCurrentWeekend = function() {
-            $scope.isSelectedWorkdays = false; 
-            $scope.currentSchedule = $scope.busSchedule.scheduleWeekend;
+    ServiceController.prototype.withSameStations = function() {
+      var count, transport, _i, _len, _ref;
+      if (this.$scope.allTransport != null) {
+        count = 0;
+        _ref = this.$scope.allTransport;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          transport = _ref[_i];
+          if (this.isStationsSame(transport)) {
+            count += 1;
+          }
         }
-      
-        $scope.initialCheckedStations = true; 
-        $scope.hideMenu = false;
-        $scope.hours = [];
-        $scope.minutes = [];
-        $scope.selectedHour = 0;
-        $scope.selectedMinute = 0;
-        this.highlightOn = true;
-        for (var i=0; i < 24; i++) {
-            $scope.hours.push(i);
+        return count;
+      }
+    };
+
+    ServiceController.prototype.isTransportShown = function(transport) {
+      if (transport != null) {
+        if (this.isStationsSame(transport)) {
+          return false;
         }
-        for (var i=0; i < 60; i++) {
-            $scope.minutes.push(i);
+        if (!this.isLengthOk(transport)) {
+          return false;
         }
-}]);
+        return true;
+      }
+    };
+
+    ServiceController.prototype.toReject = function(transport) {
+      if (transport.everyday) {
+        return true;
+      }
+      if (transport.weekend && !transport.workdays) {
+        return true;
+      }
+      if (!transport.weekend && transport.workdays) {
+        return true;
+      }
+      return false;
+    };
+
+    return ServiceController;
+
+  })();
+
+  transportControllers.controller('MainViewController', ['$scope', MainViewController]);
+
+  transportControllers.controller('BusesTrolleysController', ['$scope', 'TransportManager', BusesTrolleysController]);
+
+  transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', ScheduleController]);
+
+  transportControllers.controller('ServiceController', ['$scope', 'TransportManager', ServiceController]);
+
+  transportControllers.controller('TestController', ['$scope', 'TransportManager', TestController]);
+
+}).call(this);

@@ -2,14 +2,12 @@
   "globalstrict": true,
   "globals": {
     "angular": false,
-
-    "browser": false,
-    "element": false,
-    "by": false,
-
     "describe": false,
-    "beforeEach": false,
     "it": false,
-    "expect": false
+    "expect": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "module": false,
+    "inject": false
   }
 }

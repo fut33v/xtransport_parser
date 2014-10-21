@@ -8,7 +8,12 @@ body {
 /* Main view */
 #main-text-about {
     text-align: right;
-    font-size: 50px;
+    font-size: 40px;
+}
+
+#main-text-about-left {
+    text-align: left;
+    font-size: 40px;
 }
 
 .main-text {
@@ -26,10 +31,12 @@ body {
 
 .main-features-container ul > li {
     font-size: 20px;
+    list-style-type: none;
 }
 
 .main-row {
     display: flex;
+    margin-top: 20px;
 }
 
 .header-main {
@@ -55,6 +62,14 @@ body {
 }
 
 /* Main view */
+
+
+/* Stops view */
+.stops-not-impl {
+    text-align: center;
+    font-size: 40px;
+}
+/* Stops view */
 
 
 /* Buses view */
@@ -90,9 +105,19 @@ body {
     margin: 15px;
     color: #333333;
 }
+
+.bus-button {
+    width: 70px;
+    /*border-radius: 0;*/
+}
+
+.mixed-container {
+    border-top: 1px #d7d7d7 solid;
+}
 /* Buses view */
 
 
+/* Schedule view*/
 .checkbox-container {
     overflow-y: auto;
 }
@@ -108,11 +133,6 @@ body {
     margin-right: 5px;
 }
 
-.bus-button {
-    width: 70px;
-    /*height: 70px;*/
-    /*border-radius: 0;*/
-}
 
 /*
 thead, tbody, tr, td, th { display: block; }
@@ -145,21 +165,35 @@ tbody td, thead th {
 
 div.schedule-table div.fixed-table-container-inner {
     max-height: 500px;
-
     border: 1px solid #aaaaaa;
     width: 95%;
+    margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
 }
 
+.schedule-header {
+    position: absolute;
+    top: 0;
+    width: 90px;
+    height: 75px;
+    /*text-align: center;*/
+    border-left: 1px #d7d7d7 solid;
+    padding-left: 5px;
+}
+
 /* the height of the header row */
 div.schedule-table div.th-inner {
-    line-height: 50px;
+    line-height: 25px;
 }
 
 /* the height of the header row - this needs to match line-height above */
 div.schedule-table div.fixed-table-container {
    padding-top: 25px;
+}
+
+div.fixed-table-container-inner > table > tbody >tr > td {
+    padding: 0;
 }
 
 div.schedule-table tr.hidden-header .th-inner {
@@ -183,6 +217,15 @@ div.schedule-table > td {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.schedule-transport-icon {
+    width: 125px;
+}
+
+.schedule-transport-div {
+    padding: 0;
+    padding-top: 30px;
 }
 
 .schedule-menu-button {
@@ -237,11 +280,23 @@ div.schedule-table > td {
     margin-bottom: 20px;
 }
 
-.schedule-header {
-    position: absolute;
-    top: 0;
-}
 
 #buses-container {
     border-right: 1px #d7d7d7 solid;
 }
+
+.schedule-menu-row {
+    display: flex;
+}
+/* Schedule view*/
+
+
+/* Service view */
+.service-transport {
+    margin: 30px;
+    border-top: 1px #d7d7d7 solid;
+}
+.service-controller > h2 {
+    text-align: center;
+}
+/* Service view */

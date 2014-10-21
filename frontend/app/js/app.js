@@ -1,28 +1,30 @@
-'use strict';
+(function() {
+  var transportApp;
 
-/* App Module */
-var transportApp = angular.module('transportApp', [
-    'ngRoute',
-    'transportControllers',
-    'transportFilters',
-    'transportDirectives',
-    'oci.fixedHeader'
-]);
+  transportApp = angular.module('transportApp', ['ngRoute', 'transportControllers', 'transportServices', 'transportDirectives', 'transportFilters', 'oci.fixedHeader']);
 
-transportApp.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'html/main_view.html',
-            controller: 'MainViewController'
-        }).
-        when('/buses/', {
-            templateUrl: 'html/buses_view.html',
-            controller: 'BusesController'
-        }).
-        when('/buses/:busId', {
-            templateUrl: 'html/bus_view.html',
-            controller: 'BusScheduleController'
-        }).otherwise({
-            redirectTo: '/'
-        });
-    }]);
+  transportApp.config([
+    '$routeProvider', function($routeProvider) {
+      var obj;
+      return $routeProvider.when('/', obj = {
+        templateUrl: 'html/main_view.html',
+        controller: 'MainViewController'
+      }).when('/buses_trolleys/', obj = {
+        templateUrl: 'html/buses_trolleys_view.html',
+        controller: 'BusesTrolleysController'
+      }).when('/schedule/:transportId', obj = {
+        templateUrl: 'html/schedule_view.html',
+        controller: 'ScheduleController'
+      }).when('/stops/', obj = {
+        templateUrl: 'html/stops_view.html',
+        controller: 'BusesController'
+      }).when('/service/', obj = {
+        templateUrl: 'html/service_view.html',
+        controller: 'ServiceController'
+      }).otherwise(obj = {
+        redirectTo: '/'
+      });
+    }
+  ]);
+
+}).call(this);
