@@ -42,43 +42,45 @@ class ScheduleController
       console.log data
       ctrl.currentTransport = data
       currentTransport = data
-
-      if currentTransport.weekend
-        console.log 'Weekend!'
-
-      if currentTransport.everyday
+     
+      if currentTransport.schedule_everyday?
         $scope.everydayIsTheSame = true
         currentSchedule = currentTransport['schedule_everyday']
         currentStations = currentTransport['stations_everyday']
         station.selected = true for station in currentStations
-      else if currentTransport.workdays and currentTransport.weekend
+
+      else if currentTransport.schedule_workdays? and currentTransport.schedule_weekend?
         today = TimeManager.getToday()
         if today.weekend
           currentSchedule = currentTransport['schedule_weekend']
-          currentStations = currentTransport['stations_weekend']
+          if currentTransport.stations?
+            currentStations = currentTransport.stations
+          else
+            currentStations = currentTransport.stations_weekend
           ctrl.selectedDay = 'weekend'
         else
           currentSchedule = currentTransport['schedule_workdays']
-          currentStations = currentTransport['stations_workdays']
+          if currentTransport.stations?
+            currentStations = currentTransport.stations
+          else
+            currentStations = currentTransport['stations_workdays']
           ctrl.selectedDay = 'workdays'
-        station.selected = true for station in currentTransport['stations_workdays']
-        station.selected = true for station in currentTransport['stations_weekend']
-      else if currentTransport.workdays and not currentTransport.weekend
+        if currentTransport.stations?
+          station.selected = true for station in currentTransport.stations
+        else
+          station.selected = true for station in currentTransport.stations_workdays
+          station.selected = true for station in currentTransport.stations_weekend
+      else if currentTransport.schedule_workdays? and not currentTransport.schedule_weekend?
         $scope.workdaysOnly = true
-        currentSchedule = currentTransport['schedule_workdays']
-        currentStations = currentTransport['stations_workdays']
+        currentSchedule = currentTransport.schedule_workdays
+        currentStations = currentTransport.stations_workdays
         station.selected = true for station in currentStations
       else if not currentTransport.workdays and currentTransport.weekend
-        console.log "hi"
         $scope.weekendOnly = true
-        currentSchedule = currentTransport['schedule_weekend']
-        currentStations = currentTransport['stations_weekend']
+        currentSchedule = currentTransport.schedule_weekend
+        currentStations = currentTransport.stations_weekend
         station.selected = true for station in currentStations
 
-      # ctrl.currentSchedule = currentSchedule
-      # ctrl.currentStations = currentStations
-
-      #$scope.currentTransport.typeName
       $scope.currentTransport = currentTransport
       $scope.currentSchedule = currentSchedule
       $scope.currentStations = currentStations
@@ -109,13 +111,15 @@ class ScheduleController
   setCurrentWorkdays: () ->
     @selectedDay = 'workdays'
     @$scope.currentSchedule = @currentTransport.schedule_workdays
-    @$scope.currentStations = @currentTransport.stations_workdays
+    if not @currentTransport.stations?
+      @$scope.currentStations = @currentTransport.stations_workdays
     # station.selected = true for station in @$scope.currentStations
 
   setCurrentWeekend: () ->
     @selectedDay = 'weekend'
     @$scope.currentSchedule = @currentTransport.schedule_weekend
-    @$scope.currentStations = @currentTransport.stations_weekend
+    if not @currentTransport.stations?
+      @$scope.currentStations = @currentTransport.stations_weekend
     # station.selected = true for station in @$scope.currentStations
 
   setCurrentTime: () ->

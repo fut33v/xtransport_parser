@@ -62,14 +62,11 @@
       this.TimeManager = TimeManager;
       ctrl = this;
       TransportManager.getTransport($routeParams.transportId).success(function(data) {
-        var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+        var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2;
         console.log(data);
         ctrl.currentTransport = data;
         currentTransport = data;
-        if (currentTransport.weekend) {
-          console.log('Weekend!');
-        }
-        if (currentTransport.everyday) {
+        if (currentTransport.schedule_everyday != null) {
           $scope.everydayIsTheSame = true;
           currentSchedule = currentTransport['schedule_everyday'];
           currentStations = currentTransport['stations_everyday'];
@@ -77,42 +74,57 @@
             station = currentStations[_i];
             station.selected = true;
           }
-        } else if (currentTransport.workdays && currentTransport.weekend) {
+        } else if ((currentTransport.schedule_workdays != null) && (currentTransport.schedule_weekend != null)) {
           today = TimeManager.getToday();
           if (today.weekend) {
             currentSchedule = currentTransport['schedule_weekend'];
-            currentStations = currentTransport['stations_weekend'];
+            if (currentTransport.stations != null) {
+              currentStations = currentTransport.stations;
+            } else {
+              currentStations = currentTransport.stations_weekend;
+            }
             ctrl.selectedDay = 'weekend';
           } else {
             currentSchedule = currentTransport['schedule_workdays'];
-            currentStations = currentTransport['stations_workdays'];
+            if (currentTransport.stations != null) {
+              currentStations = currentTransport.stations;
+            } else {
+              currentStations = currentTransport['stations_workdays'];
+            }
             ctrl.selectedDay = 'workdays';
           }
-          _ref = currentTransport['stations_workdays'];
-          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-            station = _ref[_j];
-            station.selected = true;
+          if (currentTransport.stations != null) {
+            _ref = currentTransport.stations;
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              station = _ref[_j];
+              station.selected = true;
+            }
+          } else {
+            _ref1 = currentTransport.stations_workdays;
+            for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
+              station = _ref1[_k];
+              station.selected = true;
+            }
+            _ref2 = currentTransport.stations_weekend;
+            for (_l = 0, _len3 = _ref2.length; _l < _len3; _l++) {
+              station = _ref2[_l];
+              station.selected = true;
+            }
           }
-          _ref1 = currentTransport['stations_weekend'];
-          for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
-            station = _ref1[_k];
-            station.selected = true;
-          }
-        } else if (currentTransport.workdays && !currentTransport.weekend) {
+        } else if ((currentTransport.schedule_workdays != null) && (currentTransport.schedule_weekend == null)) {
           $scope.workdaysOnly = true;
-          currentSchedule = currentTransport['schedule_workdays'];
-          currentStations = currentTransport['stations_workdays'];
-          for (_l = 0, _len3 = currentStations.length; _l < _len3; _l++) {
-            station = currentStations[_l];
+          currentSchedule = currentTransport.schedule_workdays;
+          currentStations = currentTransport.stations_workdays;
+          for (_m = 0, _len4 = currentStations.length; _m < _len4; _m++) {
+            station = currentStations[_m];
             station.selected = true;
           }
         } else if (!currentTransport.workdays && currentTransport.weekend) {
-          console.log("hi");
           $scope.weekendOnly = true;
-          currentSchedule = currentTransport['schedule_weekend'];
-          currentStations = currentTransport['stations_weekend'];
-          for (_m = 0, _len4 = currentStations.length; _m < _len4; _m++) {
-            station = currentStations[_m];
+          currentSchedule = currentTransport.schedule_weekend;
+          currentStations = currentTransport.stations_weekend;
+          for (_n = 0, _len5 = currentStations.length; _n < _len5; _n++) {
+            station = currentStations[_n];
             station.selected = true;
           }
         }
@@ -155,13 +167,17 @@
     ScheduleController.prototype.setCurrentWorkdays = function() {
       this.selectedDay = 'workdays';
       this.$scope.currentSchedule = this.currentTransport.schedule_workdays;
-      return this.$scope.currentStations = this.currentTransport.stations_workdays;
+      if (this.currentTransport.stations == null) {
+        return this.$scope.currentStations = this.currentTransport.stations_workdays;
+      }
     };
 
     ScheduleController.prototype.setCurrentWeekend = function() {
       this.selectedDay = 'weekend';
       this.$scope.currentSchedule = this.currentTransport.schedule_weekend;
-      return this.$scope.currentStations = this.currentTransport.stations_weekend;
+      if (this.currentTransport.stations == null) {
+        return this.$scope.currentStations = this.currentTransport.stations_weekend;
+      }
     };
 
     ScheduleController.prototype.setCurrentTime = function() {
