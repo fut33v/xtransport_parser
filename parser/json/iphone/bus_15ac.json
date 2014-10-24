@@ -1,0 +1,10 @@
+{
+    "everyday": false,
+    "id": "bus_15ac",
+    "name": "15a\u0446",
+    "schedule_workdays": [],
+    "stations_workdays": [],
+    "type": "bus",
+    "weekend": false,
+    "workdays": true
+}
