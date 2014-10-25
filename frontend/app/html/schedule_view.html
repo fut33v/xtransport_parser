@@ -46,6 +46,7 @@
         <p>Остановки:</p>
         <label 
           ng-repeat="i in currentStations track by $index"
+          ng-show="ctrl.isStationShown($index)"
           ng-click="ctrl.stationClicked(i)"
           ng-class="{active: currentStations[$index].selected}"
           class="btn btn-default square-borders">
@@ -175,7 +176,7 @@
       <thead> 
         <tr>
           <th 
-            ng-show="currentStations[$index].selected"
+            ng-show="ctrl.isStationShown($index)"
             ng-repeat="station in currentStations track by $index">
               <div class="schedule-header">
                 {{station.name}}   
@@ -186,7 +187,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="row in currentSchedule | filtertime:selectedHour:selectedMinute"> 
-          <td ng-show="currentStations[$index].selected"
+          <td ng-show="ctrl.isStationShown($index)"
               ng-repeat="time in row track by $index "
               ng-class="{'text-danger': ctrl.isTimeExpired(time) && highlightOn}">
             {{time}}

@@ -34,7 +34,8 @@ class ScheduleController
       @$routeParams,
       @$filter,
       @TransportManager,
-      @TimeManager) ->
+      @TimeManager,
+      @filtertimeFilter) ->
 
     ctrl = @
 
@@ -155,7 +156,6 @@ class ScheduleController
     minute = parseInt(timeSplited[1])
     # night hours of the next day
     if (hour == 0 || hour == 1)
-      console.log hour, minute
       return false
     if currentHour > hour
       return true
@@ -176,6 +176,24 @@ class ScheduleController
         return true
       else
         false
+
+  isStationShown: (index) ->
+    filteredSchedule = @filtertimeFilter(
+      @$scope.currentSchedule,
+      @$scope.selectedHour,
+      @$scope.selectedMinute
+    )
+    # console.log @$scope.selectedHour, @$scope.selectedMinute
+    column = []
+    for row in filteredSchedule
+      column.push row[index]
+    isEmpty = _.every(column, (elem) ->
+      elem == '-'
+    )
+    if isEmpty
+      return false
+    else
+      @$scope.currentStations[index].selected
 
   isNoMenu: () ->
     if @currentTransport?
@@ -282,6 +300,7 @@ transportControllers.controller 'ScheduleController', [
   '$filter',
   'TransportManager',
   'TimeManager',
+  'filtertimeFilter',
   ScheduleController
 ]
 

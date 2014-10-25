@@ -53,13 +53,14 @@
   })();
 
   ScheduleController = (function() {
-    function ScheduleController($scope, $routeParams, $filter, TransportManager, TimeManager) {
+    function ScheduleController($scope, $routeParams, $filter, TransportManager, TimeManager, filtertimeFilter) {
       var ctrl, i, _i, _j;
       this.$scope = $scope;
       this.$routeParams = $routeParams;
       this.$filter = $filter;
       this.TransportManager = TransportManager;
       this.TimeManager = TimeManager;
+      this.filtertimeFilter = filtertimeFilter;
       ctrl = this;
       TransportManager.getTransport($routeParams.transportId).success(function(data) {
         var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2;
@@ -228,7 +229,6 @@
       hour = parseInt(timeSplited[0]);
       minute = parseInt(timeSplited[1]);
       if (hour === 0 || hour === 1) {
-        console.log(hour, minute);
         return false;
       }
       if (currentHour > hour) {
@@ -256,6 +256,24 @@
         } else {
           return false;
         }
+      }
+    };
+
+    ScheduleController.prototype.isStationShown = function(index) {
+      var column, filteredSchedule, isEmpty, row, _i, _len;
+      filteredSchedule = this.filtertimeFilter(this.$scope.currentSchedule, this.$scope.selectedHour, this.$scope.selectedMinute);
+      column = [];
+      for (_i = 0, _len = filteredSchedule.length; _i < _len; _i++) {
+        row = filteredSchedule[_i];
+        column.push(row[index]);
+      }
+      isEmpty = _.every(column, function(elem) {
+        return elem === '-';
+      });
+      if (isEmpty) {
+        return false;
+      } else {
+        return this.$scope.currentStations[index].selected;
       }
     };
 
@@ -403,7 +421,7 @@
 
   transportControllers.controller('BusesTrolleysController', ['$scope', 'TransportManager', BusesTrolleysController]);
 
-  transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', ScheduleController]);
+  transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', 'filtertimeFilter', ScheduleController]);
 
   transportControllers.controller('ServiceController', ['$scope', 'TransportManager', ServiceController]);
 
