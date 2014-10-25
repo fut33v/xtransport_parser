@@ -7,8 +7,6 @@
           <div class="buses-txt-transport">Автобус:</div>
           <a href="#/schedule/{{bus.id}}" ng-repeat="bus in busesList | ordertransport">
             <button 
-              ng-mouseover="ctrl.showFullName(bus)" 
-              ng-mouseleave="ctrl.hideFullName()" 
               class="btn btn-danger bus-button">
               {{bus.name}}
             </button>
@@ -17,8 +15,6 @@
         <div class="button-container mixed-container">
           <a href="#/schedule/{{bus.id}}" ng-repeat="bus in mixedList | ordertransport">
             <button 
-              ng-mouseover="ctrl.showFullName(bus)" 
-              ng-mouseleave="ctrl.hideFullName()" 
               class="btn btn-danger mixed-button">
               {{bus.name}}
             </button>
@@ -38,15 +34,6 @@
             </button>
           </a>
         </div>
-      </div>
-    </div>
-
-    <div 
-      ng-show="showFullName"
-      class="well buses-full-info">
-      Подробнее:
-      <div class="buses-full-info-right">
-        {{currentBus.name}}  
       </div>
     </div>
 
