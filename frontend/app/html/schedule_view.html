@@ -46,7 +46,6 @@
         <p>Остановки:</p>
         <label 
           ng-repeat="i in currentStations track by $index"
-          ng-show="ctrl.isStationShown($index)"
           ng-click="ctrl.stationClicked(i)"
           ng-class="{active: currentStations[$index].selected}"
           class="btn btn-default square-borders">
