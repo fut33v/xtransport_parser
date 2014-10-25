@@ -225,9 +225,10 @@
       if (timeSplited.length !== 2) {
         return false;
       }
-      hour = timeSplited[0];
-      minute = timeSplited[1];
+      hour = parseInt(timeSplited[0]);
+      minute = parseInt(timeSplited[1]);
       if (hour === 0 || hour === 1) {
+        console.log(hour, minute);
         return false;
       }
       if (currentHour > hour) {
@@ -249,19 +250,22 @@
     };
 
     ScheduleController.prototype.showShortDescription = function() {
-      console.log('kydax', this.currentTransport);
-      if (this.currentTransport.name.length <= 4) {
-        return true;
-      } else {
-        return false;
+      if (this.currentTransport != null) {
+        if (this.currentTransport.name.length <= 4) {
+          return true;
+        } else {
+          return false;
+        }
       }
     };
 
     ScheduleController.prototype.isNoMenu = function() {
-      if (this.currentTransport.type === 'mixed') {
-        return true;
-      } else {
-        return false;
+      if (this.currentTransport != null) {
+        if (this.currentTransport.type === 'mixed') {
+          return true;
+        } else {
+          return false;
+        }
       }
     };
 

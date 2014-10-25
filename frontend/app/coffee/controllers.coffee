@@ -151,16 +151,17 @@ class ScheduleController
     timeSplited = time.split(':')
     if timeSplited.length != 2
       return false
-    hour = timeSplited[0]
-    minute = timeSplited[1]
+    hour = parseInt(timeSplited[0])
+    minute = parseInt(timeSplited[1])
     # night hours of the next day
     if (hour == 0 || hour == 1)
-        return false
+      console.log hour, minute
+      return false
     if currentHour > hour
-        return true
+      return true
     else
       if (currentHour == hour && currentMinute > minute)
-          return true
+        return true
     return false
 
   hideButton: () ->
@@ -170,17 +171,18 @@ class ScheduleController
       @$scope.hideMenu = true
 
   showShortDescription: () ->
-    console.log 'kydax', @currentTransport
-    if  @currentTransport.name.length <= 4
-      return true
-    else
-      false
+    if @currentTransport?
+      if @currentTransport.name.length <= 4
+        return true
+      else
+        false
 
   isNoMenu: () ->
-    if @currentTransport.type == 'mixed'
-      return true
-    else
-      false
+    if @currentTransport?
+      if @currentTransport.type == 'mixed'
+        return true
+      else
+        false
 
 
 class ServiceController
