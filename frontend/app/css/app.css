@@ -46,9 +46,15 @@ body {
     padding: 10px;
 }
 
+.live-counter {
+    display: inline;
+    float: right;
+}
+
 #logo-img {
     height: 49px; 
 }
+
 
 #footer-main {
     position: absolute;
