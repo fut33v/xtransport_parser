@@ -37,7 +37,9 @@ def download_page(url_string, data="", retry_sleep_time=1):
     """
     Function downloads html page by given url,
     if URLError raises, it will retry after
-    retry_sleep_time
+    retry_sleep_time.
+
+    Decodes windows-1251.
     """
 
     request = None
@@ -83,6 +85,10 @@ def download_page(url_string, data="", retry_sleep_time=1):
         )
 
     return html
+
+
+def no_whitespaces(string_):
+    return "".join(string_.split())
 
 if __name__ == "__main__":
     save_json_file("test.json", {"id": 1})
