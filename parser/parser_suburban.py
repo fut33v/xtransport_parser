@@ -17,7 +17,7 @@ class SuburbanParser(HTMLParser):
         u"направление": 'station',
         u"отправ.савтовокзалав.новгорода": 'from_city',
         u"отправ.скон.пункта": 'to_city',
-        u"времявпути": 'schedule',
+        u"времявпути": 'time',
         u"расст-евкм.": 'distance',
         u"стоимостьпроездаруб.": 'cost'
     }
@@ -37,13 +37,16 @@ class SuburbanParser(HTMLParser):
     @classmethod
     def parse_html(cls, html_page):
         parser = SuburbanParser()
-        parser.feed(html)
+        parser.feed(html_page)
         h = parser._table_header_dict
+        suburban_buses = []
         for row in parser._result:
             bus = {}
             for column_header, eng_key in cls.COLUMNS_HEADERS.iteritems():
                 bus[eng_key] = row[h[eng_key]]
-            print bus
+            suburban_buses.append(bus)
+            # print bus
+        return suburban_buses
 
     def handle_starttag(self, tag, attrs):
         if tag == 'table':

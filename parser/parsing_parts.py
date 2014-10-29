@@ -2,8 +2,14 @@ import logging
 
 from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
-import parser_utils
+from parser_suburban import SuburbanParser
 import parser_configs
+import parser_utils
+from parser_utils import in_dict
+from parser_utils import no_whitespaces
+
+import re
+
 
 MIX_LIST = [
     'bus_1cr',
@@ -153,3 +159,29 @@ def get_transport_json(transport_list, type_):
             }
         )
     return transport
+
+
+def parse_schedules_suburban():
+    html = parser_utils.download_page(
+        SuburbanParser.SUBURBAN_TRANSPORT_PAGE_URL
+    )
+    suburban_buses = SuburbanParser.parse_html(html)
+    for bus in suburban_buses:
+        from_city = in_dict(bus, 'from_city')
+        if from_city:
+            from_city = no_whitespaces(from_city)
+
+            regex_one_day = r"[0-9]{1,2}-[0-9]{1,2}\([0-9]{1}\)"
+            regex_range_of_days = r"[0-9]{1,2}-[0-9]{1,2}\([0-9]{1}-[0-9]{1}\)"
+            regex_set_of_days = r"[0-9]{1,2}-[0-9]{1,2}\([0-9]{1},[0-9]{1}\)"
+            regex_normal_end = r"[0-9]{1,2}-[0-9]{1,2}$"
+            regex_normal_middle = r"([0-9]{1,2}-[0-9]{1,2}),"
+
+            print "------------------------------"
+            print from_city
+            print "one-day", re.findall(regex_one_day, from_city)
+            print "range of days", re.findall(regex_range_of_days, from_city)
+            print "set of days", re.findall(regex_set_of_days, from_city)
+            print "normal", re.findall(regex_normal_end, from_city)
+            print "normal", re.findall(regex_normal_middle, from_city)
+            print "------------------------------"

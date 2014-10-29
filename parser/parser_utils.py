@@ -90,5 +90,12 @@ def download_page(url_string, data="", retry_sleep_time=1):
 def no_whitespaces(string_):
     return "".join(string_.split())
 
+
+def in_dict(dictionary, key):
+    if key in dictionary:
+        return dictionary[key]
+    else:
+        return None
+
 if __name__ == "__main__":
     save_json_file("test.json", {"id": 1})
