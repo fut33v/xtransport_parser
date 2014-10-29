@@ -30,6 +30,12 @@
           });
         };
 
+        TransportManager.prototype.getSuburbanTransport = function() {
+          return $http.get('json/suburban_transport.json').success(function(data) {
+            return console.log(data);
+          });
+        };
+
         return TransportManager;
 
       })());

@@ -1,5 +1,5 @@
 (function() {
-  var BusesTrolleysController, MainViewController, ScheduleController, ServiceController, TestController, transportControllers;
+  var BusesTrolleysController, MainViewController, ScheduleController, ServiceController, SuburbanScheduleController, SuburbanTransportController, TestController, transportControllers;
 
   transportControllers = angular.module('transportControllers', []);
 
@@ -296,7 +296,6 @@
       var ctrl;
       this.$scope = $scope;
       this.TransportManager = TransportManager;
-      console.log("Hello, Petuh");
       ctrl = this;
       TransportManager.getTransportList().success(function(data) {
         var bus, transportList, trolley, _i, _j, _len, _len1, _ref, _ref1, _results;
@@ -417,9 +416,44 @@
 
   })();
 
+  SuburbanTransportController = (function() {
+    function SuburbanTransportController($scope, TransportManager) {
+      this.$scope = $scope;
+      this.TransportManager = TransportManager;
+      TransportManager.getSuburbanTransport().success(function(data) {
+        return $scope.suburbanTransport = data;
+      });
+    }
+
+    return SuburbanTransportController;
+
+  })();
+
+  SuburbanScheduleController = (function() {
+    function SuburbanScheduleController($scope, $routeParams, TransportManager) {
+      this.$scope = $scope;
+      this.$routeParams = $routeParams;
+      this.TransportManager = TransportManager;
+      TransportManager.getSuburbanTransport().success(function(data) {
+        $scope.suburbanTransport = data;
+        console.log($routeParams.transportId);
+        return $scope.currentBus = _.find(data, function(elem) {
+          return elem.id === $routeParams.transportId;
+        });
+      });
+    }
+
+    return SuburbanScheduleController;
+
+  })();
+
   transportControllers.controller('MainViewController', ['$scope', MainViewController]);
 
   transportControllers.controller('BusesTrolleysController', ['$scope', 'TransportManager', BusesTrolleysController]);
+
+  transportControllers.controller('SuburbanTransportController', ['$scope', 'TransportManager', SuburbanTransportController]);
+
+  transportControllers.controller('SuburbanScheduleController', ['$scope', '$routeParams', 'TransportManager', SuburbanScheduleController]);
 
   transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', 'filtertimeFilter', ScheduleController]);
 

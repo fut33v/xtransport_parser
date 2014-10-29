@@ -20,6 +20,10 @@ transportServices.factory 'TransportManager', [
             data.icon = 'img/trolley.png'
             data.typeName = 'троллейбусы'
             data.typeNameSingle = 'троллейбус'
+
+      getSuburbanTransport: () ->
+        $http.get('json/suburban_transport.json').success (data) ->
+          console.log data
 ]
 
 
