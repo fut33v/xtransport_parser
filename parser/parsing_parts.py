@@ -1,4 +1,6 @@
-import logging
+#!/usr/bin/env python
+
+__author__ = 'Ilya Fateev'
 
 from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
@@ -8,6 +10,9 @@ import parser_utils
 from parser_utils import in_dict
 from parser_utils import no_whitespaces
 
+from unidecode import unidecode
+
+import logging
 import re
 
 
@@ -185,3 +190,16 @@ def parse_schedules_suburban():
             print "normal", re.findall(regex_normal_end, from_city)
             print "normal", re.findall(regex_normal_middle, from_city)
             print "------------------------------"
+
+        bus_id = in_dict(bus, 'number')
+        bus_id = no_whitespaces(bus_id)
+        bus_id = bus_id.replace(',', '_')
+        bus_id = unidecode(bus_id)
+        bus_id = "sub_" + bus_id
+        print bus_id
+        bus['id'] = bus_id
+    parser_utils.save_json_file(
+        (parser_configs.directories["JSON_DIR"] +
+            "suburban_transport.json"),
+        suburban_buses
+    )

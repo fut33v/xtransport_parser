@@ -7,6 +7,4 @@ directories = {
     "JSON_DIR": "json/",
     "BUSES_DIR": "json/transport/",
     "TROLLEYS_DIR": "json/transport/"
-    # "BUSES_DIR": "json/buses/",
-    # "TROLLEYS_DIR": "json/trolleys/"
 }
