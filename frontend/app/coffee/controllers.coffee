@@ -286,14 +286,19 @@ class SuburbanTransportController
       $scope.suburbanTransport = data
 
 
+
 class SuburbanScheduleController
-  constructor: (@$scope, @$routeParams, @TransportManager) ->
+  constructor: (@$scope, @$routeParams, @TransportManager, @TimeManager) ->
     TransportManager.getSuburbanTransport().success (data) ->
       $scope.suburbanTransport = data
       console.log $routeParams.transportId
       $scope.currentBus = _.find(data, (elem) ->
         elem.id == $routeParams.transportId
       )
+      console.log $scope.currentBus
+    console.log "allah", $scope.daysOfWeek
+    $scope.daysOfWeek = TimeManager.daysOfWeekOutput
+    console.log "allah", $scope.daysOfWeek
 
 
 ###############################################################################
@@ -320,6 +325,7 @@ transportControllers.controller 'SuburbanScheduleController', [
   '$scope',
   '$routeParams',
   'TransportManager',
+  'TimeManager',
   SuburbanScheduleController
 ]
 

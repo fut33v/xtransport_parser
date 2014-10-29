@@ -48,6 +48,7 @@
       return new (TimeManager = (function() {
         function TimeManager() {
           this.daysOfWeek = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"];
+          this.daysOfWeekOutput = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
           this.workday = "рабочий";
           this.weekend = "выходной";
         }

@@ -3,15 +3,25 @@
    {{currentBus.station}}
  </h1>
  <h2>
-   {{currentBus.number}}
+   № {{currentBus.number}}
  </h2>
+ <h3>
+   Стоимость: {{currentBus.cost}}
+ </h3>
+ <h3>
+   Время в пути: {{currentBus.time}}
+ </h3>
  <table class="table table-striped">
    <thead>
+    <th></th>
     <th>Из Великого Новгорода</th>
     <th>Из конечного пункта {{currentBus.station}}</th>
    </thead>
    <tbody>
-   <tr>
+   <tr ng-repeat="day in daysOfWeek">
+     <td>
+       {{day}}
+     </td>
      <td>
        {{currentBus.from_city}}
      </td>

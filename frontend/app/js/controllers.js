@@ -430,17 +430,22 @@
   })();
 
   SuburbanScheduleController = (function() {
-    function SuburbanScheduleController($scope, $routeParams, TransportManager) {
+    function SuburbanScheduleController($scope, $routeParams, TransportManager, TimeManager) {
       this.$scope = $scope;
       this.$routeParams = $routeParams;
       this.TransportManager = TransportManager;
+      this.TimeManager = TimeManager;
       TransportManager.getSuburbanTransport().success(function(data) {
         $scope.suburbanTransport = data;
         console.log($routeParams.transportId);
-        return $scope.currentBus = _.find(data, function(elem) {
+        $scope.currentBus = _.find(data, function(elem) {
           return elem.id === $routeParams.transportId;
         });
+        return console.log($scope.currentBus);
       });
+      console.log("allah", $scope.daysOfWeek);
+      $scope.daysOfWeek = TimeManager.daysOfWeekOutput;
+      console.log("allah", $scope.daysOfWeek);
     }
 
     return SuburbanScheduleController;
@@ -453,7 +458,7 @@
 
   transportControllers.controller('SuburbanTransportController', ['$scope', 'TransportManager', SuburbanTransportController]);
 
-  transportControllers.controller('SuburbanScheduleController', ['$scope', '$routeParams', 'TransportManager', SuburbanScheduleController]);
+  transportControllers.controller('SuburbanScheduleController', ['$scope', '$routeParams', 'TransportManager', 'TimeManager', SuburbanScheduleController]);
 
   transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', 'filtertimeFilter', ScheduleController]);
 
