@@ -9,6 +9,8 @@ from parser_transport import TransportParser
 from parsing_parts import parse_schedules_bus
 from parsing_parts import parse_schedules_trolley
 from parsing_parts import get_transport_json
+from parsing_parts import parse_schedules_suburban
+
 
 import parser_utils
 
@@ -53,6 +55,8 @@ if __name__ == "__main__":
 
     # logging.info("Parsing trolleys schedules started.")
     # parse_schedules_trolley(transport["trolley_list"])
+
+    parse_schedules_suburban()
 
     buses_trolleys = transport["trolley_list"] + transport["bus_list"]
 
