@@ -147,16 +147,16 @@ class TransportParser(HTMLParser):
     def _get_post_data_trolley(trolley_id):
         return "select+value=&" + "trol=" + trolley_id
 
-    @staticmethod
-    def _reset_parser():
-        TransportParser._bus_number_list = []
-        TransportParser._trolley_number_list = []
-        TransportParser._bus_descriptor_list = []
-        TransportParser._trolley_descriptor_list = []
-        TransportParser._transport_bus_started = False
-        TransportParser._transport_trolley_started = False
-        TransportParser._current_bus = []
-        TransportParser._current_bus_counter = 0
+    @classmethod
+    def _reset_parser(cls):
+        cls._bus_number_list = []
+        cls._trolley_number_list = []
+        cls._bus_descriptor_list = []
+        cls._trolley_descriptor_list = []
+        cls._transport_bus_started = False
+        cls._transport_trolley_started = False
+        cls._current_bus = []
+        cls._current_bus_counter = 0
 
 if __name__ == "__main__":
     import pprint
