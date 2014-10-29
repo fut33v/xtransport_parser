@@ -166,6 +166,17 @@ def get_transport_json(transport_list, type_):
     return transport
 
 
+days_dict = {
+    1: 'monday',
+    2: 'tuesday',
+    3: 'wendesday',
+    4: 'thursday',
+    5: 'friday',
+    6: 'saturday',
+    7: 'sunday',
+}
+
+
 def parse_schedules_suburban():
     html = parser_utils.download_page(
         SuburbanParser.SUBURBAN_TRANSPORT_PAGE_URL
@@ -183,13 +194,20 @@ def parse_schedules_suburban():
             regex_normal_middle = r"([0-9]{1,2}-[0-9]{1,2}),"
 
             print "------------------------------"
+            print bus['number']
             print from_city
             print "one-day", re.findall(regex_one_day, from_city)
             print "range of days", re.findall(regex_range_of_days, from_city)
             print "set of days", re.findall(regex_set_of_days, from_city)
-            print "normal", re.findall(regex_normal_end, from_city)
-            print "normal", re.findall(regex_normal_middle, from_city)
+            normal = re.findall(regex_normal_end, from_city)
+            normal += (re.findall(regex_normal_middle, from_city))
+            print "normal", normal
             print "------------------------------"
+            normal = [x.replace('-', ':') for x in normal]
+            bus['schedule_from_city'] = {}
+            for i in range(1, 7 + 1):
+                day_name = days_dict[i]
+                bus['schedule_from_city'][day_name] = normal
 
         bus_id = in_dict(bus, 'number')
         bus_id = no_whitespaces(bus_id)
