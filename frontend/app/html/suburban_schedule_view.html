@@ -1,0 +1,43 @@
+<div ng-controller="SuburbanScheduleController">
+ <h1>
+   {{currentBus.station}}
+ </h1>
+ <h2>
+   № {{currentBus.number}}
+ </h2>
+ <h3>
+   Стоимость: {{currentBus.cost}}
+ </h3>
+ <h3>
+   Время в пути: {{currentBus.time}}
+ </h3>
+ <table class="table table-striped">
+   <thead>
+    <th></th>
+    <th>Из Великого Новгорода</th>
+    <th>Из конечного пункта {{currentBus.station}}</th>
+   </thead>
+   <tbody>
+     <tr>
+       <td></td>
+       <td>
+         {{currentBus.from_city}}
+       </td>
+       <td>
+         {{currentBus.to_city}}
+       </td>
+     </tr>
+     <tr ng-repeat="day in daysOfWeek">
+       <td>
+         {{day.name}}
+       </td>
+       <td>
+         <span ng-repeat="time in currentBus.schedule_from_city[day.key]">{{time}} </span>
+       </td>
+       <td>
+         <span ng-repeat="time in currentBus.schedule_to_city[day.key]">{{time}} </span>
+       </td>
+     </tr>
+ </tbody>
+ </table>
+</div>

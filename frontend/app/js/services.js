@@ -30,6 +30,12 @@
           });
         };
 
+        TransportManager.prototype.getSuburbanTransport = function() {
+          return $http.get('json/suburban_transport.json').success(function(data) {
+            return console.log(data);
+          });
+        };
+
         return TransportManager;
 
       })());
@@ -42,6 +48,30 @@
       return new (TimeManager = (function() {
         function TimeManager() {
           this.daysOfWeek = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"];
+          this.daysOfWeekOutput = [
+            {
+              name: "Понедельник",
+              key: "monday"
+            }, {
+              name: "Вторник",
+              key: "tuesday"
+            }, {
+              name: "Среда",
+              key: "wednesday"
+            }, {
+              name: "Четверг",
+              key: "thursday"
+            }, {
+              name: "Пятница",
+              key: "friday"
+            }, {
+              name: "Суббота",
+              key: "saturday"
+            }, {
+              name: "Воскресенье",
+              key: "sunday"
+            }
+          ];
           this.workday = "рабочий";
           this.weekend = "выходной";
         }

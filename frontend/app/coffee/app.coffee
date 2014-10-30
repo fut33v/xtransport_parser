@@ -17,6 +17,12 @@ transportApp.config [
       .when('/buses_trolleys/', obj=
         templateUrl: 'html/buses_trolleys_view.html',
         controller: 'BusesTrolleysController')
+      .when('/suburban_transport/', obj=
+        templateUrl: 'html/suburban_transport_view.html',
+        controller: 'BusesTrolleysController')
+      .when('/suburban_transport/:transportId', obj=
+        templateUrl: 'html/suburban_schedule_view.html',
+        controller: 'SuburbanScheduleController')
       .when('/schedule/:transportId', obj=
         templateUrl: 'html/schedule_view.html',
         controller: 'ScheduleController')

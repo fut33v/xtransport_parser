@@ -20,6 +20,10 @@ transportServices.factory 'TransportManager', [
             data.icon = 'img/trolley.png'
             data.typeName = 'троллейбусы'
             data.typeNameSingle = 'троллейбус'
+
+      getSuburbanTransport: () ->
+        $http.get('json/suburban_transport.json').success (data) ->
+          console.log data
 ]
 
 
@@ -37,6 +41,39 @@ transportServices.factory 'TimeManager', [
           "пятница",
           "суббота"
         ]
+
+        @daysOfWeekOutput = [
+          {
+            name: "Понедельник"
+            key: "monday"
+          },
+          {
+            name: "Вторник"
+            key: "tuesday"
+          },
+          {
+            name: "Среда"
+            key: "wednesday"
+          },
+          {
+            name: "Четверг"
+            key: "thursday"
+          },
+          {
+            name: "Пятница"
+            key: "friday"
+          },
+          {
+            name: "Суббота"
+            key: "saturday"
+          }
+          {
+            name: "Воскресенье"
+            key: "sunday"
+          }
+        ]
+        
+
         @workday = "рабочий"
         @weekend = "выходной"
 

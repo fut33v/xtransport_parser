@@ -183,7 +183,6 @@ class ScheduleController
       @$scope.selectedHour,
       @$scope.selectedMinute
     )
-    # console.log @$scope.selectedHour, @$scope.selectedMinute
     column = []
     for row in filteredSchedule
       column.push row[index]
@@ -208,7 +207,6 @@ class ServiceController
     @$scope,
     @TransportManager
   ) ->
-    console.log "Hello, Petuh"
     ctrl = @
     TransportManager.getTransportList().success (data) ->
       transportList = data
@@ -280,9 +278,32 @@ class ServiceController
     if not transport.weekend and transport.workdays
       return true
     false
-      
+
+
+class SuburbanTransportController
+  constructor: (@$scope, @TransportManager) ->
+    TransportManager.getSuburbanTransport().success (data) ->
+      $scope.suburbanTransport = data
+
+
+
+class SuburbanScheduleController
+  constructor: (@$scope, @$routeParams, @TransportManager, @TimeManager) ->
+    TransportManager.getSuburbanTransport().success (data) ->
+      $scope.suburbanTransport = data
+      console.log $routeParams.transportId
+      $scope.currentBus = _.find(data, (elem) ->
+        elem.id == $routeParams.transportId
+      )
+      console.log $scope.currentBus
+    console.log "allah", $scope.daysOfWeek
+    $scope.daysOfWeek = TimeManager.daysOfWeekOutput
+    console.log "allah", $scope.daysOfWeek
+
 
 ###############################################################################
+
+
 transportControllers.controller 'MainViewController', [
   '$scope',
   MainViewController
@@ -292,6 +313,20 @@ transportControllers.controller 'BusesTrolleysController', [
   '$scope',
   'TransportManager',
   BusesTrolleysController
+]
+
+transportControllers.controller 'SuburbanTransportController', [
+  '$scope',
+  'TransportManager',
+  SuburbanTransportController
+]
+
+transportControllers.controller 'SuburbanScheduleController', [
+  '$scope',
+  '$routeParams',
+  'TransportManager',
+  'TimeManager',
+  SuburbanScheduleController
 ]
 
 transportControllers.controller 'ScheduleController', [
