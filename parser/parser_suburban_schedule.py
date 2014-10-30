@@ -6,7 +6,7 @@ from unidecode import unidecode
 class SuburbanScheduleParser:
 
     _regex_str_range_of_days = r"\d{1,2}-\d{1,2}\(\d{1}-\d{1}\)"
-    _regex_str_set_of_days = r"\d{1,2}-\d{1,2}\(\d{1},\d{1}\)"
+    _regex_str_set_of_days = r"(\d{1,2}-\d{1,2})\(((\d{1})(,\d{1})*)\)"
     _regex_str_normal_end = r"\d{1,2}-\d{1,2}$"
     _regex_str_normal_middle = r"(\d{1,2}-\d{1,2}),"
     _regex_str_one_day = r"(\d{1,2}-\d{1,2})\((\d{1})\)"
@@ -22,13 +22,9 @@ class SuburbanScheduleParser:
     _regex_str_range_of_days_finish = (
         r"(\d{1,2}-\d{1,2})\((\d{1})-(\d{1})\)"
     )
-    _regex_str_set_of_days_finish = (
-        r"(\d{1,2}-\d{1,2})\(((\d{1})(,{1}\d{1})*)\)"
-    )
     _regex_str_one_day_finish = r"\d{1,2}-\d{1,2}\((\d{1})\)"
 
     _regex_range_of_days_finish = re.compile(_regex_str_range_of_days_finish)
-    _regex_set_of_days_finish = re.compile(_regex_str_set_of_days_finish)
 
     _days_dict = {
         1: 'monday',
@@ -64,15 +60,13 @@ class SuburbanScheduleParser:
 
         # time, that is the same for set of days, that presented
         # by list, separated with commas
-        sets_of_days = cls._regex_set_of_days.findall(schedule_string)
-        for set_ in sets_of_days:
-            m = cls._regex_set_of_days_finish.search(set_)
+        match = cls._regex_set_of_days.finditer(schedule_string)
+        for m in match:
             time = m.group(1)
-            set_of_days = m.group(2)
-            days = string.split(set_of_days, ',')
-            days = [int(x) for x in days]
+            days = [int(x) for x in string.split(m.group(2), ',')]
             for i in days:
-                schedule[cls._days_dict[i]].append(time)
+                weekday = cls._days_dict[i]
+                schedule[weekday].append(time)
 
         # time for only one day e.g: 18-21(4)
         one_days = cls._regex_one_day.finditer(schedule_string)
@@ -81,7 +75,6 @@ class SuburbanScheduleParser:
             day = int(m.group(2))
             weekday = cls._days_dict[day]
             schedule[weekday].append(time)
-            # print day, time, weekday
 
         # time for days with excepting schedule for day/s, e.g 137 with kr.2,4
         match = cls._regex_except_day.finditer(schedule_string)
