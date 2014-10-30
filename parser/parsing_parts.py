@@ -186,18 +186,20 @@ def parse_schedules_suburban():
     for bus in suburban_buses:
         from_city = in_dict(bus, 'from_city')
         if from_city:
-            print bus['number']
+            # print bus['number']
             from_city = no_whitespaces(from_city)
 
             schedule_from_city = SuburbanScheduleParser.parse_schedule(
                 from_city
             )
             bus['schedule_from_city'] = schedule_from_city
+
             if bus['number'] == '159':
                 print schedule_from_city
+
         to_city = in_dict(bus, 'to_city')
         if to_city:
-            print bus['number']
+            # print bus['number']
             to_city = no_whitespaces(to_city)
             schedule_to_city = SuburbanScheduleParser.parse_schedule(
                 to_city
