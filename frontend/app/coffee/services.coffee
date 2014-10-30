@@ -43,14 +43,36 @@ transportServices.factory 'TimeManager', [
         ]
 
         @daysOfWeekOutput = [
-          "Понедельник",
-          "Вторник",
-          "Среда",
-          "Четверг",
-          "Пятница",
-          "Суббота"
-          "Воскресенье"
+          {
+            name: "Понедельник"
+            key: "monday"
+          },
+          {
+            name: "Вторник"
+            key: "tuesday"
+          },
+          {
+            name: "Среда"
+            key: "wednesday"
+          },
+          {
+            name: "Четверг"
+            key: "thursday"
+          },
+          {
+            name: "Пятница"
+            key: "friday"
+          },
+          {
+            name: "Суббота"
+            key: "saturday"
+          }
+          {
+            name: "Воскресенье"
+            key: "sunday"
+          }
         ]
+        
 
         @workday = "рабочий"
         @weekend = "выходной"

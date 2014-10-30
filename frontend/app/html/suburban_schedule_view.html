@@ -18,17 +18,26 @@
     <th>Из конечного пункта {{currentBus.station}}</th>
    </thead>
    <tbody>
-   <tr ng-repeat="day in daysOfWeek">
-     <td>
-       {{day}}
-     </td>
-     <td>
-       {{currentBus.from_city}}
-     </td>
-     <td>
-       {{currentBus.to_city}}
-     </td>
-   </tr>
+     <tr>
+       <td></td>
+       <td>
+         {{currentBus.from_city}}
+       </td>
+       <td>
+         {{currentBus.to_city}}
+       </td>
+     </tr>
+     <tr ng-repeat="day in daysOfWeek">
+       <td>
+         {{day.name}}
+       </td>
+       <td>
+         <span ng-repeat="time in currentBus.schedule_from_city[day.key]">{{time}} </span>
+       </td>
+       <td>
+         <span ng-repeat="time in currentBus.schedule_to_city[day.key]">{{time}} </span>
+       </td>
+     </tr>
  </tbody>
  </table>
 </div>

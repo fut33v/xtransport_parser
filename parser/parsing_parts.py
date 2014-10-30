@@ -5,6 +5,7 @@ __author__ = 'Ilya Fateev'
 from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
 from parser_suburban import SuburbanParser
+from parser_suburban_schedule import SuburbanScheduleParser
 import parser_configs
 import parser_utils
 from parser_utils import in_dict
@@ -13,7 +14,7 @@ from parser_utils import no_whitespaces
 from unidecode import unidecode
 
 import logging
-import re
+# import re
 
 
 MIX_LIST = [
@@ -174,29 +175,31 @@ def parse_schedules_suburban():
     for bus in suburban_buses:
         from_city = in_dict(bus, 'from_city')
         if from_city:
+            print bus['number']
             from_city = no_whitespaces(from_city)
-
-            regex_one_day = r"[0-9]{1,2}-[0-9]{1,2}\([0-9]{1}\)"
-            regex_range_of_days = r"[0-9]{1,2}-[0-9]{1,2}\([0-9]{1}-[0-9]{1}\)"
-            regex_set_of_days = r"[0-9]{1,2}-[0-9]{1,2}\([0-9]{1},[0-9]{1}\)"
-            regex_normal_end = r"[0-9]{1,2}-[0-9]{1,2}$"
-            regex_normal_middle = r"([0-9]{1,2}-[0-9]{1,2}),"
-
-            print "------------------------------"
-            print from_city
-            print "one-day", re.findall(regex_one_day, from_city)
-            print "range of days", re.findall(regex_range_of_days, from_city)
-            print "set of days", re.findall(regex_set_of_days, from_city)
-            print "normal", re.findall(regex_normal_end, from_city)
-            print "normal", re.findall(regex_normal_middle, from_city)
-            print "------------------------------"
+            schedule_from_city = SuburbanScheduleParser.parse_schedule(
+                from_city
+            )
+            bus['schedule_from_city'] = schedule_from_city
+            if bus['number'] == '159':
+                print schedule_from_city
+        to_city = in_dict(bus, 'to_city')
+        if to_city:
+            print bus['number']
+            to_city = no_whitespaces(to_city)
+            schedule_to_city = SuburbanScheduleParser.parse_schedule(
+                to_city
+            )
+            bus['schedule_to_city'] = schedule_to_city
+            if bus['number'] == '159':
+                print schedule_to_city
 
         bus_id = in_dict(bus, 'number')
         bus_id = no_whitespaces(bus_id)
         bus_id = bus_id.replace(',', '_')
         bus_id = unidecode(bus_id)
         bus_id = "sub_" + bus_id
-        print bus_id
+        # print bus_id
         bus['id'] = bus_id
     parser_utils.save_json_file(
         (parser_configs.directories["JSON_DIR"] +
