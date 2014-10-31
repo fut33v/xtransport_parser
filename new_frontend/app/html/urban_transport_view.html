@@ -1,0 +1,41 @@
+<div class="container-fluid" ng-controller="UrbanTransportController as ctrl">
+    
+  <div class="container"> 
+    <div class="row buses-row"> 
+      <div class="col-md-6 " id="buses-container"> 
+        <div class="button-container">
+          <div class="buses-txt-transport">Автобус:</div>
+          <a 
+            href="#/urban_transport/{{bus.id}}"
+            ng-repeat="bus in busesList | ordertransport"
+            class="btn btn-danger bus-button"
+            role="button">
+              {{bus.name}}
+          </a>
+        </div>
+        <div class="button-container mixed-container">
+          <a href="#/urban_transport/{{bus.id}}" ng-repeat="bus in mixedList | ordertransport">
+            <button 
+              class="btn btn-danger mixed-button">
+              {{bus.name}}
+            </button>
+          </a>
+        </div>
+      </div>                   
+      
+      <div class="col-md-6 "> 
+        <div class="button-container">
+          <div class="buses-txt-transport">Троллейбус:</div>
+          <a href="#/urban_transport/{{trolley.id}}" ng-repeat="trolley in trolleysList | ordertransport">
+            <button 
+              ng-mouseover="ctrl.showFullName(trolley)" 
+              ng-mouseleave="ctrl.hideFullName()" 
+              class="btn btn-primary bus-button">
+              {{trolley.name}}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+</div>

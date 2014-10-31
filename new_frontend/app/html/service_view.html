@@ -1,0 +1,35 @@
+<div ng-controller="ServiceController as ctrl" class="service-controller">
+  <div class="well">
+    <h3>С разным количеством остановок: {{ctrl.withDifferentCountOfStations()}}</h3>
+    <h3>С одинаковым количеством остановок и одинаковыми названиями остановок (ОК): {{ctrl.withSameStations()}}</h3>
+  </div>
+  <h2>Станции, у которых одинаковое количество остановок, но названия отличаются</h2>
+  <div 
+    ng-repeat="transport in allTransport | ordertransport" 
+    ng-show="ctrl.isTransportShown(transport)"
+    class="service-transport">
+    <h2 
+      ng-class="{'bg-danger': !ctrl.isTransportOk(transport), 'bg-success': ctrl.isTransportOk(transport)}">
+        {{transport.name}} ({{transport.typeNameSingle}})
+        <span ng-show="!ctrl.isLengthOk(transport)"> | разное количество остановок </span>
+        <span ng-show="!ctrl.isStationsSame(transport)"> | станции различаются </span>
+
+    </h2>
+    <table class="table table-bordered">
+    <tr>
+      <td 
+        ng-repeat="station in transport.stations_workdays track by $index"
+        ng-class="{'bg-danger':!ctrl.isStationOk(transport.stations_workdays, transport.stations_weekend, $index)}">
+        {{station.name}}
+      </td>
+    </tr>  
+    <tr>
+      <td 
+        ng-repeat="station in transport.stations_weekend"
+        ng-class="{'bg-danger':!ctrl.isStationOk(transport.stations_workdays, transport.stations_weekend, $index)}">
+        {{station.name}}
+      </td>
+    </tr>  
+    </table>
+  </div>
+</div>
