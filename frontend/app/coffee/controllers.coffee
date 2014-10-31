@@ -296,9 +296,7 @@ class SuburbanScheduleController
         elem.id == $routeParams.transportId
       )
       console.log $scope.currentBus
-    console.log "allah", $scope.daysOfWeek
     $scope.daysOfWeek = TimeManager.daysOfWeekOutput
-    console.log "allah", $scope.daysOfWeek
 
 
 ###############################################################################

@@ -59,4 +59,39 @@
     };
   });
 
+  transportFilters.filter('filterTimeSuburban', function() {
+    return function(input) {
+      var l;
+      if (input != null) {
+        l = function(i) {
+          var hour, minute, obj, time;
+          time = i.split(':');
+          hour = parseInt(time[0]);
+          minute = parseInt(time[1]);
+          return obj = {
+            hour: hour,
+            minute: minute
+          };
+        };
+        input.sort(function(a, b) {
+          var t1, t2;
+          t1 = l(a);
+          t2 = l(b);
+          if (t1.hour === t2.hour) {
+            if (t1.minute > t2.minute) {
+              return 1;
+            } else {
+              return -1;
+            }
+          } else if (t1.hour > t2.hour) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+        return input;
+      }
+    };
+  });
+
 }).call(this);

@@ -443,9 +443,7 @@
         });
         return console.log($scope.currentBus);
       });
-      console.log("allah", $scope.daysOfWeek);
       $scope.daysOfWeek = TimeManager.daysOfWeekOutput;
-      console.log("allah", $scope.daysOfWeek);
     }
 
     return SuburbanScheduleController;

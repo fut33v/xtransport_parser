@@ -32,3 +32,29 @@ transportFilters.filter 'filtertime', () ->
             output.push row
             break
     output
+
+transportFilters.filter 'filterTimeSuburban', () ->
+  (input) ->
+    if input?
+      l = (i) ->
+        time = i.split ':'
+        hour = parseInt time[0]
+        minute = parseInt time[1]
+        obj =
+          hour: hour
+          minute: minute
+
+      input.sort (a, b) ->
+        t1 = l a
+        t2 = l b
+        if t1.hour == t2.hour
+          if t1.minute > t2.minute
+            return 1
+          else
+            return -1
+        else if t1.hour > t2.hour
+          return 1
+        else
+          return -1
+
+      input
