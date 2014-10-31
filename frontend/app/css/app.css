@@ -306,3 +306,9 @@ div.schedule-table > td {
     text-align: center;
 }
 /* Service view */
+
+/* Suburban schedule view */
+#bus-info-suburban {
+   margin-left: 20px; 
+}
+/* Suburban schedule view */
