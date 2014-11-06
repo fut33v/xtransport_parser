@@ -47,7 +47,7 @@ class ScheduleController
       if currentTransport.schedule_everyday?
         $scope.everydayIsTheSame = true
         currentSchedule = currentTransport['schedule_everyday']
-        currentStations = currentTransport['stations_everyday']
+        currentStations = currentTransport['stations']
         station.selected = true for station in currentStations
 
       else if currentTransport.schedule_workdays? and currentTransport.schedule_weekend?

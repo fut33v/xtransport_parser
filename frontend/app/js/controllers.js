@@ -70,7 +70,7 @@
         if (currentTransport.schedule_everyday != null) {
           $scope.everydayIsTheSame = true;
           currentSchedule = currentTransport['schedule_everyday'];
-          currentStations = currentTransport['stations_everyday'];
+          currentStations = currentTransport['stations'];
           for (_i = 0, _len = currentStations.length; _i < _len; _i++) {
             station = currentStations[_i];
             station.selected = true;
