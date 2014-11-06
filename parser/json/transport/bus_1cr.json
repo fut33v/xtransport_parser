@@ -567,7 +567,5 @@
             "name": "\u0412\u0440\u0435\u043c\u044f   \u043e\u0442\u043f\u0440."
         }
     ],
-    "type": "mixed",
-    "weekend": true,
-    "workdays": true
+    "type": "mixed"
 }

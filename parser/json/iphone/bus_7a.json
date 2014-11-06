@@ -1,5 +1,5 @@
 {
-    "everyday": true,
+    "everyday": false,
     "id": "bus_7a",
     "name": "7a",
     "schedule_everyday": [
@@ -136,7 +136,7 @@
             "23:57"
         ]
     ],
-    "stations_everyday": [
+    "stations": [
         {
             "name": "\u0412\u043e\u043a\u0437\u0430\u043b (\u043e\u0442\u043f\u0440.)"
         },
@@ -150,7 +150,5 @@
             "name": "\u0412\u043e\u043a\u0437\u0430\u043b (\u043f\u0440\u0438\u0431.)"
         }
     ],
-    "type": "bus",
-    "weekend": true,
-    "workdays": true
+    "type": "bus"
 }

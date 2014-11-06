@@ -492,7 +492,5 @@
             "name": "\u0443\u043b. \u041a\u043e\u043b\u043b\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f (\u0443\u043b. \u041f\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f) \u043f\u0440\u0438\u0431."
         }
     ],
-    "type": "bus",
-    "weekend": true,
-    "workdays": true
+    "type": "bus"
 }

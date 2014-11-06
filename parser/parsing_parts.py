@@ -6,6 +6,7 @@ from parser_schedule import ScheduleParser
 from parser_transport import TransportParser
 from parser_suburban import SuburbanParser
 from parser_suburban_schedule import SuburbanScheduleParser
+
 import parser_configs
 import parser_utils
 from parser_utils import in_dict
@@ -51,8 +52,6 @@ def parse_schedules_bus(bus_list):
 
         # Case when bus have only weekend schedule
         if bus['weekend'] is True:
-            json_bus_object['workdays'] = False
-            json_bus_object['weekend'] = True
             json_bus_object['schedule_weekend'] = schedule['schedule_table']
             json_bus_object['stations_weekend'] = schedule['stations_list']
 
@@ -61,22 +60,16 @@ def parse_schedules_bus(bus_list):
             # Case of '7a' bus (everyday)
             # @TODO: could be others buses like this
             if schedule['everyday'] is True:
-                json_bus_object['everyday'] = True
-                json_bus_object['workdays'] = True
-                json_bus_object['weekend'] = True
                 json_bus_object['schedule_everyday'] = (
                     schedule['schedule_table']
                 )
-                json_bus_object['stations_everyday'] = schedule['stations_list']
+                json_bus_object['stations'] = schedule['stations_list']
             else:
-                json_bus_object['workdays'] = True
-                json_bus_object['weekend'] = False
                 json_bus_object['schedule_workdays'] = (
                     schedule['schedule_table']
                 )
                 json_bus_object['stations_workdays'] = schedule['stations_list']
                 if schedule['weekend'] is True:
-                    json_bus_object['weekend'] = True
                     html = parser_utils.download_page(
                         schedule['weekend_link']
                     )
@@ -87,6 +80,11 @@ def parse_schedules_bus(bus_list):
                     json_bus_object['stations_weekend'] = (
                         schedule_weekend['stations_list']
                     )
+        if 'stations_weekend' in json_bus_object and 'stations_workdays' in json_bus_object:
+            if json_bus_object['stations_weekend'] == json_bus_object['stations_workdays']:
+                json_bus_object['stations'] = json_bus_object['stations_weekend']
+                json_bus_object.pop('stations_workdays')
+                json_bus_object.pop('stations_weekend')
         parser_utils.save_json_file(
             parser_configs.directories["BUSES_DIR"] + bus["id"] + ".json",
             json_bus_object
