@@ -144,7 +144,5 @@
             "name": "\u0414\u0435\u0440\u0435\u0432\u044f\u043d\u0438\u0446\u044b \u21161 \u0443\u043b.\u041f\u0435\u0440\u0441\u043f\u0435\u043a\u0442\u0438\u0432\u043d\u0430\u044f \u043f\u0440\u0438\u0431."
         }
     ],
-    "type": "bus",
-    "weekend": false,
-    "workdays": true
+    "type": "bus"
 }

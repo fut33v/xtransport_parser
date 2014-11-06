@@ -50,11 +50,11 @@ if __name__ == "__main__":
     transport = transport_parser.parse_html(html)
     logging.info("Parsing transport id's finished.")
 
-    # logging.info("Parsing buses schedules started.")
-    # parse_schedules_bus(transport["bus_list"])
+    logging.info("Parsing buses schedules started.")
+    parse_schedules_bus(transport["bus_list"])
 
-    # logging.info("Parsing trolleys schedules started.")
-    # parse_schedules_trolley(transport["trolley_list"])
+    logging.info("Parsing trolleys schedules started.")
+    parse_schedules_trolley(transport["trolley_list"])
 
     parse_schedules_suburban()
 
@@ -71,11 +71,6 @@ if __name__ == "__main__":
     buses = get_transport_json(regular_buses, 'bus')
     trolleys = get_transport_json(transport["trolley_list"], 'trolley')
     mixed = get_transport_json(mixed_buses, 'mixed')
-
-    # for bus in regular_buses:
-    #     print bus['id']
-    # for bus in mixed_buses:
-    #     print bus['id']
 
     transport_dict = {
         'buses': buses,

@@ -1949,7 +1949,5 @@
             "name": "\u0412\u043e\u043a\u0437\u0430\u043b \u043f\u0440\u0438\u0431."
         }
     ],
-    "type": "bus",
-    "weekend": true,
-    "workdays": true
+    "type": "bus"
 }

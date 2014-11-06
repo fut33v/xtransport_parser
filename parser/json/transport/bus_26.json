@@ -1,5 +1,5 @@
 {
-    "everyday": true,
+    "everyday": false,
     "id": "bus_26",
     "name": "26",
     "schedule_everyday": [
@@ -220,7 +220,7 @@
             "-"
         ]
     ],
-    "stations_everyday": [
+    "stations": [
         {
             "name": "\u0426\u0435\u043d\u0442\u0440.\u0440\u044b\u043d\u043e\u043a \u043e\u0442\u043f\u0440."
         },
@@ -252,7 +252,5 @@
             "name": "\u0426\u0435\u043d\u0442\u0440.\u0440\u044b\u043d\u043e\u043a \u043f\u0440\u0438\u0431."
         }
     ],
-    "type": "bus",
-    "weekend": true,
-    "workdays": true
+    "type": "bus"
 }
