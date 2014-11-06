@@ -211,7 +211,11 @@ def parse_schedules_suburban():
         bus_id = in_dict(bus, 'number')
         bus_id = no_whitespaces(bus_id)
         bus_id = bus_id.replace(',', '_')
-        bus_id = unidecode(bus_id)
+        postfix = unidecode(bus['station']).lower().replace('/', '_')
+        postfix = postfix.replace('.', '')
+        postfix = postfix.replace('\'', '')
+        postfix = postfix.replace(' ', '_')
+        bus_id = unidecode(bus_id) + '_' + postfix
         bus_id = "sub_" + bus_id
         # print bus_id
         bus['id'] = bus_id

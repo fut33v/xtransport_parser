@@ -3,7 +3,7 @@
         "cost": "51-80",
         "distance": "20.7",
         "from_city": "8-30(6,7),17-55(6,7)",
-        "id": "sub_80",
+        "id": "sub_80_mshagskie_dachi",
         "number": "80",
         "schedule_from_city": {
             "friday": [],
@@ -43,7 +43,7 @@
         "cost": "83-30",
         "distance": "33.4",
         "from_city": "-",
-        "id": "sub_81",
+        "id": "sub_81_povode",
         "number": "81",
         "schedule_from_city": {
             "friday": [],
@@ -71,7 +71,7 @@
         "cost": "27-50",
         "distance": "11.0",
         "from_city": "6-30(6,7),17-25",
-        "id": "sub_100",
+        "id": "sub_100_radivanovo",
         "number": "100",
         "schedule_from_city": {
             "friday": [
@@ -131,7 +131,7 @@
         "cost": "80-00",
         "distance": "32.0",
         "from_city": "4-20,6-00,9-40,11-30,12-10,20-50",
-        "id": "sub_102",
+        "id": "sub_102_proletarii_",
         "number": "102",
         "schedule_from_city": {
             "friday": [
@@ -250,7 +250,7 @@
         "cost": "91-80",
         "distance": "36.7",
         "from_city": "5-25,6-05(6,7),7-10(6,7),10-00,                                   14-25(6,7),17-50",
-        "id": "sub_102d",
+        "id": "sub_102d_dorozhno",
         "number": "102\u0434",
         "schedule_from_city": {
             "friday": [
@@ -346,7 +346,7 @@
         "cost": "104-30",
         "distance": "41.7",
         "from_city": "5-20,8-20(1,3,4),11-20,13-05,16-20(1,3)            ",
-        "id": "sub_103",
+        "id": "sub_103_piatnitsa",
         "number": "103",
         "schedule_from_city": {
             "friday": [
@@ -440,7 +440,7 @@
         "cost": "80-00",
         "distance": "32.0",
         "from_city": "6-45(1-6),20-15(1-5)",
-        "id": "sub_103",
+        "id": "sub_103_novoselitsy",
         "number": "103",
         "schedule_from_city": {
             "friday": [
@@ -502,7 +502,7 @@
         "cost": "113-00",
         "distance": "45.2",
         "from_city": "8-20(6,7)",
-        "id": "sub_103",
+        "id": "sub_103_ryshevo",
         "number": "103",
         "schedule_from_city": {
             "friday": [],
@@ -538,7 +538,7 @@
         "cost": "31-50",
         "distance": "12.6",
         "from_city": "6-15(1-5)",
-        "id": "sub_104",
+        "id": "sub_104_savino",
         "number": "104",
         "schedule_from_city": {
             "friday": [
@@ -586,7 +586,7 @@
         "cost": "58-80",
         "distance": "23.5",
         "from_city": "5-25,6-15,6-30,7-10,8-15,10-15,                                 12-10,13-55,14-30,16-40,17-25,18-25,                               19-20,20-30,21-30(\u043a\u0440.7)",
-        "id": "sub_105",
+        "id": "sub_105_podbereze___________po_rabochim_dniam_____________",
         "number": "105",
         "schedule_from_city": {
             "friday": [
@@ -836,7 +836,7 @@
         "cost": "58-80",
         "distance": "23.5",
         "from_city": "5-25,6-30,7-10,10-15,12-10,13-20,                                   14-30,17-25,19-10,20-30,21-30",
-        "id": "sub_105",
+        "id": "sub_105_podbereze______________po_vykhodnym_dniam__________",
         "number": "105",
         "schedule_from_city": {
             "friday": [
@@ -1025,7 +1025,7 @@
         "cost": "58-80",
         "distance": "23.5",
         "from_city": "8-10,10-00,11-15,13-00(6,7),                                           13-30(1-5),16-05,17-40",
-        "id": "sub_105",
+        "id": "sub_105_podbereze_(m_a)",
         "number": "105",
         "schedule_from_city": {
             "friday": [
@@ -1151,7 +1151,7 @@
         "cost": "51-50",
         "distance": "20.6",
         "from_city": "7-30,12-25,15-30,18-20",
-        "id": "sub_106",
+        "id": "sub_106_kozyn_ilmen",
         "number": "106",
         "schedule_from_city": {
             "friday": [
@@ -1249,7 +1249,7 @@
         "cost": "45-50",
         "distance": "18.2",
         "from_city": "6-40,12-00,14-30,18-10",
-        "id": "sub_106",
+        "id": "sub_106_troitsa",
         "number": "106",
         "schedule_from_city": {
             "friday": [
@@ -1347,7 +1347,7 @@
         "cost": "70-00",
         "distance": "28.0",
         "from_city": "5-45",
-        "id": "sub_108",
+        "id": "sub_108_erunovo",
         "number": "108",
         "schedule_from_city": {
             "friday": [
@@ -1403,7 +1403,7 @@
         "cost": "74-50",
         "distance": "29.8",
         "from_city": "14-10,16-35,19-35",
-        "id": "sub_108",
+        "id": "sub_108_sergovo",
         "number": "108",
         "schedule_from_city": {
             "friday": [
@@ -1487,7 +1487,7 @@
         "cost": "75-50",
         "distance": "30.2",
         "from_city": "5-15(1-5),7-30(6,7),17-30(1-5),                                  17-45(6,7)",
-        "id": "sub_109",
+        "id": "sub_109_bogdanovo",
         "number": "109",
         "schedule_from_city": {
             "friday": [
@@ -1557,7 +1557,7 @@
         "cost": "122-80",
         "distance": "49.1   ",
         "from_city": "7-15(1-5)",
-        "id": "sub_109",
+        "id": "sub_109_chaika_sutoki________",
         "number": "109",
         "schedule_from_city": {
             "friday": [
@@ -1605,7 +1605,7 @@
         "cost": "81-80",
         "distance": "32.7",
         "from_city": "14-40(1-5)",
-        "id": "sub_109",
+        "id": "sub_109_______chaika",
         "number": "109",
         "schedule_from_city": {
             "friday": [
@@ -1653,7 +1653,7 @@
         "cost": "47-00",
         "distance": "17.3",
         "from_city": "9-10(6,7),18-40(6,7)",
-        "id": "sub_109a",
+        "id": "sub_109a_farofon_dachi",
         "number": "109\u0430",
         "schedule_from_city": {
             "friday": [],
@@ -1693,7 +1693,7 @@
         "cost": "136-30",
         "distance": "54.5",
         "from_city": "5-35,13-30,18-20",
-        "id": "sub_110",
+        "id": "sub_110_zamlene",
         "number": "110",
         "schedule_from_city": {
             "friday": [
@@ -1777,7 +1777,7 @@
         "cost": "33-00",
         "distance": "13.2    ",
         "from_city": "6-40,7-50,9-00,10-10(6,7),                                  11-20(6,7),15-00,17-45,18-55            ",
-        "id": "sub_112",
+        "id": "sub_112_sady_______________________________________________________________________________________________________________________________________",
         "number": "112",
         "schedule_from_city": {
             "friday": [
@@ -1911,7 +1911,7 @@
         "cost": "-",
         "distance": "-",
         "from_city": "-",
-        "id": "sub_-",
+        "id": "sub_-_sady_po_vykhodn______________________________________________________________________________________________",
         "number": "-",
         "schedule_from_city": {
             "friday": [],
@@ -1939,7 +1939,7 @@
         "cost": "71-80",
         "distance": "28.7",
         "from_city": "9-00,17-25",
-        "id": "sub_113",
+        "id": "sub_113_nekhino",
         "number": "113",
         "schedule_from_city": {
             "friday": [
@@ -2009,7 +2009,7 @@
         "cost": "121-00",
         "distance": "48.4",
         "from_city": "7-20,8-20,10-50,15-00,17-15(5),17-55,                          18-00(7),18-40(7),18-55(7)",
-        "id": "sub_114",
+        "id": "sub_114_shimsk",
         "number": "114",
         "schedule_from_city": {
             "friday": [
@@ -2137,7 +2137,7 @@
         "cost": "76-50",
         "distance": "30.6",
         "from_city": "7-00,14-20,20-15",
-        "id": "sub_115",
+        "id": "sub_115_vidogoshch",
         "number": "115",
         "schedule_from_city": {
             "friday": [
@@ -2221,7 +2221,7 @@
         "cost": "56-50",
         "distance": "22.6",
         "from_city": "-",
-        "id": "sub_115a",
+        "id": "sub_115a_vashkovskie_dachi",
         "number": "115\u0430",
         "schedule_from_city": {
             "friday": [],
@@ -2249,7 +2249,7 @@
         "cost": "92-50",
         "distance": "37.0",
         "from_city": "6-10,8-35,15-55,18-25(5-7)",
-        "id": "sub_116",
+        "id": "sub_116_kholynia",
         "number": "116",
         "schedule_from_city": {
             "friday": [
@@ -2339,7 +2339,7 @@
         "cost": "102-00",
         "distance": "40.8",
         "from_city": "6-35,14-40,17-35(5-7)",
-        "id": "sub_117",
+        "id": "sub_117_navolok",
         "number": "117",
         "schedule_from_city": {
             "friday": [
@@ -2415,7 +2415,7 @@
         "cost": "108-80",
         "distance": "43.5",
         "from_city": "6-10,9-20,12-45,15-05,17-50",
-        "id": "sub_118",
+        "id": "sub_118_zakharino",
         "number": "118",
         "schedule_from_city": {
             "friday": [
@@ -2527,7 +2527,7 @@
         "cost": "113-80",
         "distance": "45.5",
         "from_city": "8-20(1-5),17-35(1-5)",
-        "id": "sub_119",
+        "id": "sub_119_priluki",
         "number": "119",
         "schedule_from_city": {
             "friday": [
@@ -2585,7 +2585,7 @@
         "cost": "148-30",
         "distance": "59.9",
         "from_city": "8-20(6,7),17-35(6,7)",
-        "id": "sub_119",
+        "id": "sub_119_churilovo",
         "number": "119",
         "schedule_from_city": {
             "friday": [],
@@ -2625,7 +2625,7 @@
         "cost": "103-00",
         "distance": "41.2",
         "from_city": "5-35(1-5),6-50(1-5),8-05,                                                13-00,14-25(1-5),16-10,19-50",
-        "id": "sub_120",
+        "id": "sub_120_krasnye_stanki",
         "number": "120",
         "schedule_from_city": {
             "friday": [
@@ -2753,7 +2753,7 @@
         "cost": "35-30",
         "distance": "14.1",
         "from_city": "6-30,9-05,13-35(6,7),14-35(1-5),18-05",
-        "id": "sub_121",
+        "id": "sub_121_khutyn",
         "number": "121",
         "schedule_from_city": {
             "friday": [
@@ -2851,7 +2851,7 @@
         "cost": "132-50",
         "distance": "53.0",
         "from_city": "5-45,14-35,17-45",
-        "id": "sub_122",
+        "id": "sub_122_gorodok",
         "number": "122",
         "schedule_from_city": {
             "friday": [
@@ -2935,7 +2935,7 @@
         "cost": "45-00",
         "distance": "18.0",
         "from_city": "6-10(1-5),7-10(6,7),12-20,17-40",
-        "id": "sub_123",
+        "id": "sub_123_bolotnaia",
         "number": "123",
         "schedule_from_city": {
             "friday": [
@@ -3019,7 +3019,7 @@
         "cost": "82-50",
         "distance": "33.0",
         "from_city": "6-05,13-30,18-15",
-        "id": "sub_124",
+        "id": "sub_124_zaval",
         "number": "124",
         "schedule_from_city": {
             "friday": [
@@ -3103,7 +3103,7 @@
         "cost": "131-30",
         "distance": "52.5",
         "from_city": "6-25,8-00(2,5),14-50,18-10",
-        "id": "sub_127",
+        "id": "sub_127_liubitovo_zhabitsy",
         "number": "127",
         "schedule_from_city": {
             "friday": [
@@ -3191,7 +3191,7 @@
         "cost": "31-00                  34-30",
         "distance": "12.4  13.7",
         "from_city": "5-40(1-5),6-35,7-30,8-00,8-30,                              10-30,12-05,13-05,15-00,                                          16-15,18-00,19-00,22-10",
-        "id": "sub_129",
+        "id": "sub_129_ermolino_(kladbishche)",
         "number": "129",
         "schedule_from_city": {
             "friday": [
@@ -3404,7 +3404,7 @@
         "cost": "85-00",
         "distance": "34.0",
         "from_city": "5-20,7-00,9-20,12-40,17-15,20-45",
-        "id": "sub_130",
+        "id": "sub_130_lesnaia",
         "number": "130",
         "schedule_from_city": {
             "friday": [
@@ -3530,7 +3530,7 @@
         "cost": "140-50",
         "distance": "56.2",
         "from_city": "6-00,13-15,17-20",
-        "id": "sub_132",
+        "id": "sub_132_tesovo",
         "number": "132",
         "schedule_from_city": {
             "friday": [
@@ -3614,7 +3614,7 @@
         "cost": "194-00",
         "distance": "77.6",
         "from_city": "15-40(1,6),16-30(5), 20-30(7)",
-        "id": "sub_135",
+        "id": "sub_135_batetskii_moika_",
         "number": "135",
         "schedule_from_city": {
             "friday": [
@@ -3661,7 +3661,7 @@
         "cost": "236-30",
         "distance": "94.5",
         "from_city": "6-35(1,3),7-35(5-7),17-10(\u043a\u0440.2,4)",
-        "id": "sub_137",
+        "id": "sub_137_nezhatitsy_moika_",
         "number": "137",
         "schedule_from_city": {
             "friday": [
@@ -3719,7 +3719,7 @@
         "cost": "196-50",
         "distance": "78.6",
         "from_city": "6-35(2,4),17-10(2,4)",
-        "id": "sub_137",
+        "id": "sub_137_ovsino",
         "number": "137",
         "schedule_from_city": {
             "friday": [],
@@ -3759,7 +3759,7 @@
         "cost": "88-80  98-50",
         "distance": "35.5 39.4",
         "from_city": "5-30(1,3,5),17-15(1,3,5)                                                                  6-55(6,7),5-30(2,4),17-15(2,4,6,7)",
-        "id": "sub_149_149a",
+        "id": "sub_149_149a_volyn",
         "number": "149, 149\u0430",
         "schedule_from_city": {
             "friday": [
@@ -3829,7 +3829,7 @@
         "cost": "84-00",
         "distance": "33.6",
         "from_city": "11-00",
-        "id": "sub_150",
+        "id": "sub_150_dubrovka",
         "number": "150",
         "schedule_from_city": {
             "friday": [
@@ -3885,7 +3885,7 @@
         "cost": "148-80",
         "distance": "59.5",
         "from_city": "10-40",
-        "id": "sub_154",
+        "id": "sub_154_novgorod(154)_",
         "number": "154",
         "schedule_from_city": {
             "friday": [
@@ -3927,7 +3927,7 @@
         "cost": "148-80",
         "distance": "59.5",
         "from_city": "8-05",
-        "id": "sub_155",
+        "id": "sub_155_novgorod(155)_",
         "number": "155",
         "schedule_from_city": {
             "friday": [
@@ -3969,7 +3969,7 @@
         "cost": "179-50",
         "distance": "71.8 ",
         "from_city": "4-15(1-5),6-15(1-5),8-25(6,7),                                          15-00(6,7),15-30(1-5),18-00(1-5)                                                                                         ",
-        "id": "sub_157",
+        "id": "sub_157_rogavka_osiia_",
         "number": "157",
         "schedule_from_city": {
             "friday": [
@@ -4059,7 +4059,7 @@
         "cost": "158-80",
         "distance": "63.5",
         "from_city": "5-25(1-5),6-55(6,7),13-55,18-05(5-7)",
-        "id": "sub_159",
+        "id": "sub_159_chastova",
         "number": "159",
         "schedule_from_city": {
             "friday": [
@@ -4136,7 +4136,7 @@
         "cost": "169-50",
         "distance": "67.8",
         "from_city": "6-00(2,4,5),8-00(6(,16-20(2,4,5),                      18-25(7)",
-        "id": "sub_167",
+        "id": "sub_167_aleksandrovskoe",
         "number": "167",
         "schedule_from_city": {
             "friday": [
@@ -4191,7 +4191,7 @@
         "cost": "38-50",
         "distance": "15.4",
         "from_city": "9-10(6,7),15-50(6,7)",
-        "id": "sub_168",
+        "id": "sub_168_gorynevo_dachi",
         "number": "168",
         "schedule_from_city": {
             "friday": [],
@@ -4231,7 +4231,7 @@
         "cost": "52-50",
         "distance": "21.0",
         "from_city": "6-30(6,7),18-20(6,7)",
-        "id": "sub_179",
+        "id": "sub_179_seltso",
         "number": "179",
         "schedule_from_city": {
             "friday": [],
@@ -4271,7 +4271,7 @@
         "cost": "36-30",
         "distance": "14.5",
         "from_city": "7-40,16-50",
-        "id": "sub_180",
+        "id": "sub_180_kunino",
         "number": "180",
         "schedule_from_city": {
             "friday": [
@@ -4341,7 +4341,7 @@
         "cost": "33-80",
         "distance": "13.5",
         "from_city": "7-25(1-5),8-25(6,7),14-00,19-05",
-        "id": "sub_186",
+        "id": "sub_186_sp_nereditsy",
         "number": "186",
         "schedule_from_city": {
             "friday": [
@@ -4425,7 +4425,7 @@
         "cost": "45-50",
         "distance": "18.7",
         "from_city": "9-20(6,7),16-50(6,7)",
-        "id": "sub_187",
+        "id": "sub_187_11-_km",
         "number": "187",
         "schedule_from_city": {
             "friday": [],
@@ -4465,7 +4465,7 @@
         "cost": "42-00",
         "distance": "16.8",
         "from_city": "7-50,15-45",
-        "id": "sub_188",
+        "id": "sub_188_gubariovo",
         "number": "188",
         "schedule_from_city": {
             "friday": [
@@ -4535,7 +4535,7 @@
         "cost": "63-50",
         "distance": "26.7",
         "from_city": "6-30,13-10,17-40",
-        "id": "sub_189a",
+        "id": "sub_189a_ilmen_vas",
         "number": "189\u0430",
         "schedule_from_city": {
             "friday": [
