@@ -243,11 +243,6 @@ div.schedule-table > td {
     margin-bottom: 10px;
 }
 
-.schedule-menu-group {
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
 .nav-bar-schedule {
     margin-bottom: 20px;
     padding-left: 20px;
@@ -280,6 +275,7 @@ div.schedule-table > td {
 .schedule-menu-well {
     background: white;
     border-radius: 0;
+    width: 100%;
 }
 
 #show-menu-button {
@@ -293,6 +289,64 @@ div.schedule-table > td {
 
 .schedule-menu-row {
     display: flex;
+}
+
+.left-panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    background: navy;
+    color: white;
+    background: #343131;
+}
+
+.main-content {
+    position: fixed;
+    top: 50px;
+    left: 200px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+#buses-button {
+    margin-top: 10px;
+    border-radius: 0;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.station-button {
+    border-radius: 0;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#home-link {
+    color: white;
+}
+
+#menu-block {
+    margin: 0;
+    padding: 10px;
+}
+
+.transport-button {
+    margin: 1px;
+    width: 45px;
+}
+
+#transport-block {
+    margin-left: 5px;
 }
 /* Schedule view*/
 
@@ -312,3 +366,11 @@ div.schedule-table > td {
    margin-left: 20px; 
 }
 /* Suburban schedule view */
+
+#left-panel-header {
+    background: #27AE60;
+    color: white;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+}

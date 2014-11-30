@@ -3,9 +3,9 @@
     <div class="left-panel">
       <div>
         <div id="left-panel-header">
-          <a id="home-link" href="/">53bus.ru</a>
+          <a href="/"></a>53bus.ru
         </div>
-        <!-- <button class="btn btn-primary" id="buses-button">Автобусы/тралики</button> -->
+        <button class="btn btn-primary" id="buses-button">Автобусы/тралики</button>
         <div id="bus-number">{{currentTransport.name}}</div>
         <div 
           id="hidden-stops"
@@ -20,21 +20,6 @@
           </div>
         </div>
       </div>
-      <div id="transport-block">
-        <h3>Автобусы:</h3>
-        <button
-          ng-repeat="bus in transportList.buses"
-          class="btn btn-default transport-button">
-          {{bus.name}}
-        </button>
-        <h3>Тралики:</h3>
-        <button
-          ng-repeat="trolley in transportList.trolleys"
-          class="btn btn-default transport-button">
-          {{trolley.name}}
-        </button>
-      </div>
-
     </div>
 
   <div class="main-content">
@@ -45,7 +30,7 @@
     <div class="schedule-menu-row row" ng-hide="hideMenu || ctrl.isNoMenu()">
     
 
-    <div class="schedule-menu-well well well-lg" id="menu-block">
+    <div class="row schedule-menu-well well well-lg">
 
       <div ng-show="!everydayIsTheSame && !workdaysOnly && !weekendOnly" class="col-md-5" id="day-menu" data-toggle="buttons">
         <div class="schedule-menu-button-row">
@@ -124,10 +109,8 @@
             <th 
               ng-show="ctrl.isStationShown($index)"
               ng-repeat="station in currentStations track by $index">
-                  <label>
-                    {{station.name}}   
-                    <input type="checkbox" ng-model="station.selected" />
-                  </label>
+                  {{station.name}}   
+                  <input type="checkbox" ng-model="station.selected" />
             </th>
           </tr>
         </thead>

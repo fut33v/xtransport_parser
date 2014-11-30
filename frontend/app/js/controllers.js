@@ -62,6 +62,10 @@
       this.TimeManager = TimeManager;
       this.filtertimeFilter = filtertimeFilter;
       ctrl = this;
+      TransportManager.getTransportList().success(function(data) {
+        console.log(data);
+        return $scope.transportList = data;
+      });
       TransportManager.getTransport($routeParams.transportId).success(function(data) {
         var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2;
         console.log(data);
@@ -148,7 +152,6 @@
       for (i = _j = 0; _j <= 59; i = ++_j) {
         $scope.minutes.push(i);
       }
-      $scope.hideMenu = false;
     }
 
     ScheduleController.prototype.isSelectedWorkdays = function() {
@@ -195,28 +198,6 @@
       return this.$scope.selectedMinute = 0;
     };
 
-    ScheduleController.prototype.setAllStationsChecked = function() {
-      var station, _i, _len, _ref;
-      _ref = this.$scope.currentStations;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        station = _ref[_i];
-        station.selected = true;
-      }
-      return this.initialCheckedStations = true;
-    };
-
-    ScheduleController.prototype.stationClicked = function(selectedStation) {
-      var station, _i, _len, _ref;
-      if (this.initialCheckedStations) {
-        _ref = this.$scope.currentStations;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          station = _ref[_i];
-          station.selected = false;
-        }
-        return this.initialCheckedStations = false;
-      }
-    };
-
     ScheduleController.prototype.isTimeExpired = function(time) {
       var currentHour, currentMinute, d, hour, minute, timeSplited;
       d = new Date();
@@ -249,16 +230,6 @@
       }
     };
 
-    ScheduleController.prototype.showShortDescription = function() {
-      if (this.currentTransport != null) {
-        if (this.currentTransport.name.length <= 4) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    };
-
     ScheduleController.prototype.isStationShown = function(index) {
       var column, filteredSchedule, isEmpty, row, _i, _len;
       filteredSchedule = this.filtertimeFilter(this.$scope.currentSchedule, this.$scope.selectedHour, this.$scope.selectedMinute);
@@ -277,13 +248,23 @@
       }
     };
 
-    ScheduleController.prototype.isNoMenu = function() {
-      if (this.currentTransport != null) {
-        if (this.currentTransport.type === 'mixed') {
-          return true;
-        } else {
-          return false;
+    ScheduleController.prototype.showHiddenStops = function() {
+      var station, _i, _len, _ref;
+      if (this.$scope.currentStations != null) {
+        _ref = this.$scope.currentStations;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          station = _ref[_i];
+          if (!station.selected) {
+            return true;
+          }
         }
+      }
+      return false;
+    };
+
+    ScheduleController.prototype.hiddenStationClick = function(station) {
+      if (station != null) {
+        return station.selected = true;
       }
     };
 
