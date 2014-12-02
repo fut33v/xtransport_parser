@@ -1,0 +1,20 @@
+<div 
+  ng-controller="UrbanTransportController"
+  id="transport-block">
+  <h3>Автобусы:</h3>
+  <a href="#/schedule/{{bus.id}}"
+    ng-repeat="bus in transportList.buses">
+    <button
+      class="btn btn-default transport-button">
+      {{bus.name}}
+    </button>
+  </a>
+  <h3>Тралики:</h3>
+  <a href="#/schedule/{{trolley.id}}"
+    ng-repeat="trolley in transportList.trolleys">
+    <button
+      class="btn btn-default transport-button">
+      {{trolley.name}}
+    </button>
+  </a>
+</div>
