@@ -117,7 +117,8 @@
           <tr>
             <th 
               ng-show="ctrl.isStationShown($index)"
-              ng-repeat="station in currentStations track by $index">
+              ng-repeat="station in currentStations track by $index"
+              class="station-name">
                   <label>
                     {{station.name}}   
                     <input type="checkbox" ng-model="station.selected" />

@@ -235,6 +235,10 @@ div.schedule-table > td {
     margin-bottom: 16px;
 }
 
+.station-name {
+    text-align: center;
+}
+
 .schedule-transport-div {
     padding: 0;
     padding-top: 30px;
