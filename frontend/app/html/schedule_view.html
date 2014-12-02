@@ -6,8 +6,11 @@
           <a id="home-link" href="/">53bus.ru</a>
         </div>
         <!-- <button class="btn btn-primary" id="buses-button">Автобусы/тралики</button> -->
-        <div id="bus-number">{{currentTransport.name}}</div>
-        <img ng-src="{{currentTransport.icon}}" class="centerized schedule-transport-icon"/>
+        <div id="bus-number">
+          <img ng-src="{{currentTransport.icon}}" class="schedule-transport-icon"/>
+          {{currentTransport.name}}
+        </div>
+        
         <div 
           id="hidden-stops"
           ng-show="ctrl.showHiddenStops()">
