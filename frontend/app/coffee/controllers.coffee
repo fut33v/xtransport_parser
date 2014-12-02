@@ -28,6 +28,16 @@ class BusesTrolleysController
     @$scope.currentBus = ""
 
 
+class UrbanTransportController
+  constructor: (
+      @$scope,
+      @TransportManager
+  ) ->
+    TransportManager.getTransportList().success (data) ->
+      console.log data
+      $scope.transportList = data
+
+
 class ScheduleController
   constructor: (
       @$scope,
@@ -39,9 +49,6 @@ class ScheduleController
 
     ctrl = @
 
-    TransportManager.getTransportList().success (data) ->
-      console.log data
-      $scope.transportList = data
 
     TransportManager.getTransport($routeParams.transportId).success (data) ->
       console.log data
@@ -316,6 +323,12 @@ transportControllers.controller 'SuburbanScheduleController', [
   'TransportManager',
   'TimeManager',
   SuburbanScheduleController
+]
+
+transportControllers.controller 'UrbanTransportController', [
+  '$scope',
+  'TransportManager',
+  UrbanTransportController
 ]
 
 transportControllers.controller 'ScheduleController', [

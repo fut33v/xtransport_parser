@@ -1,5 +1,5 @@
 (function() {
-  var BusesTrolleysController, MainViewController, ScheduleController, ServiceController, SuburbanScheduleController, SuburbanTransportController, TestController, transportControllers;
+  var BusesTrolleysController, MainViewController, ScheduleController, ServiceController, SuburbanScheduleController, SuburbanTransportController, TestController, UrbanTransportController, transportControllers;
 
   transportControllers = angular.module('transportControllers', []);
 
@@ -52,6 +52,20 @@
 
   })();
 
+  UrbanTransportController = (function() {
+    function UrbanTransportController($scope, TransportManager) {
+      this.$scope = $scope;
+      this.TransportManager = TransportManager;
+      TransportManager.getTransportList().success(function(data) {
+        console.log(data);
+        return $scope.transportList = data;
+      });
+    }
+
+    return UrbanTransportController;
+
+  })();
+
   ScheduleController = (function() {
     function ScheduleController($scope, $routeParams, $filter, TransportManager, TimeManager, filtertimeFilter) {
       var ctrl, i, _i, _j;
@@ -62,10 +76,6 @@
       this.TimeManager = TimeManager;
       this.filtertimeFilter = filtertimeFilter;
       ctrl = this;
-      TransportManager.getTransportList().success(function(data) {
-        console.log(data);
-        return $scope.transportList = data;
-      });
       TransportManager.getTransport($routeParams.transportId).success(function(data) {
         var currentSchedule, currentStations, currentTransport, station, today, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2;
         console.log(data);
@@ -438,6 +448,8 @@
   transportControllers.controller('SuburbanTransportController', ['$scope', 'TransportManager', SuburbanTransportController]);
 
   transportControllers.controller('SuburbanScheduleController', ['$scope', '$routeParams', 'TransportManager', 'TimeManager', SuburbanScheduleController]);
+
+  transportControllers.controller('UrbanTransportController', ['$scope', 'TransportManager', UrbanTransportController]);
 
   transportControllers.controller('ScheduleController', ['$scope', '$routeParams', '$filter', 'TransportManager', 'TimeManager', 'filtertimeFilter', ScheduleController]);
 
