@@ -1,16 +1,10 @@
 <div ng-controller="MainViewController as mainViewController" class="container-fluid">
-    <div class="main-features-container"> 
-      <ul>
-        <li><a href="#/buses_trolleys">
-          <span class="glyphicon glyphicon-calendar"></span>Расписание автобуса/троллейбуса
-        </a></li>
-        <li><a href="#/stops/">
-          <span class="glyphicon glyphicon-calendar"></span>Расписание остановки
-        </a></li>
-        <li><a href="#/suburban_transport/">
-          <span class="glyphicon glyphicon-calendar"></span>Расписание пригородного транспорта
-        </a></li>
-      </ul>
-    </div> 
+  <div class="left-panel">
+    <div id="left-panel-header">
+      <a id="home-link" href="/">53bus.ru</a>
+    </div>
+    <div 
+      ng-include="'html/transport_list.html'">
+    </div>
   </div>
 </div>
