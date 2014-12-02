@@ -301,6 +301,9 @@ div.schedule-table > td {
     display: flex;
 }
 
+.left-panel-container {
+}
+
 .left-panel {
     position: absolute;
     top: 0;
@@ -308,7 +311,7 @@ div.schedule-table > td {
     left: 0;
     width: 200px;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     background: navy;
     color: white;
     background: #343131;
