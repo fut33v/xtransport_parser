@@ -10,6 +10,10 @@ body {
     height: 35px;
 }
 
+.appstore-logo {
+    height: 35px;
+}
+
 #main-text-about {
     text-align: right;
     font-size: 40px;
@@ -356,6 +360,7 @@ div.schedule-table > td {
 .transport-button {
     margin: 1px;
     width: 40px;
+    border-radius: 0;
 }
 
 #transport-block {

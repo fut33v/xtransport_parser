@@ -15,6 +15,11 @@
           id="hidden-stops"
           ng-show="ctrl.showHiddenStops()">
           <h3>Скрытые остановки:</h3>
+          <button 
+            ng-click="ctrl.selectAllStations()"
+            class="btn btn-danger station-button" type="submit">
+            Сбросить 
+          </button>
           <div
             ng-show="!ctrl.isStationShown($index)"
             ng-repeat="station in currentStations track by $index"
