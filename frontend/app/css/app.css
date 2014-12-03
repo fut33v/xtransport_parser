@@ -360,6 +360,7 @@ div.schedule-table > td {
 .transport-button {
     margin: 1px;
     width: 40px;
+    border-radius: 0;
 }
 
 #transport-block {
