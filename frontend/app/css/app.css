@@ -10,6 +10,10 @@ body {
     height: 35px;
 }
 
+.appstore-logo {
+    height: 35px;
+}
+
 #main-text-about {
     text-align: right;
     font-size: 40px;
