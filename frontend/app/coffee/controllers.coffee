@@ -197,7 +197,11 @@ class ScheduleController
   hiddenStationClick: (station) ->
     if station?
       station.selected = true
-    
+ 
+  selectAllStations: () ->
+    if @$scope.currentStations?
+      for station in @$scope.currentStations
+        station.selected = true
 
 
 class ServiceController

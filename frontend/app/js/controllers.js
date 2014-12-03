@@ -278,6 +278,19 @@
       }
     };
 
+    ScheduleController.prototype.selectAllStations = function() {
+      var station, _i, _len, _ref, _results;
+      if (this.$scope.currentStations != null) {
+        _ref = this.$scope.currentStations;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          station = _ref[_i];
+          _results.push(station.selected = true);
+        }
+        return _results;
+      }
+    };
+
     return ScheduleController;
 
   })();
