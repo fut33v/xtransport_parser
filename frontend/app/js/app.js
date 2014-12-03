@@ -9,9 +9,6 @@
       return $routeProvider.when('/', obj = {
         templateUrl: 'html/main_view.html',
         controller: 'MainViewController'
-      }).when('/buses_trolleys/', obj = {
-        templateUrl: 'html/buses_trolleys_view.html',
-        controller: 'BusesTrolleysController'
       }).when('/suburban_transport/', obj = {
         templateUrl: 'html/suburban_transport_view.html',
         controller: 'BusesTrolleysController'
