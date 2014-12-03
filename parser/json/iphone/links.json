@@ -1,5 +1,5 @@
 {
-    "service": "http://53bus.ru/json/iphone/links.json",
+    "service": "http://53bus.ru/json/transport.json",
     "suburban_links": [
         "http://53bus.ru/json/suburban_transport.json"
     ],
@@ -43,7 +43,6 @@
         "http://53bus.ru/json/iphone/trolley_2.json",
         "http://53bus.ru/json/iphone/trolley_3.json",
         "http://53bus.ru/json/iphone/trolley_4.json",
-        "http://53bus.ru/json/iphone/trolley_5.json",
-        "http://53bus.ru/json/transport.json"
+        "http://53bus.ru/json/iphone/trolley_5.json"
     ]
 }
