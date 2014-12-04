@@ -1,10 +1,9 @@
 <div ng-controller="ScheduleController as ctrl">
 
-    <div class="left-panel">
+    <div 
+      ng-hide="hideLeftPanel"
+      class="left-panel">
       <div>
-        <div id="left-panel-header">
-          <a id="home-link" href="/">53bus.ru</a>
-        </div>
         <!-- <button class="btn btn-primary" id="buses-button">Автобусы/тралики</button> -->
         <div id="bus-number">
           <img ng-src="{{currentTransport.icon}}" class="schedule-transport-icon"/>
@@ -30,13 +29,35 @@
         </div>
       </div>
 
+
       <div 
         ng-include="'html/transport_list.html'">
       </div>
 
     </div>
 
-  <div class="main-content">
+      <div id="hide-left-panel">
+        <button 
+          ng-click="ctrl.hideLeftPanel()"
+          ng-hide="hideLeftPanel"
+          class="btn btn-primary station-button">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Скрыть меню
+        </button>
+      </div>
+      
+      <div id="show-left-panel">
+        <button 
+          ng-click="ctrl.hideLeftPanel()"
+          ng-hide="!hideLeftPanel"
+          class="btn btn-success station-button">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Показать меню
+        </button>
+      </div>
+
+    <div 
+      ng-class="{'main-content': !hideLeftPanel, 'main-content-full': hideLeftPanel}">
     
   <!-- @Menu @start --> 
   <div class="well well-lg square-borders">
@@ -145,4 +166,4 @@
 
   </div>
 
-</div>
+</div> -->

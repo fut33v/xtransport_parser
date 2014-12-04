@@ -291,6 +291,15 @@
       }
     };
 
+    ScheduleController.prototype.hideLeftPanel = function() {
+      console.log("AllahuAkbar");
+      if (this.$scope.hideLeftPanel != null) {
+        return this.$scope.hideLeftPanel = !this.$scope.hideLeftPanel;
+      } else {
+        return this.$scope.hideLeftPanel = true;
+      }
+    };
+
     return ScheduleController;
 
   })();

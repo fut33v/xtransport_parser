@@ -203,6 +203,13 @@ class ScheduleController
       for station in @$scope.currentStations
         station.selected = true
 
+  hideLeftPanel: () ->
+    console.log "AllahuAkbar"
+    if @$scope.hideLeftPanel?
+      @$scope.hideLeftPanel = !@$scope.hideLeftPanel
+    else
+      @$scope.hideLeftPanel = true
+
 
 class ServiceController
   constructor: (

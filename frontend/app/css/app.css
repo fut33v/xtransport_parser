@@ -48,6 +48,7 @@ body {
 }
 
 .header-main {
+    position: fixed;
     width: 100%;
     margin-bottom: 20px;
     border-bottom: 1px #d7d7d7 solid;
@@ -310,7 +311,7 @@ div.schedule-table > td {
 
 .left-panel {
     position: absolute;
-    top: 0;
+    top: 50px;
     bottom: 0;
     left: 0;
     width: 200px;
@@ -329,6 +330,27 @@ div.schedule-table > td {
     bottom: 0;
     overflow: auto;
     background: #fff;
+}
+
+.main-content-full {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+#hide-left-panel {
+    position: fixed;
+    bottom: 20px;
+}
+
+#show-left-panel {
+    position: fixed;
+    bottom: 20px;
+    z-index: 2;
 }
 
 #buses-button {
@@ -386,9 +408,13 @@ div.schedule-table > td {
 /* Suburban schedule view */
 
 #left-panel-header {
+    top: 0;
+    left: 0;
+    position: fixed;
     background: #27AE60;
     color: white;
     height: 50px;
     font-size: 40px;
     text-align: center;
+    width: 200px;
 }
