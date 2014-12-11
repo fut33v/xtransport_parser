@@ -6,6 +6,14 @@ body {
 }
 
 /* Main view */
+.social-logo {
+    height: 35px;
+}
+
+.appstore-logo {
+    height: 35px;
+}
+
 #main-text-about {
     text-align: right;
     font-size: 40px;
@@ -40,10 +48,12 @@ body {
 }
 
 .header-main {
+    position: fixed;
     width: 100%;
     margin-bottom: 20px;
     border-bottom: 1px #d7d7d7 solid;
     padding: 10px;
+    height: 51px;
 }
 
 .live-counter {
@@ -226,7 +236,12 @@ div.schedule-table > td {
 }
 
 .schedule-transport-icon {
-    width: 125px;
+    width: 66px;
+    margin-bottom: 16px;
+}
+
+.station-name {
+    /*text-align: center;*/
 }
 
 .schedule-transport-div {
@@ -241,11 +256,6 @@ div.schedule-table > td {
 .schedule-menu-button-row {
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.schedule-menu-group {
-    padding-left: 40px;
-    padding-right: 40px;
 }
 
 .nav-bar-schedule {
@@ -273,13 +283,14 @@ div.schedule-table > td {
 }
 
 #bus-number {
-    font-size: 100px;
+    font-size: 80px;
     text-align: center;
 }
 
 .schedule-menu-well {
     background: white;
     border-radius: 0;
+    width: 100%;
 }
 
 #show-menu-button {
@@ -293,6 +304,89 @@ div.schedule-table > td {
 
 .schedule-menu-row {
     display: flex;
+}
+
+.left-panel-container {
+}
+
+.left-panel {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    background: navy;
+    color: white;
+    background: #343131;
+}
+
+.main-content {
+    position: fixed;
+    top: 50px;
+    left: 200px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+.main-content-full {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+#hide-left-panel {
+    position: fixed;
+    bottom: 20px;
+}
+
+#show-left-panel {
+    position: fixed;
+    bottom: 20px;
+    z-index: 2;
+}
+
+#buses-button {
+    margin-top: 10px;
+    border-radius: 0;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.station-button {
+    border-radius: 0;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#home-link {
+    color: white;
+}
+
+#menu-block {
+    margin: 0;
+    padding: 10px;
+}
+
+.transport-button {
+    margin: 1px;
+    width: 40px;
+    border-radius: 0;
+}
+
+#transport-block {
+    margin-left: 5px;
 }
 /* Schedule view*/
 
@@ -312,3 +406,15 @@ div.schedule-table > td {
    margin-left: 20px; 
 }
 /* Suburban schedule view */
+
+#left-panel-header {
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: #27AE60;
+    color: white;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+    width: 200px;
+}

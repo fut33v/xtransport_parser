@@ -28,6 +28,16 @@ class BusesTrolleysController
     @$scope.currentBus = ""
 
 
+class UrbanTransportController
+  constructor: (
+      @$scope,
+      @TransportManager
+  ) ->
+    TransportManager.getTransportList().success (data) ->
+      console.log data
+      $scope.transportList = data
+
+
 class ScheduleController
   constructor: (
       @$scope,
@@ -38,6 +48,7 @@ class ScheduleController
       @filtertimeFilter) ->
 
     ctrl = @
+
 
     TransportManager.getTransport($routeParams.transportId).success (data) ->
       console.log data
@@ -71,11 +82,13 @@ class ScheduleController
         else
           station.selected = true for station in currentTransport.stations_workdays
           station.selected = true for station in currentTransport.stations_weekend
+
       else if currentTransport.schedule_workdays? and not currentTransport.schedule_weekend?
         $scope.workdaysOnly = true
         currentSchedule = currentTransport.schedule_workdays
         currentStations = currentTransport.stations_workdays
         station.selected = true for station in currentStations
+
       else if not currentTransport.workdays and currentTransport.weekend
         $scope.weekendOnly = true
         currentSchedule = currentTransport.schedule_weekend
@@ -97,7 +110,6 @@ class ScheduleController
     $scope.minutes = []
     $scope.hours.push(i) for i in [0..23]
     $scope.minutes.push(i) for i in [0..59]
-    $scope.hideMenu = false
 
   isSelectedWorkdays: () ->
     if @selectedDay == 'workdays'
@@ -121,7 +133,6 @@ class ScheduleController
     @$scope.currentSchedule = @currentTransport.schedule_weekend
     if not @currentTransport.stations?
       @$scope.currentStations = @currentTransport.stations_weekend
-    # station.selected = true for station in @$scope.currentStations
 
   setCurrentTime: () ->
     d = new Date()
@@ -133,17 +144,6 @@ class ScheduleController
   setNullTime: () ->
     @$scope.selectedHour = 0
     @$scope.selectedMinute = 0
-
-  setAllStationsChecked: () ->
-    for station in @$scope.currentStations
-        station.selected = true
-    @initialCheckedStations = true
-
-  stationClicked: (selectedStation) ->
-    if (@initialCheckedStations)
-      for station in @$scope.currentStations
-        station.selected = false
-      @initialCheckedStations = false
 
   isTimeExpired: (time) ->
     d = new Date()
@@ -170,13 +170,6 @@ class ScheduleController
     else
       @$scope.hideMenu = true
 
-  showShortDescription: () ->
-    if @currentTransport?
-      if @currentTransport.name.length <= 4
-        return true
-      else
-        false
-
   isStationShown: (index) ->
     filteredSchedule = @filtertimeFilter(
       @$scope.currentSchedule,
@@ -194,12 +187,28 @@ class ScheduleController
     else
       @$scope.currentStations[index].selected
 
-  isNoMenu: () ->
-    if @currentTransport?
-      if @currentTransport.type == 'mixed'
-        return true
-      else
-        false
+  showHiddenStops: () ->
+    if @$scope.currentStations?
+      for station in @$scope.currentStations
+        if not station.selected
+          return true
+    false
+
+  hiddenStationClick: (station) ->
+    if station?
+      station.selected = true
+ 
+  selectAllStations: () ->
+    if @$scope.currentStations?
+      for station in @$scope.currentStations
+        station.selected = true
+
+  hideLeftPanel: () ->
+    console.log "AllahuAkbar"
+    if @$scope.hideLeftPanel?
+      @$scope.hideLeftPanel = !@$scope.hideLeftPanel
+    else
+      @$scope.hideLeftPanel = true
 
 
 class ServiceController
@@ -325,6 +334,12 @@ transportControllers.controller 'SuburbanScheduleController', [
   'TransportManager',
   'TimeManager',
   SuburbanScheduleController
+]
+
+transportControllers.controller 'UrbanTransportController', [
+  '$scope',
+  'TransportManager',
+  UrbanTransportController
 ]
 
 transportControllers.controller 'ScheduleController', [
