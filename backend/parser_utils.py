@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf8 -*-
 
 __author__ = 'Ilya Fateev'
 
@@ -7,6 +8,7 @@ import json
 import urllib2
 import time
 import logging
+import os
 
 
 json_pretty_dumps = partial(
@@ -89,11 +91,39 @@ def no_whitespaces(string_):
     return "".join(string_.split())
 
 
+punctuation = [
+   ',',
+   '.',
+   '-',
+   '(',
+   ')',
+   '"',
+   '\''
+]
+def no_punctuation(string_):
+    for p in punctuation:
+        string_ = string_.replace(p, '')
+    return string_
+
+
+def replace_whitespaces(string_):
+    return "_".join(string_.split())
+
+
 def in_dict(dictionary, key):
     if key in dictionary:
         return dictionary[key]
     else:
         return None
 
+
+def create_dirs(directories):
+    for dir_name in directories:
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+
+
 if __name__ == "__main__":
     save_json_file("test.json", {"id": 1})
+
+
