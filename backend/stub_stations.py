@@ -145,9 +145,9 @@ if __name__ == "__main__":
     save_json_file("station_sofiyskaya_square.json", station_schedule)
 
     stations = [
-        "station_sofiyskaya_square",
-        "station_balt_bank",
-        "station_derzhavina"
+        {'id': "station_sofiyskaya_square", 'name': u"Софийская площадь"},
+        {'id': "station_balt_bank", 'name': u"Балтийский банк"},
+        {'id': "station_derzhavina", 'name': u"Ул. Державина"}
     ]
 
     save_json_file("stations.json", stations)
