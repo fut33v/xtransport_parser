@@ -47,7 +47,10 @@ if __name__ == "__main__":
         station_schedule += sch
     station_schedule = [x for x in station_schedule if x[1] != "-"]
     station_schedule = sorted(station_schedule, key=time_key)
-    station_schedule_workdays = station_schedule
+    station_schedule_buses = [x[0] for x in station_schedule]
+    station_schedule_times = [x[1] for x in station_schedule]
+    station_schedule_workdays_buses = station_schedule_buses
+    station_schedule_workdays_times = station_schedule_times
 
     station_schedule = []
     for i in range(len(balt_bank_bus_list)):
@@ -58,12 +61,19 @@ if __name__ == "__main__":
         station_schedule += sch
     station_schedule = [x for x in station_schedule if x[1] != "-"]
     station_schedule = sorted(station_schedule, key=time_key)
+    station_schedule_buses = [x[0] for x in station_schedule]
+    station_schedule_times = [x[1] for x in station_schedule]
+    station_schedule_weekend_buses = station_schedule_buses
+    station_schedule_weekend_times = station_schedule_times
+
     station_schedule_weekend = station_schedule
 
     station_schedule = {
         'name': u"Балтийский банк",
-        'schedule_workdays': station_schedule_workdays,
-        'schedule_weekend': station_schedule_weekend
+        'schedule_workdays_buses': station_schedule_workdays_buses,
+        'schedule_workdays_times': station_schedule_workdays_times,
+        'schedule_weekend_buses': station_schedule_weekend_buses,
+        'schedule_weekend_times': station_schedule_weekend_times
     }
 
     save_json_file("station_balt_bank.json", station_schedule)
@@ -86,6 +96,10 @@ if __name__ == "__main__":
     station_schedule = [x for x in station_schedule if x[1] != "-"]
     station_schedule = sorted(station_schedule, key=time_key)
     station_schedule_workdays = station_schedule
+    station_schedule_buses = [x[0] for x in station_schedule]
+    station_schedule_times = [x[1] for x in station_schedule]
+    station_schedule_workdays_buses = station_schedule_buses
+    station_schedule_workdays_times = station_schedule_times
 
     station_schedule = []
     for i in range(len(derzhavina_bus_list)):
@@ -97,11 +111,17 @@ if __name__ == "__main__":
     station_schedule = [x for x in station_schedule if x[1] != "-"]
     station_schedule = sorted(station_schedule, key=time_key)
     station_schedule_weekend = station_schedule
+    station_schedule_buses = [x[0] for x in station_schedule]
+    station_schedule_times = [x[1] for x in station_schedule]
+    station_schedule_weekend_buses = station_schedule_buses
+    station_schedule_weekend_times = station_schedule_times
 
     station_schedule = {
         'name': u"Ул. Державина",
-        'schedule_workdays': station_schedule_workdays,
-        'schedule_weekend': station_schedule_weekend
+        'schedule_workdays_buses': station_schedule_workdays_buses,
+        'schedule_workdays_times': station_schedule_workdays_times,
+        'schedule_weekend_buses': station_schedule_weekend_buses,
+        'schedule_weekend_times': station_schedule_weekend_times
     }
 
     save_json_file("station_derzhavina.json", station_schedule)
@@ -124,6 +144,10 @@ if __name__ == "__main__":
     station_schedule = [x for x in station_schedule if x[1] != "-"]
     station_schedule = sorted(station_schedule, key=time_key)
     station_schedule_workdays = station_schedule
+    station_schedule_buses = [x[0] for x in station_schedule]
+    station_schedule_times = [x[1] for x in station_schedule]
+    station_schedule_workdays_buses = station_schedule_buses
+    station_schedule_workdays_times = station_schedule_times
 
     station_schedule = []
     for i in range(len(sofiyskaya_square_bus_list)):
@@ -135,11 +159,17 @@ if __name__ == "__main__":
     station_schedule = [x for x in station_schedule if x[1] != "-"]
     station_schedule = sorted(station_schedule, key=time_key)
     station_schedule_weekend = station_schedule
+    station_schedule_buses = [x[0] for x in station_schedule]
+    station_schedule_times = [x[1] for x in station_schedule]
+    station_schedule_weekend_buses = station_schedule_buses
+    station_schedule_weekend_times = station_schedule_times
 
     station_schedule = {
         'name': u"Софийская площадь",
-        'schedule_workdays': station_schedule_workdays,
-        'schedule_weekend': station_schedule_weekend
+        'schedule_workdays_buses': station_schedule_workdays_buses,
+        'schedule_workdays_times': station_schedule_workdays_times,
+        'schedule_weekend_buses': station_schedule_weekend_buses,
+        'schedule_weekend_times': station_schedule_weekend_times
     }
 
     save_json_file("station_sofiyskaya_square.json", station_schedule)
