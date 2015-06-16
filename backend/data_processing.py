@@ -20,7 +20,7 @@ def do_replace(transport, replace):
             station = transport['stations_workdays'][i]['name']
             for what in replace:
                 if what['what'] == station:
-                    print "\t", station, "=>", what['replace']
+                    #print "\t", station, "=>", what['replace']
                     transport['stations_workdays'][i]['name'] = (
                         what['replace']
                     )
@@ -29,7 +29,7 @@ def do_replace(transport, replace):
             station = transport['stations_weekend'][i]['name']
             for what in replace:
                 if what['what'] == station:
-                    print "\t", station, "=>", what['replace']
+                    #print "\t", station, "=>", what['replace']
                     transport['stations_weekend'][i]['name'] = (
                         what['replace']
                     )
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         print filename
         transport = parser_utils.load_json_file(filename)
 
-        print transport['name']
+        # print transport['name']
 
         # if transport['id'] == "bus_27a":
         #     if 'stations_workdays' in transport:
@@ -67,7 +67,7 @@ if __name__ == "__main__":
                 print "stations is the same"
         print "##############################"
 
-        # serializating web version JSON
+        # serialization of web version JSON
         parser_utils.save_json_file(filename, transport)
 
         # transpose schedules, serializating phone version JSON

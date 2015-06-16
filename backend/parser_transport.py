@@ -33,7 +33,7 @@ class TransportParser(HTMLParser):
         TransportParser.bus_dictionary = {}
         bus_list = []
         for bus_number in TransportParser._bus_number_list:
-            print i, ')', bus_number, TransportParser._bus_descriptor_list[i]
+            #print i, ')', bus_number, TransportParser._bus_descriptor_list[i]
             if TransportParser._bus_descriptor_list[i] != '#':
                 bus_id = string.split(
                     TransportParser._bus_descriptor_list[i], '_'
